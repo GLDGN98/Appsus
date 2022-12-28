@@ -24,7 +24,7 @@ export function Home() {
             <h1 className="welcome-hdr">Welcome to Appsus</h1>
 
             <nav className="home-menu flex-row">
-                <i onClick={onNavTo('mail')} className="fa-sharp fa-solid fa-envelope"></i>
+                <i onClick={()=> {onNavTo('mail')} } className="fa-sharp fa-solid fa-envelope"></i>
                 <i onClick={onNavTo('note')} className="fa-sharp fa-solid fa-clipboard"></i>
                 <i onClick={onNavTo('book')} className="fa-sharp fa-solid fa-book"></i>
             </nav>
