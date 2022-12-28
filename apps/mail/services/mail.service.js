@@ -37,21 +37,24 @@ function _createMails() {
     let mails = storageService.loadFromStorage(MAIL_KEY)
     if (!mails || !mails.length) {
         mails = []
-        mails.push(_createMail('Meeting', 'Hey! waiting from response', new Date().toLocaleDateString(), 'momo@gmail.com'))
-        mails.push(_createMail('Party', 'Are you coming to the party tommorrow?', new Date().toLocaleDateString(), 'jojo@gmail.com'))
+        mails.push(_createMail('Meeting', 'Hey! waiting from response', 'momo@gmail.com', 'momo'))
+        mails.push(_createMail('Party', 'Are you coming to the party tommorrow?', 'jojo@gmail.com', 'jojo'))
         storageService.saveToStorage(MAIL_KEY, mails)
     }
 }
 
 
-function _createMail(subject, body, sentAt, from) {
+function _createMail(subject, body, from, name) {
     return {
         id: utilService.makeId(),
         subject,
         body,
-        sentAt,
         isRead: false,
         from,
-        starred: false
+        name,
+        starred: false,
+        to: 'user@appsus.com',
+        sentAt: new Date(1551133930594).toLocaleDateString(),
+        removedAt: null
     }
 }

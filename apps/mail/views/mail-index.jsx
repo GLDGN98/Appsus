@@ -1,6 +1,6 @@
 const { Outlet, NavLink } = ReactRouterDOM
+const { useNavigate } = ReactRouterDOM
 
-import { MailList } from "../cmps/mail-list.jsx"
 import { MailFilter } from "../cmps/mail-filter.jsx"
 import { MailCompose } from "../cmps/mail-compose.jsx"
 import { mailService } from "../services/mail.service.js"
@@ -9,8 +9,10 @@ const { useEffect, useState } = React
 export function MailIndex() {
 
     const [mails, setMails] = useState([])
+    const navigate = useNavigate()
 
     useEffect(() => {
+        navigate('/mail/inbox')
         loadMails()
     }, [])
 
@@ -18,11 +20,16 @@ export function MailIndex() {
         mailService.query().then(setMails)
     }
 
+    function onOpenModal() {
+
+    }
+
+
     return (
         <div className="mail-index">
             <div className="mail-container">
                 <div className="main-nav-app">
-                    <button>+Compose</button>
+                    <button onClick={onOpenModal}>+Compose</button>
                     <nav className="main-nav">
                         <NavLink to="/mail/inbox">Inbox</NavLink>
                         <NavLink to="/mail/starred">Starred</NavLink>
@@ -36,7 +43,7 @@ export function MailIndex() {
                     <div className="nested-route">
                         <Outlet />
                     </div>
-                    {/* <MailList mails={mails} /> */}
+                    <MailCompose />
                 </div>
             </div>
         </div>
