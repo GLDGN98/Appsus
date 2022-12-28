@@ -4,7 +4,7 @@
 /* @import './setup/fonts.css'; */
 
 /* Basics */
-
+@import './basics/layouts.css';
 @import './basics/base.css';
 @import './basics/helpers.css';
 /* @import './basics/layout.css'; */
@@ -28,4 +28,10 @@
 
 /* @import './apps/mail/cmps/mail-list.css'; */
 
-@import './app/mail/cmps/mail-preview.css'
+@import './app/mail/cmps/mail-preview.css';
+
+
+/* App Note */
+@import './app/note/cmps/note-preview.css';
+
+
