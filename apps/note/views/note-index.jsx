@@ -7,6 +7,11 @@ export function NoteIndex() {
     const [filterBy, setFilterBy] = useState(noteService.getDefaultFilter())
 
 
-    return <NoteList filterBy={filterBy} />
+    return <div>
+            <section className="search">
+                
+            </section>
+            <NoteList filterBy={filterBy} />
+        </div>
 
 }

@@ -41,7 +41,7 @@ export function NoteList({ filterBy }) {
         setNotes(updatedNotes)
     }
     
-    return <div>
+    return <div className="notes-list-box flex-row">
         {!isLoading && notes.map(note => <NotePreview updateFuncs={updateFuncs} key={note.id} note={note} />)}
         {isLoading && <div>Loading...</div>}
     </div>

@@ -8,17 +8,25 @@ header {
 
 
     border-bottom: 2px solid white;
-    
+    justify-content: space-around;
+    padding: 3rem 0;
 }
 
-.app-header {
-    display: flex;
+div.header-box {
+    flex-grow: 1;
     justify-content: space-between;
-    padding: 20px 0;
+    align-items: center;
+}
+
+.app-logo {
+    font-size: 5rem;
+    color: white;
 }
 
 nav a {
-    margin: .5em;
+    font-size: 3rem;
+    margin-inline: .5em;
+    height: fit-content;
 }
 
 nav a:active {

@@ -18,7 +18,7 @@ export function Home() {
         }
     }
 
-    return <section className="home flex-col">
+    return <section className="home flex-col full">
         <div className="hero-menu-box flex-col">
 
             <h1 className="welcome-hdr">Welcome to Appsus</h1>

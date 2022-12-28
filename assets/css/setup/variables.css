@@ -1,17 +1,17 @@
 :root {
-    
+
     /* color vars */
-   --email-selected-background: #c2dbff;
-   --email-background: #f2f6fc;
+    --email-selected-background: #c2dbff;
+    --email-background: #f2f6fc;
 
-   --email-read-font-color: #202124;
+    --email-read-font-color: #202124;
 
-   
-
-
-
-    /* size vars */
 
 
     --main-bg-color: rgb(1, 163, 222);
+
+    /* size vars */
+
+    --app-width-xl: 2200px;
+
 }
