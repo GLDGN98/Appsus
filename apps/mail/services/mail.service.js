@@ -8,14 +8,27 @@ const MAIL_KEY = 'mailDB'
 export const mailService = {
     query,
     get,
-    save
+    save,
+    remove,
+    getDefaultFilter
 }
 
 _createMails()
 
+function getDefaultFilter() {
+    return { name: '', subject: '', body: '' }
+}
 
-function query() {
+function query(filterBy = '') {
     return asyncStorageService.query(MAIL_KEY)
+        .then(mails => {
+            if (filterBy) {
+                const regex = new RegExp(filterBy, 'i')
+                mails = mails.filter(mail => regex.test(mail.name))
+                console.log(mails)
+            }
+            return mails
+        })
 
 }
 
@@ -25,6 +38,10 @@ function save(mail) {
     } else {
         return asyncStorageService.post(MAIL_KEY, mail)
     }
+}
+
+function remove(mailId) {
+    return asyncStorageService.remove(MAIL_KEY, mailId)
 }
 
 
