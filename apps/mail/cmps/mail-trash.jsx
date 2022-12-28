@@ -1,5 +1,7 @@
 export function MailTrash() {
     return (
-        <h1>Mail Trash</h1>
+        <div className="mail-trash">
+            <h1>Mail Trash</h1>
+        </div>
     )
 }

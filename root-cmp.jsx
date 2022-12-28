@@ -14,7 +14,6 @@ import { MailSent } from "./apps/mail/cmps/mail-sent.jsx"
 import { MailTrash } from "./apps/mail/cmps/mail-trash.jsx"
 
 
-
 export function App() {
     return <Router>
         <section className="app">

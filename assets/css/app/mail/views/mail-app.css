@@ -1,0 +1,9 @@
+.mail-index .main-nav {
+    display: flex;
+    flex-direction: column;
+}
+
+.mail-container {
+    display: grid;
+    grid-template-columns: 1fr 10fr;
+}

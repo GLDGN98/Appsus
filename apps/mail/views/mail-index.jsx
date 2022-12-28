@@ -1,4 +1,4 @@
-const { Outlet, Link } = ReactRouterDOM
+const { Outlet, NavLink } = ReactRouterDOM
 
 import { MailList } from "../cmps/mail-list.jsx"
 import { MailFilter } from "../cmps/mail-filter.jsx"
@@ -18,22 +18,26 @@ export function MailIndex() {
     }
 
     return (
-        <div>
-            <MailFilter />
-            <MailCompose />
-
-            <nav>
-                <Link to="/mail">Inbox</Link>
-                <Link to="/mail/starred">Starred</Link>
-                <Link to="/mail/drafts">Drafts</Link>
-                <Link to="/mail/sent-email">Sent Mail</Link>
-                <Link to="/mail/trash">Trash</Link>
-            </nav>
-
-            <div className="nested-route">
-                <Outlet />
+        <div className="mail-index">
+            <div className="mail-container">
+                <div className="main-nav-app">
+                    <button>+Compose</button>
+                    <nav className="main-nav">
+                        <NavLink to="/mail">Inbox</NavLink>
+                        <NavLink to="/mail/starred">Starred</NavLink>
+                        <NavLink to="/mail/drafts">Drafts</NavLink>
+                        <NavLink to="/mail/sent-email">Sent Mail</NavLink>
+                        <NavLink to="/mail/trash">Trash</NavLink>
+                    </nav>
+                </div>
+                <div className="main-outlet">
+                <MailFilter />
+                    <div className="nested-route">
+                        <Outlet />
+                    </div>
+                    <MailList />
+                </div>
             </div>
-            <MailList />
         </div>
     )
 }

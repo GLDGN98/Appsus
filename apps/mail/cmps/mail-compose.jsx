@@ -1,5 +1,7 @@
 export function MailCompose() {
     return (
-        <h1>Mail Compose</h1>
+        <div className="mail-compose">
+            <h1>Mail Compose</h1>
+        </div>
     )
 }

@@ -1,5 +1,7 @@
 export function MailDraft() {
     return (
-        <h1>mail draft</h1>
+        <div className="mail-draft">
+            <h1>mail draft</h1>
+        </div>
     )
 }
