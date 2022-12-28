@@ -1,14 +1,13 @@
 import { MailPreview } from "./mail-preview.jsx"
 
 
-export function MailList() {
-
-
+export function MailList({ mails }) {
     return (
-        <div className="mail-list">
-            <h1>Mail list</h1>
-            <MailPreview />
-        </div>
+        <table>
+            <tbody className="mail-list">
+                {mails.map(mail => <MailPreview key={mail.id} mail={mail} />)}
+            </tbody>
+        </table>
     )
 
 }

@@ -4,17 +4,18 @@ import { MailList } from "../cmps/mail-list.jsx"
 import { MailFilter } from "../cmps/mail-filter.jsx"
 import { MailCompose } from "../cmps/mail-compose.jsx"
 import { mailService } from "../services/mail.service.js"
-const { useEffect } = React
+const { useEffect, useState } = React
 
 export function MailIndex() {
+
+    const [mails, setMails] = useState([])
 
     useEffect(() => {
         loadMails()
     }, [])
 
-
     function loadMails() {
-        mailService.query().then(res => console.log(res))
+        mailService.query().then(setMails)
     }
 
     return (
@@ -31,11 +32,11 @@ export function MailIndex() {
                     </nav>
                 </div>
                 <div className="main-outlet">
-                <MailFilter />
+                    <MailFilter />
                     <div className="nested-route">
                         <Outlet />
                     </div>
-                    <MailList />
+                    {/* <MailList mails={mails} /> */}
                 </div>
             </div>
         </div>

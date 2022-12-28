@@ -1,4 +1,4 @@
-const { Route, Routes , useParams } = ReactRouterDOM
+const { Route, Routes, useParams } = ReactRouterDOM
 const Router = ReactRouterDOM.HashRouter
 
 import { AppHeader } from "./cmps/app-header.jsx"
@@ -23,15 +23,12 @@ export function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/about" element={<About />} />
-
                     <Route path="/mail" element={<MailIndex />}>
-
                         <Route path="/mail/inbox" element={<MailInbox />} />
                         <Route path="/mail/starred" element={<MailStarred />} />
                         <Route path="/mail/sent-email" element={<MailSent />} />
                         <Route path="/mail/drafts" element={<MailDraft />} />
                         <Route path="/mail/trash" element={<MailTrash />} />
-
                     </Route>
 
                     <Route path="/mail/:id" element={<MailDetails />} />
