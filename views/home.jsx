@@ -1,9 +1,9 @@
 const { Link, NavLink, useNavigate } = ReactRouterDOM
 
 export function Home() {
-
-    function onNavTo(page) {
-        const nav = useNavigate()
+    const nav = useNavigate()
+    
+    function _onNavTo(page) {
         console.log(page, nav)
         switch (page) {
             case 'mail':
@@ -24,9 +24,9 @@ export function Home() {
             <h1 className="welcome-hdr">Welcome to Appsus</h1>
 
             <nav className="home-menu flex-row">
-                <i onClick={()=> {onNavTo('mail')} } className="fa-sharp fa-solid fa-envelope"></i>
-                <i onClick={onNavTo('note')} className="fa-sharp fa-solid fa-clipboard"></i>
-                <i onClick={onNavTo('book')} className="fa-sharp fa-solid fa-book"></i>
+                <i onClick={() => { _onNavTo('mail')}} className="fa-sharp fa-solid fa-envelope"></i>
+                <i onClick={() => { _onNavTo('note')}} className="fa-sharp fa-solid fa-clipboard"></i>
+                <i onClick={() => { _onNavTo('book')}} className="fa-sharp fa-solid fa-book"></i>
             </nav>
         </div>
     </section>
