@@ -30,7 +30,9 @@ const notes = [
             label: "Get my stuff together",
             todos: [
                 { txt: "Driving liscence", doneAt: null },
-                { txt: "Coding power", doneAt: 187111111 }
+                { txt: "Coding power", doneAt: 187111111 },
+                { txt: "Go home", doneAt: null },
+                { txt: "Go work", doneAt: 187111555 }
             ]
         }
     }
@@ -44,7 +46,8 @@ export const noteService = {
     remove,
     save,
     query,
-    getDefaultFilter
+    getDefaultFilter,
+    sortTodos
 }
 
 function get(noteId) {
@@ -60,11 +63,29 @@ function save(note) {
     else return asyncStorageService.post(NOTE_DB_KEY, note)
 }
 
-function query() {
+function query(filterBy = getDefaultFilter()) {
     return asyncStorageService.query(NOTE_DB_KEY)
         .then(notes => {
-            return notes
+            const sorted = sortPinned(notes)
+            return sorted
         })
+}
+
+
+function sortTodos(note) {
+    if(!note.info.todos) return null
+    const done = note.info.todos.filter(todo => todo.doneAt)
+    const unDone = note.info.todos.filter(todo => !todo.doneAt)
+    unDone.push(...done)
+    return unDone
+}
+
+
+function sortPinned(notes) {
+    const pinned = notes.filter(note => note.isPinned)
+    const unPinned = notes.filter(note => !note.isPinned)
+    pinned.push(...unPinned)
+    return pinned
 }
 
 function getDefaultFilter() {
@@ -72,7 +93,8 @@ function getDefaultFilter() {
 }
 
 function _createNotes() {
-    if (!utilService.loadFromStorage(NOTE_DB_KEY)) {
+    const getNotes = utilService.loadFromStorage(NOTE_DB_KEY)
+    if (!getNotes || !getNotes.length) {
         utilService.saveToStorage(NOTE_DB_KEY, notes)
     }
 }
