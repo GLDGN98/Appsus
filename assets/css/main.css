@@ -23,5 +23,7 @@
 
 @import './cmps/user-msg.css';
 @import './cmps/app-header.css';
+@import './cmps/app-footer.css';
+@import './cmps/app-main.css';
 
 /* @import './apps/mail/cmps/mail-list.css'; */

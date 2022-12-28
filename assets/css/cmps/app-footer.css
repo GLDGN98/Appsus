@@ -1,4 +1,4 @@
-header {
+footer {
     background: #acb6e5;
     /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #86fde8, #acb6e5);
@@ -8,25 +8,17 @@ header {
 
 
 
-    border-bottom: 2px solid white;
+    line-height: 1.5;
+
+    justify-self: flex-end;
+    justify-content: center;
+
+    font-size: 1.5rem;
+
+    padding-block: 6rem;
 }
 
-.app-header {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px 0;
-}
 
-nav a {
-    margin: .5em;
-}
-
-nav a:active {
-    color: purple;
-}
-
-nav a.active {
-    color: darkblue;
-    font-weight: bold;
-    text-decoration: overline;
+footer>* {
+    margin: 0 auto;
 }

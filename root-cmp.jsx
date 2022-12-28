@@ -2,6 +2,7 @@ const { Route, Routes } = ReactRouterDOM
 const Router = ReactRouterDOM.HashRouter
 
 import { AppHeader } from "./cmps/app-header.jsx"
+import { AppFooter } from "./cmps/app-footer.jsx"
 import { About } from "./views/about.jsx"
 import { Home } from "./views/home.jsx"
 import { MailIndex } from "./apps/mail/views/mail-index.jsx"
@@ -16,25 +17,28 @@ import { MailTrash } from "./apps/mail/cmps/mail-trash.jsx"
 
 export function App() {
     return <Router>
-        <section className="app">
+        <section className="app flex-col">
             <AppHeader />
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
+            <main className="main-layout full flex-col">
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/about" element={<About />} />
 
-                <Route path="/mail" element={<MailIndex />}>
+                    <Route path="/mail" element={<MailIndex />}>
 
-                    <Route path="/mail" element={<MailInbox />} />
-                    <Route path="/mail/starred" element={<MailStarred />} />
-                    <Route path="/mail/sent-email" element={<MailSent />} />
-                    <Route path="/mail/drafts" element={<MailDraft />} />
-                    <Route path="/mail/trash" element={<MailTrash />} />
+                        <Route path="/mail" element={<MailInbox />} />
+                        <Route path="/mail/starred" element={<MailStarred />} />
+                        <Route path="/mail/sent-email" element={<MailSent />} />
+                        <Route path="/mail/drafts" element={<MailDraft />} />
+                        <Route path="/mail/trash" element={<MailTrash />} />
 
-                </Route>
+                    </Route>
 
-                <Route path="/mail/:id" element={<MailDetails />} />
-                <Route path="/note" element={<NoteIndex />} />
-            </Routes>
+                    <Route path="/mail/:id" element={<MailDetails />} />
+                    <Route path="/note" element={<NoteIndex />} />
+                </Routes>
+            </main>
+            <AppFooter />
         </section>
     </Router>
 }

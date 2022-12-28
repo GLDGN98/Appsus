@@ -1,0 +1,6 @@
+section.home{
+    flex-grow: 1;
+    background-image: url('../../img/hero.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
