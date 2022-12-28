@@ -1,4 +1,4 @@
-const { Route, Routes, useParams } = ReactRouterDOM
+const { Route, Routes } = ReactRouterDOM
 const Router = ReactRouterDOM.HashRouter
 
 import { AppHeader } from "./cmps/app-header.jsx"
@@ -17,6 +17,7 @@ import { MailTrash } from "./apps/mail/cmps/mail-trash.jsx"
 
 export function App() {
     return <Router>
+        
         <section className="app flex-col">
             <AppHeader />
             <main className="main-layout full flex-col">
@@ -35,7 +36,6 @@ export function App() {
                     <Route path="/note" element={<NoteIndex />} />
                 </Routes>
             </main>
-            <AppFooter />
         </section>
     </Router>
 }
