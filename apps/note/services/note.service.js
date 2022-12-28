@@ -66,14 +66,45 @@ function save(note) {
 function query(filterBy = getDefaultFilter()) {
     return asyncStorageService.query(NOTE_DB_KEY)
         .then(notes => {
-            const sorted = sortPinned(notes)
-            return sorted
+            let getNotes
+            if (filterBy.type === '' || !filterBy.type) {
+                if (filterBy.txt) {
+                    getNotes = _filterByType(notes, 'text', filterBy.txt)
+                    getNotes = [...getNotes, ..._filterByType(notes, 'img', filterBy.txt)]
+                    getNotes = [...getNotes, ..._filterByType(notes, 'todo', filterBy.txt)]
+                }
+                else getNotes = notes
+            }
+            else getNotes = _filterByType(notes, filterBy.type, filterBy.txt)
+            return (getNotes) ? sortPinned(getNotes) : []
         })
+}
+
+function _filterByType(allNotes, type, txt) {
+    let myNotes
+    if(!txt) txt = ''
+    const regex = new RegExp(txt, 'i')
+    if (type === 'todo') {
+        myNotes = allNotes.filter(note => note.type === 'note-todos')
+        return myNotes.filter(note => regex.test(note.info.label))
+    }
+    else if (type === 'text') {
+        myNotes = allNotes.filter(note => note.type === 'note-txt')
+        return myNotes.filter(note => regex.test(note.info.txt))
+    }
+    else if (type === 'img') {
+        myNotes = allNotes.filter(note => note.type === 'note-img')
+        return myNotes.filter(note => regex.test(note.info.title))
+    }
+    else if (type === 'video') {
+        myNotes = allNotes.filter(note => note.type === 'note-img')
+        return myNotes.filter(note => regex.test(note.info.url))
+    }
 }
 
 
 function sortTodos(note) {
-    if(!note.info.todos) return null
+    if (!note.info.todos) return null
     const done = note.info.todos.filter(todo => todo.doneAt)
     const unDone = note.info.todos.filter(todo => !todo.doneAt)
     unDone.push(...done)
@@ -82,6 +113,7 @@ function sortTodos(note) {
 
 
 function sortPinned(notes) {
+    if (!notes) return []
     const pinned = notes.filter(note => note.isPinned)
     const unPinned = notes.filter(note => !note.isPinned)
     pinned.push(...unPinned)
@@ -89,7 +121,7 @@ function sortPinned(notes) {
 }
 
 function getDefaultFilter() {
-    return { txt: '', type: '' }
+    return { type: '', txt: '' }
 }
 
 function _createNotes() {

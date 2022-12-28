@@ -87,7 +87,7 @@ function NoteTodo({ note, onToolsClick, isPinned = false }) {
 function NoteImg({ note, onToolsClick, isPinned = false }) {
     return <div className="note-img-box flex-col">
         <span className="note-image-title">{note.info.title}</span>
-        <img src={note.info.url} />
+        <img className="note-img" src={note.info.url} />
         <NoteTools isPinned={isPinned} onToolsClick={onToolsClick} />
     </div>
 }
