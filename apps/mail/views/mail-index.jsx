@@ -23,7 +23,7 @@ export function MailIndex() {
                 <div className="main-nav-app">
                     <button>+Compose</button>
                     <nav className="main-nav">
-                        <NavLink to="/mail">Inbox</NavLink>
+                        <NavLink to="/mail/inbox">Inbox</NavLink>
                         <NavLink to="/mail/starred">Starred</NavLink>
                         <NavLink to="/mail/drafts">Drafts</NavLink>
                         <NavLink to="/mail/sent-email">Sent Mail</NavLink>
