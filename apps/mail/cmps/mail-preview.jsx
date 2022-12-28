@@ -1,22 +1,38 @@
+import { mailService } from "../services/mail.service.js"
+
 const { useState, useEffect, Fragment } = React
 const { Link } = ReactRouterDOM
 
-export function MailPreview({ mail }) {
+export function MailPreview({ mail, mails, handleDelete }) {
 
     const [isExpanded, setIsExpanded] = useState(false)
+    const [isStarred, setIsStarred] = useState(mail.starred)
+    const [mouseOver, setMouseOver] = useState(false)
+
+    function handleStar(ev) {
+        ev.stopPropagation()
+        setIsStarred((prev) => !prev)
+        mail.starred = isStarred
+        mailService.save(mail)
+    }
+
+    function onHandleDelete(ev, mailId) {
+        ev.stopPropagation()
+        handleDelete(mailId)
+    }
 
     return (
         <Fragment>
             <div style={mail.isRead ? { fontFamily: 'Lato Thin' } : { fontFamily: 'Lato' }}
                 className="mail-preview">
-                <tr className="first-tr" onClick={() => {
+                <tr onMouseOver={() => setMouseOver(true)} onMouseOut={() => setMouseOver(false)} className="first-tr" onClick={() => {
                     setIsExpanded(!isExpanded)
                 }}>
-                    <td><i className="fa-regular fa-star"></i></td>
+                    <td onClick={handleStar}>{mail.starred ? <i style={{ color: 'gold' }} className="fa-sharp fa-solid fa-star"></i> : <i className="fa-regular fa-star"></i>}</td>
                     <td>{mail.name}</td>
                     <td>{mail.subject}</td>
                     <td className="mail-sent-at">
-                        {mail.sentAt}
+                        {mouseOver === true ? <i onClick={(ev) => onHandleDelete(ev, mail.id)} className="fa-sharp fa-solid fa-trash"></i> : mail.sentAt}
                     </td>
                 </tr>
                 <tr className="second-tr" hidden={!isExpanded}>

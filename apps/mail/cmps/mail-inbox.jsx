@@ -1,8 +1,5 @@
-const { Outlet, NavLink } = ReactRouterDOM
 
 import { MailList } from "../cmps/mail-list.jsx"
-import { MailFilter } from "../cmps/mail-filter.jsx"
-import { MailCompose } from "../cmps/mail-compose.jsx"
 import { mailService } from "../services/mail.service.js"
 const { useEffect, useState } = React
 
@@ -18,9 +15,16 @@ export function MailInbox() {
         mailService.query().then(setMails)
     }
 
+    function handleDelete(mailId) {
+        mailService.remove(mailId).then(() => {
+            const updatedMails = mails.filter(mail => mail.id !== mailId)
+            setMails(updatedMails)
+        })
+    }
+
     return (
         <div className="mail-inbox">
-            <MailList mails={mails} />
+            <MailList handleDelete={handleDelete} mails={mails} />
         </div>
     )
 }
