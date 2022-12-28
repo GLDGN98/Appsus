@@ -1,0 +1,17 @@
+.mail-preview .first-tr {
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 15fr 1fr;
+    border: 1px solid rgb(235, 234, 234);
+    padding: 0.6em;
+}
+
+
+.mail-preview .first-tr .mail-sent-at {
+    grid-column: 4/5;
+}
+
+
+.mail-preview .first-tr:hover {
+    cursor: pointer;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
+}
