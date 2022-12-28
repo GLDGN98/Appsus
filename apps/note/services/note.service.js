@@ -97,7 +97,7 @@ function _filterByType(allNotes, type, txt) {
         return myNotes.filter(note => regex.test(note.info.title))
     }
     else if (type === 'video') {
-        myNotes = allNotes.filter(note => note.type === 'note-img')
+        myNotes = allNotes.filter(note => note.type === 'note-video')
         return myNotes.filter(note => regex.test(note.info.url))
     }
 }
