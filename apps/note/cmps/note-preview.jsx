@@ -56,7 +56,7 @@ function NoteTodo({ note, onToolsClick }) {
 
 function NoteImg({ note, onToolsClick }) {
     return <div className="note-img-box flex-col">
-        <span className="note-image-title">{note.info.title}</span>
+        <span className="note-image-title">{note.info.title}A</span>
         <img src={note.info.url}/>
         <NoteTools onToolsClick={onToolsClick} />
     </div>
