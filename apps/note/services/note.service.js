@@ -72,7 +72,8 @@ function getDefaultFilter() {
 }
 
 function _createNotes() {
-    if (!utilService.loadFromStorage(NOTE_DB_KEY)) {
+    const getNotes = utilService.loadFromStorage(NOTE_DB_KEY)
+    if (getNotes !== undefined || !getNotes.length) {
         utilService.saveToStorage(NOTE_DB_KEY, notes)
     }
 }
