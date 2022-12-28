@@ -1,0 +1,3 @@
+.main-layout >*:not(.full) {
+    max-width: var(--app-width-xl);
+}

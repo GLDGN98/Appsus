@@ -1,0 +1,45 @@
+div.note-box {
+    background-color: green;
+    font-size: 2rem;
+
+    margin: 1rem;
+    padding: 1.5rem;
+    width: fit-content;
+
+    border: 0px hidden black;
+}
+
+/* Note Text */
+
+
+span.note-text {
+    padding: 2rem;
+}
+
+div.note-tools{
+    width: 100%;
+    justify-content: space-between;
+}
+
+
+
+
+
+/* Note Todo */
+
+ul.note-todo-list{
+    list-style: none;
+}
+
+i.todo-checked{
+    margin-inline-start: 1.5rem;
+}
+
+span.done {
+    color:rgb(78, 76, 76);
+}
+
+span.note-todo-header {
+    font-size: 2.2rem;
+    text-align: center;
+}

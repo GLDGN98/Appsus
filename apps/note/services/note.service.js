@@ -16,7 +16,7 @@ const notes = [
         id: "n102",
         type: "note-img",
         info: {
-            url: "http://some-img/me",
+            url: "https://d.newsweek.com/en/full/2120466/triptych-photo-donald-trump.webp?w=466&h=311&l=50&t=28&f=f4760c7c9955ac99c7aa2bb75ef1d1b3",
             title: "Bobi and Me"
         },
         style: {
