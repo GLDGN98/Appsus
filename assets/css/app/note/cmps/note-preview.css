@@ -1,5 +1,4 @@
 div.note-box {
-    background-color: green;
     font-size: 2rem;
 
     margin: 1rem;
@@ -9,6 +8,19 @@ div.note-box {
     border: 0px hidden black;
 }
 
+
+div.note-tools{
+    width: 100%;
+    justify-content: space-between;
+    margin-block-start: 1rem;
+}
+
+input.note-color-tool{
+    opacity: 0;
+    height: 0;
+    width: 0;
+}
+
 /* Note Text */
 
 
@@ -16,10 +28,6 @@ span.note-text {
     padding: 2rem;
 }
 
-div.note-tools{
-    width: 100%;
-    justify-content: space-between;
-}
 
 
 
@@ -42,4 +50,11 @@ span.done {
 span.note-todo-header {
     font-size: 2.2rem;
     text-align: center;
+}
+
+/* Todo Image */
+span.note-image-title {
+    font-size: 2.2rem;
+    text-align: center;
+    margin-block-end: 1rem;
 }
