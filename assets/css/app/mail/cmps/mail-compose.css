@@ -14,7 +14,6 @@
     right: 0;
 }
 
-
 .new-mail h3 {
     background-color: grey;
     color: white;
@@ -26,6 +25,9 @@
     background: none;
 }
 
+.new-mail input {
+    border: none;
+}
 
 .new-mail button {
     position: fixed;
@@ -52,7 +54,6 @@
     vertical-align: baseline;
     white-space: nowrap;
 }
-
 
 .new-mail button:hover,
 .new-mail button:focus {

@@ -1,3 +1,24 @@
-.mail-list-container{
+.mail-list-container {
     width: 100%;
+}
+
+.main-nav a.active {
+    border: 1px solid rgb(188, 203, 232);
+    background: aliceblue;
+    border-radius: 0.3em;
+    text-decoration: none;
+    width: 100%;
+    text-align: center;
+
+}
+
+
+.main-nav a:hover {
+    width: 100%;
+    text-align: center;
+    border: 1px solid cornflowerblue;
+    background: aliceblue;
+    border-radius: 0.3em;
+    text-decoration: none;
+    font-weight: 600;
 }

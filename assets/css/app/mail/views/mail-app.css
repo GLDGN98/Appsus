@@ -17,10 +17,71 @@
 .mail-container {
     display: grid;
     grid-template-columns: 1fr 10fr;
+    gap: 1rem;
 }
-
 
 .mail-index {
     font-size: 1.5rem;
     font-family: Lato Thin;
+}
+
+.main-nav-app {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-nav-app button {
+    background-color: #0078d0;
+    border: 0;
+    border-radius: 56px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    outline: 0;
+    padding: 12px 18px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    transition: all .3s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    margin: 0.4em;
+}
+
+.main-nav-app button:before {
+    background-color: initial;
+    background-image: linear-gradient(#fff 0, rgba(255, 255, 255, 0) 100%);
+    border-radius: 125px;
+    content: "";
+    height: 50%;
+    left: 4%;
+    opacity: .5;
+    position: absolute;
+    top: 0;
+    transition: all .3s;
+    width: 92%;
+}
+
+.main-nav-app button:hover {
+    box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
+    transform: scale(1.05);
+}
+
+.main-nav-app button {
+    letter-spacing: 0.2rem;
+}
+
+.fa-star {
+    transition: all 0.4s;
+    padding: 0.3rem;
+}
+
+
+.fa-star:hover {
+    background-color: #dee2e5;
+    border-radius: 2em;  
 }
