@@ -19,7 +19,7 @@ export function About() {
         {
             name: 'Gilad Dagan',
             title: 'Fullstack Developer',
-            txt: 'I\'m a 27 from Oranit, Israel. I am a junior developr who learn Fullstack development at Coding Academy.',
+            txt: 'I\'m a 24 from Herzliya, Israel. I am a junior developr who learn Fullstack development at Coding Academy.',
             img: '../assets/img/dev/gilad.jpg',
             contact: [
                 {
