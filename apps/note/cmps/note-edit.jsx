@@ -192,20 +192,29 @@ function EditImageNote({ note, callbackFuncs }) {
 
 function EditTodoNote({ note, callbackFuncs }) {
     const { handleChange, onSaveNote } = callbackFuncs
+    const [currNote, setNote] = useState(note)
     let count = 0
+
+
+    function addLine() {
+        currNote.info.todos.push(noteService.getNewTodo())
+        const newNote = { ...currNote }
+        setNote(newNote)
+    }
+
     return <form className="note-editor-form" onSubmit={onSaveNote}>
         <table>
             <tbody>
-                <tr key={count++}>
+                <tr key={count}>
                     <td className="note-editor-td">
                         <label htmlFor="todos-title">Todo title:</label>
                     </td>
                     <td className="note-editor-td">
-                        <input name="todos-title" type="text" id="todos-title" placeholder="Enter todo title" value={note.info.label} onChange={handleChange} />
+                        <input name="todos-title" type="text" id="todos-title" placeholder="Enter todo title" value={currNote.info.label} onChange={handleChange} />
                     </td>
                 </tr>
                 {
-                    note.info.todos.map(todo =>
+                    currNote.info.todos.map(todo =>
                         <tr key={count++}>
                             <td className="note-editor-td">
                                 <label key={`label-${count}`} htmlFor={count}>Todo tasks:</label>
@@ -215,9 +224,12 @@ function EditTodoNote({ note, callbackFuncs }) {
                             </td>
                         </tr>)
                 }
+                <tr key={`add-line-${count}`}>
+                    <td onClick={() => addLine()}>Add Line...</td>
+                </tr>
                 <tr key={count++}>
                     <td className="note-editor-td editor-link">
-                        <button>{note.id ? 'Save' : 'Add'}</button>
+                        <button>{currNote.id ? 'Save' : 'Add'}</button>
                     </td>
                     <td className="note-editor-td editor-link">
                         <Link to="/note">Cancel</Link>

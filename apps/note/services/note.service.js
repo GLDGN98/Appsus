@@ -48,7 +48,8 @@ export const noteService = {
     query,
     getDefaultFilter,
     sortTodos,
-    getEmptyNote
+    getEmptyNote,
+    getNewTodo
 }
 
 function get(noteId) {
@@ -176,4 +177,6 @@ function getEmptyNote(type) {
     else if(type === 'todos') return noteTodos
 }
 
-
+function getNewTodo() {
+    return  { txt: '', doneAt: null}
+}

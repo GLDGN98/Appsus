@@ -6,6 +6,7 @@ import { noteService } from "../services/note.service.js"
 export function NotePreview({ note, updateFuncs }) {
 
     let [currNote, setNote] = useState(note)
+    let [hovering,setHovering] = useState(false)
     const { onRemoveNote, onPinnedNote, onUnpinnedNote } = updateFuncs
     const style = { backgroundColor: (currNote.style && currNote.style.backgroundColor) ? currNote.style.backgroundColor : '#e7eaf6' }
 
@@ -36,28 +37,38 @@ export function NotePreview({ note, updateFuncs }) {
         setNote(newNote)
     }
 
-    return <div className="note-box" style={{ backgroundColor: style.backgroundColor }}>
-        <DynamicCmp onToolsClick={onToolsClick} note={currNote} />
-    </div>
+    function hideNoteTools() {
+        setHovering(false)
+    }
+
+
+    function showNoteTools() {
+        setHovering(true)
+    }
+    
+    
+    return <div onMouseEnter={(()=>showNoteTools())} onMouseLeave={(()=>hideNoteTools())} className="note-box" style={{ backgroundColor: style.backgroundColor }}>
+            <DynamicCmp onToolsClick={onToolsClick} note={currNote} />
+            {hovering && <NoteTools note={currNote} onToolsClick={onToolsClick} />}
+        </div>
 }
 
 
 function DynamicCmp({ note, onToolsClick }) {
-    const isPinned = (note.isPinned) ? note.isPinned : false
+    
     switch (note.type) {
         case 'note-txt':
-            return <NoteTxt isPinned={isPinned} onToolsClick={onToolsClick} note={note} />
+            return <NoteTxt onToolsClick={onToolsClick} note={note} />
         case 'note-todos':
-            return <NoteTodo isPinned={isPinned} onToolsClick={onToolsClick} note={note} />
+            return <NoteTodo onToolsClick={onToolsClick} note={note} />
         case 'note-img':
-            return <NoteImg isPinned={isPinned} onToolsClick={onToolsClick} note={note} />
+            return <NoteImg onToolsClick={onToolsClick} note={note} />
     }
 }
 
 function NoteTxt({ note, onToolsClick, isPinned = false }) {
     return <div className="note-text-box flex-col">
         <span className="note-text">{note.info.txt}</span>
-        <NoteTools note={note} isPinned={isPinned} onToolsClick={onToolsClick} />
     </div>
 }
 
@@ -77,7 +88,6 @@ function NoteTodo({ note, onToolsClick, isPinned = false }) {
                 })
             }
         </ul >
-        <NoteTools note={note} isPinned={isPinned} onToolsClick={onToolsClick} />
     </div >
 
     function isTodoDone(todo) {
@@ -89,11 +99,12 @@ function NoteImg({ note, onToolsClick, isPinned = false }) {
     return <div className="note-img-box flex-col">
         <span className="note-image-title">{note.info.title}</span>
         <img className="note-img" src={note.info.url} />
-        <NoteTools note={note} isPinned={isPinned} onToolsClick={onToolsClick} />
+        
     </div>
 }
 
-function NoteTools({ note, onToolsClick, isPinned = false }) {
+function NoteTools({ note, onToolsClick }) {
+    const isPinned = (note.isPinned) ? note.isPinned : false
     return <div className="note-tools flex-row">
         <i onClick={() => onToolsClick('remove')} className="fa-sharp fa-solid fa-trash"></i>
         <i onClick={() => onToolsClick('mail')} className="fa-sharp fa-solid fa-envelope"></i>
@@ -105,7 +116,7 @@ function NoteTools({ note, onToolsClick, isPinned = false }) {
         <Link to={`/note/edit/${note.id}`}>
             <i onClick={() => onToolsClick('edit')} className="fa-solid fa-pen-to-square"></i>
         </Link>
-        {isPinned && <i onClick={() => onToolsClick('unpin')} className="fa-solid fa-thumbtack"></i>}
-        {!isPinned && <i onClick={() => onToolsClick('pin')} className="fa-regular fa-thumbtack"></i>}
+        {isPinned && <i onClick={() => onToolsClick('unpin')} className="fa-solid fa-thumbtack pinned"></i>}
+        {!isPinned && <i onClick={() => onToolsClick('pin')} className="fa-solid fa-thumbtack"></i>}
     </div>
 }
