@@ -132,14 +132,46 @@ function _createNotes() {
     }
 }
 
-function getEmptyNote() {
-    return {
+function getEmptyNote(type) {
+    
+    const noteText  = {
         type: "note-txt",
         isPinned: false,
         info: {
             txt: "Fullstack Me Baby!"
+        },
+        style: {
+            backgroundColor: "#e7eaf6"
         }
     }
+    const noteImg  = {
+        type: "note-img",
+        isPinned: false,
+        info: {
+            url: '',
+            title: "New Image!"
+        },
+        style: {
+            backgroundColor: "#e7eaf6"
+        }
+    }
+    const noteTodos  = {
+        type: "note-todos",
+        isPinned: false,
+        info: {
+            label: 'My Todos!',
+            todos: [
+                { txt: 'New Task', doneAt: null}
+            ]
+        },
+        style: {
+            backgroundColor: "#e7eaf6"
+        }
+    }
+
+    if(type === 'txt') return noteText
+    else if(type === 'img') return noteImg
+    else if(type === 'todos') return noteTodos
 }
 
 

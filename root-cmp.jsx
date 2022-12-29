@@ -17,7 +17,7 @@ export function App() {
 
         <section className="app flex-col">
             <AppHeader />
-            <main className="main-layout full flex-row">
+            <main className="flex-row">
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/about" element={<About />} />

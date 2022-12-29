@@ -1,4 +1,5 @@
 const { useState, useEffect } = React
+const { Link } = ReactRouterDOM
 
 import { noteService } from "../services/note.service.js"
 import { NoteList } from "../cmps/note-list.jsx"
@@ -10,7 +11,7 @@ export function NoteIndex() {
     let [filterBy, setFilterBy] = useState(noteService.getDefaultFilter())
     let iconText = 'fa-sharp fa-solid fa-font'
     let iconImg = "fa-solid fa-image"
-    let iconTodo = "fa-solid fa-list" 
+    let iconTodo = "fa-solid fa-list"
     let iconVideo = "fa-brands fa-youtube"
     _setFilterIconsClasses()
 
@@ -54,13 +55,16 @@ export function NoteIndex() {
 
     return <div className="notes-page">
         <section className="search-notes-box flex-row">
-            <input onChange={(ev) => onSearch(ev.target.value)} type="text" className="input-search-note" placeholder="What's on your mind..."></input>
+            <input onChange={(ev) => onSearch(ev.target.value)} type="text" className="input-search-note" placeholder="Search saved note..."></input>
             <nav className="filter-notes">
-                <i onClick={() => { onFilterChangeType('text') }} className={iconText}></i>
-                <i onClick={() => { onFilterChangeType('img') }}  className={iconImg}></i>
-                <i onClick={() => { onFilterChangeType('video') }}className={iconVideo}></i>
-                <i onClick={() => { onFilterChangeType('todo') }} className={iconTodo}></i>
+                <i title="Text type" onClick={() => { onFilterChangeType('text') }} className={iconText}></i>
+                <i title="Image type" onClick={() => { onFilterChangeType('img') }} className={iconImg}></i>
+                <i title="Video type" onClick={() => { onFilterChangeType('video') }} className={iconVideo}></i>
+                <i title="Todos type" onClick={() => { onFilterChangeType('todo') }} className={iconTodo}></i>
             </nav>
+            <Link to={`/note/edit`}>
+                <i title="Add new note" className="add-notes-button fa-solid fa-plus"></i>
+            </Link>
         </section>
         {!isLoading && <NoteList notes={notes} filterBy={filterBy} />}
         {isLoading && <div>Loading...</div>}

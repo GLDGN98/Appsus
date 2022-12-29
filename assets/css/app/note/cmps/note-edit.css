@@ -1,0 +1,16 @@
+section.note-editor {
+    width: 60%;
+    justify-content: center;
+    align-items: center;
+
+}
+
+nav.types-menu{
+    width: 80%;
+    justify-content: space-between;
+}
+
+span.choose-type-add-note {
+    font-size: 3rem;
+    width: 50%;
+}

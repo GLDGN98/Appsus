@@ -43,8 +43,6 @@ export function NotePreview({ note, updateFuncs }) {
 
 
 function DynamicCmp({ note, onToolsClick }) {
-
-
     const isPinned = (note.isPinned) ? note.isPinned : false
     switch (note.type) {
         case 'note-txt':
