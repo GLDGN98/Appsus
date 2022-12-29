@@ -138,30 +138,32 @@ function getEmptyNote(type) {
         type: "note-txt",
         isPinned: false,
         info: {
-            txt: "Fullstack Me Baby!"
+            txt: ''
         },
         style: {
             backgroundColor: "#e7eaf6"
         }
     }
+
     const noteImg  = {
         type: "note-img",
         isPinned: false,
         info: {
             url: '',
-            title: "New Image!"
+            title: ''
         },
         style: {
             backgroundColor: "#e7eaf6"
         }
     }
+
     const noteTodos  = {
         type: "note-todos",
         isPinned: false,
         info: {
-            label: 'My Todos!',
+            label: '',
             todos: [
-                { txt: 'New Task', doneAt: null}
+                { txt: '', doneAt: null}
             ]
         },
         style: {

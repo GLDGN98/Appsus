@@ -1,4 +1,7 @@
-html , body, #app-root , section.app {
+html,
+body,
+#app-root,
+section.app {
     height: 100%;
     width: 100%;
     margin: 0px;
@@ -13,7 +16,7 @@ body {
     min-height: 100%;
 }
 
-section.app{
+section.app {
     justify-content: space-between;
 }
 

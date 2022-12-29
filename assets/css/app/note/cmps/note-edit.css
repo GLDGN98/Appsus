@@ -1,16 +1,70 @@
 section.note-editor {
-    width: 60%;
-    justify-content: center;
+    width: 100%;
     align-items: center;
+    padding-block: 5vh;
+    color: var(--textbox-font-color);
 
 }
 
-nav.types-menu{
+nav.types-menu {
     width: 80%;
-    justify-content: space-between;
+    font-size: 5rem;
+    justify-content: space-evenly;
+    margin-block: 2rem;
+    color: cornflowerblue;
 }
 
 span.choose-type-add-note {
-    font-size: 3rem;
+    font-size: 6.5rem;
     width: 50%;
+    color: cornflowerblue;
+    margin-block-end: 10vh;
+}
+
+
+span.editor-desc {
+    font-size: 5rem;
+}
+
+td.note-editor-td>label {
+    font-size: 2rem;
+    margin-inline-end: 2rem;
+}
+
+td.note-editor-td>input {
+    font-size: 2rem;
+}
+
+td.note-editor-td {
+    padding-inline: 0.2rem;
+    padding-block: 0.8rem;
+}
+
+td.note-editor-td>button,
+td.editor-link>a {
+    font-size: 2rem;
+    border: hidden;
+    background-color: inherit;
+    border-radius: 25%;
+
+    padding: 0.5rem;
+    padding-inline: 1rem;
+}
+
+td.editor-link {
+    text-align: center;
+}
+
+td.note-editor-td>button:hover,
+td.editor-link>a:hover {
+    cursor: pointer;
+    color: white;
+    background-color: var(--main-bg-color);
+}
+
+div.editor-box {
+    padding-inline: 7.5rem;
+    padding-block: 1.5rem;
+    border-radius: 10px;
+    background-color: var(--sec-bg-color);
 }

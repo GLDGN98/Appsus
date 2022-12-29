@@ -83,8 +83,11 @@ export function NoteEdit() {
     }
 
     return <section className="note-editor flex-col">
-        {(noteToEdit) && <h2>{(noteToEdit.id) ? 'Edit this note' : 'Add a new note'}</h2>}
-        {(noteToEdit) && <DynamicEditNoteCmp note={noteToEdit} callbackFuncs={callbackFuncs} />}
+        {(noteToEdit) && <div className="editor-box">
+            <span className="editor-desc">{(noteToEdit.id) ? 'Edit this note' : 'Add a new note'}</span>
+            <DynamicEditNoteCmp note={noteToEdit} callbackFuncs={callbackFuncs} />
+        </div>}
+
         {(!noteToEdit) && <span className="choose-type-add-note">Choose type of the note to add</span>}
         {(!noteToEdit) && <TypeMenu onTypeSelect={onTypeSelect} />}
     </section>
@@ -119,30 +122,69 @@ function DynamicEditNoteCmp({ note, callbackFuncs }) {
 
 function EditTextNote({ note, callbackFuncs }) {
     const { handleChange, onSaveNote } = callbackFuncs
-    return <form onSubmit={onSaveNote}>
-        <label htmlFor="title">Note Text:</label>
-        <input type="text" id="title" placeholder="Enter text" value={note.info.txt} onChange={handleChange} />
-        <div className="edit-actions">
-            <button>{note.id ? 'Save' : 'Add'}</button>
-            <Link to="/note">Cancel</Link>
-        </div>
-    </form>
+    let count = 0
+    return <form className="note-editor-form" onSubmit={onSaveNote}>
+        <table>
+            <tbody>
+                <tr key={count++}>
+                    <td className="note-editor-td">
+                        <label htmlFor="title">Note Text:</label>
+                    </td>
+                    <td className="note-editor-td">
+                        <input type="text" id="title" placeholder="Enter text" value={note.info.txt} onChange={handleChange} />
+                    </td>
+                </tr>
+                <tr key={count++}>
+                    <td className="note-editor-td editor-link">
+                        <button>{note.id ? 'Save' : 'Add'}</button>
+                    </td>
+                    <td className="note-editor-td editor-link">
+                        <Link to="/note">Cancel</Link>
+                    </td>
+                </tr>
+            </tbody>
+        </table >
+    </form >
 
 }
 
 
 function EditImageNote({ note, callbackFuncs }) {
     const { handleChange, onSaveNote } = callbackFuncs
-    return <form onSubmit={onSaveNote}>
-        <label htmlFor="title">Note Title:</label>
-        <input type="text" id="note-img-title" placeholder="Enter text" value={note.info.title} onChange={handleChange} />
+    let count = 0
+    return <form className="note-editor-form flex-col" onSubmit={onSaveNote}>
+        <table>
+            <tbody>
 
-        <label htmlFor="note-img-url">Image URL:</label>
-        <input type="text" id="note-img-url" placeholder="Enter url" value={note.info.url} onChange={handleChange} />
-        <div className="edit-actions">
-            <button>{note.id ? 'Save' : 'Add'}</button>
-            <Link to="/note">Cancel</Link>
-        </div>
+                <tr key={count++}>
+                    <td className="note-editor-td">
+                        <label htmlFor="title">Note Title</label>
+                    </td>
+                    <td className="note-editor-td">
+                        <input type="text" id="note-img-title" placeholder="Enter text" value={note.info.title} onChange={handleChange} />
+                    </td>
+                </tr>
+
+                <tr key={count++}>
+                    <td className="note-editor-td">
+                        <label htmlFor="note-img-url">Image URL</label>
+                    </td>
+                    <td className="note-editor-td">
+
+                        <input type="text" id="note-img-url" placeholder="Enter url" value={note.info.url} onChange={handleChange} />
+                    </td>
+                </tr>
+
+                <tr key={count++}>
+                    <td className="note-editor-td editor-link">
+                        <button>{note.id ? 'Save' : 'Add'}</button>
+                    </td>
+                    <td className="note-editor-td editor-link">
+                        <Link to="/note">Cancel</Link>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </form>
 
 }
@@ -151,20 +193,38 @@ function EditImageNote({ note, callbackFuncs }) {
 function EditTodoNote({ note, callbackFuncs }) {
     const { handleChange, onSaveNote } = callbackFuncs
     let count = 0
-    return <form onSubmit={onSaveNote}>
-        <label htmlFor="todos-title">Todo title:</label>
-        <input name="todos-title" type="text" id="todos-title" placeholder="Enter todo title" value={note.info.label} onChange={handleChange} />
-        {
-            note.info.todos.map(todo =>
-                <div key={`todo-${count++}`} className="todo-box-editor">
-                    <label key={`label-${count}`} htmlFor={count}>Todo tasks:</label>
-                    <input name="todo" key={count} type="text" id={count} placeholder="Enter todo title" value={todo.txt} onChange={handleChange} />
-                </div>)
-        }
-        <div className="edit-actions">
-            <button>{note.id ? 'Save' : 'Add'}</button>
-            <Link to="/note">Cancel</Link>
-        </div>
-    </form>
+    return <form className="note-editor-form" onSubmit={onSaveNote}>
+        <table>
+            <tbody>
+                <tr key={count++}>
+                    <td className="note-editor-td">
+                        <label htmlFor="todos-title">Todo title:</label>
+                    </td>
+                    <td className="note-editor-td">
+                        <input name="todos-title" type="text" id="todos-title" placeholder="Enter todo title" value={note.info.label} onChange={handleChange} />
+                    </td>
+                </tr>
+                {
+                    note.info.todos.map(todo =>
+                        <tr key={count++}>
+                            <td className="note-editor-td">
+                                <label key={`label-${count}`} htmlFor={count}>Todo tasks:</label>
+                            </td>
+                            <td className="note-editor-td">
+                                <input name="todo" key={count} type="text" id={count} placeholder="Enter todo title" value={todo.txt} onChange={handleChange} />
+                            </td>
+                        </tr>)
+                }
+                <tr key={count++}>
+                    <td className="note-editor-td editor-link">
+                        <button>{note.id ? 'Save' : 'Add'}</button>
+                    </td>
+                    <td className="note-editor-td editor-link">
+                        <Link to="/note">Cancel</Link>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form >
 
 }

@@ -15,9 +15,11 @@ export function NoteIndex() {
     let iconVideo = "fa-brands fa-youtube"
     _setFilterIconsClasses()
 
+    
     useEffect(() => {
         loadNotes()
     }, [])
+
 
     useEffect(() => {
         _setFilterIconsClasses()
@@ -25,12 +27,14 @@ export function NoteIndex() {
 
     }, [filterBy])
 
+
     function _setFilterIconsClasses() {
         if (filterBy.type === 'text') iconText += ' active'
         else if (filterBy.type === 'todo') iconTodo += ' active'
         else if (filterBy.type === 'img') iconImg += ' active'
         else if (filterBy.type === 'video') iconVideo += ' active'
     }
+
 
     function loadNotes() {
         setIsLoading(true)
@@ -40,11 +44,14 @@ export function NoteIndex() {
                 setIsLoading(false)
             })
     }
+
+
     function onFilterChangeType(type) {
         if (filterBy.type === type) filterBy = { ...filterBy, type: '' }
         else filterBy = { ...filterBy, type }
         setFilterBy(filterBy)
     }
+
 
     function onSearch(txt) {
         // console.log(txt)

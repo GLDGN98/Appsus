@@ -4,7 +4,6 @@
 /* @import './setup/fonts.css'; */
 
 /* Basics */
-@import './basics/layouts.css';
 @import './basics/base.css';
 @import './basics/helpers.css';
 /* @import './basics/layout.css'; */
@@ -35,6 +34,7 @@
 
 /* App Note */
 @import './app/note/cmps/note-preview.css';
+@import './app/note/cmps/note-edit.css';
 @import './app/note/views/notes-index.css';
 
 
