@@ -6,7 +6,7 @@ import { noteService } from "../services/note.service.js"
 export function NotePreview({ note, updateFuncs }) {
 
     let [currNote, setNote] = useState(note)
-    let [hovering,setHovering] = useState(false)
+    let [hovering, setHovering] = useState(false)
     const { onRemoveNote, onPinnedNote, onUnpinnedNote } = updateFuncs
     const style = { backgroundColor: (currNote.style && currNote.style.backgroundColor) ? currNote.style.backgroundColor : '#e7eaf6' }
 
@@ -45,17 +45,17 @@ export function NotePreview({ note, updateFuncs }) {
     function showNoteTools() {
         setHovering(true)
     }
-    
-    
-    return <div onMouseEnter={(()=>showNoteTools())} onMouseLeave={(()=>hideNoteTools())} className="note-box" style={{ backgroundColor: style.backgroundColor }}>
-            <DynamicCmp onToolsClick={onToolsClick} note={currNote} />
-            {hovering && <NoteTools note={currNote} onToolsClick={onToolsClick} />}
-        </div>
+
+
+    return <div onMouseEnter={(() => showNoteTools())} onMouseLeave={(() => hideNoteTools())} className="note-box" style={{ backgroundColor: style.backgroundColor }}>
+        <DynamicCmp onToolsClick={onToolsClick} note={currNote} />
+        {hovering && <NoteTools note={currNote} onToolsClick={onToolsClick} />}
+    </div>
 }
 
 
 function DynamicCmp({ note, onToolsClick }) {
-    
+
     switch (note.type) {
         case 'note-txt':
             return <NoteTxt onToolsClick={onToolsClick} note={note} />
@@ -63,6 +63,8 @@ function DynamicCmp({ note, onToolsClick }) {
             return <NoteTodo onToolsClick={onToolsClick} note={note} />
         case 'note-img':
             return <NoteImg onToolsClick={onToolsClick} note={note} />
+        case 'note-video':
+            return <NoteVideo onToolsClick={onToolsClick} note={note} />
     }
 }
 
@@ -99,9 +101,29 @@ function NoteImg({ note, onToolsClick, isPinned = false }) {
     return <div className="note-img-box flex-col">
         <span className="note-image-title">{note.info.title}</span>
         <img className="note-img" src={note.info.url} />
-        
+
     </div>
 }
+
+
+function NoteVideo({ note, onToolsClick, isPinned = false }) {
+    const url = 'https://www.youtube.com/embed/' + getId(note.info.url)
+    return <div className="note-video-box flex-col">
+        <iframe src={url} frameBorder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen>
+
+        </iframe>
+    </div>
+
+    function getId(url) {
+        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+        const match = url.match(regExp);
+
+        return (match && match[2].length === 11)
+            ? match[2]
+            : null;
+    }
+}
+
 
 function NoteTools({ note, onToolsClick }) {
     const isPinned = (note.isPinned) ? note.isPinned : false
@@ -120,3 +142,4 @@ function NoteTools({ note, onToolsClick }) {
         {!isPinned && <i onClick={() => onToolsClick('pin')} className="fa-solid fa-thumbtack"></i>}
     </div>
 }
+

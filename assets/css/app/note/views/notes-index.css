@@ -44,7 +44,7 @@ i.add-notes-button:hover {
     color: var(--textbox-font-color)
 }
 
-section.search-notes-box>i.active {
+nav.filter-notes>i.active {
     background-color: 'blue';
     color: var(--textbox-font-color)
 }

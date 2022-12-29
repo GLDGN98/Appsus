@@ -172,9 +172,23 @@ function getEmptyNote(type) {
         }
     }
 
+
+    const noteVideo  = {
+        type: "note-video",
+        isPinned: false,
+        info: {
+            url: ''
+        },
+        style: {
+            backgroundColor: "#e7eaf6"
+        }
+    }
+
+
     if(type === 'txt') return noteText
     else if(type === 'img') return noteImg
     else if(type === 'todos') return noteTodos
+    else if(type === 'video') return noteVideo
 }
 
 function getNewTodo() {

@@ -37,38 +37,15 @@ export function NoteEdit() {
             else if (id === 'note-img-url') setNoteToEdit((prevNote) => ({ ...prevNote, info: { url: value, title: prevNote.info.title } }))
         }
 
-        else if (noteToEdit.type === 'note-todos') {
-
-            let { name } = target
-
-            if (name === 'todos-title') {
-                setNoteToEdit((prevNote) => {
-                    console.log(prevNote)
-                    let info = prevNote.info
-                    console.log(info)
-                    info = { ...info, label: value }
-                    return ({ ...prevNote, info })
-                })
-            }
-
-            else if (name === 'todo') {
-                setNoteToEdit((prevNote) => {
-                    id--
-                    const todos = prevNote.info.todos
-                    let todo = todos[id]
-                    todo = { ...todo, txt: value }
-                    todos[id] = todo
-                    console.log(todo, todos)
-                    return ({ ...prevNote, info: { label: prevNote.info.label, todos } })
-                })
-            }
+        else if (noteToEdit.type === 'note-video') {
+            setNoteToEdit((prevNote) => ({ ...prevNote, info: { url: value } }))
         }
 
     }
 
-    function onSaveNote(ev) {
+    function onSaveNote(ev, newSave) {
         ev.preventDefault()
-        noteService.save(noteToEdit).then((note) => {
+        noteService.save(newSave).then((note) => {
             console.log('note saved', note)
             showSuccessMsg('Note Saved')
             navigate('/note')
@@ -109,6 +86,7 @@ function TypeMenu({ onTypeSelect }) {
 
 
 function DynamicEditNoteCmp({ note, callbackFuncs }) {
+    console.log(note)
     switch (note.type) {
         case 'note-txt':
             return <EditTextNote note={note} callbackFuncs={callbackFuncs} />
@@ -116,6 +94,8 @@ function DynamicEditNoteCmp({ note, callbackFuncs }) {
             return <EditTodoNote note={note} callbackFuncs={callbackFuncs} />
         case 'note-img':
             return <EditImageNote note={note} callbackFuncs={callbackFuncs} />
+        case 'note-video':
+            return <EditVideoNote note={note} callbackFuncs={callbackFuncs} />
     }
 }
 
@@ -123,22 +103,22 @@ function DynamicEditNoteCmp({ note, callbackFuncs }) {
 function EditTextNote({ note, callbackFuncs }) {
     const { handleChange, onSaveNote } = callbackFuncs
     let count = 0
-    return <form className="note-editor-form" onSubmit={onSaveNote}>
+    return <form className="note-editor-form" onSubmit={(ev) => onSaveNote(ev, note)}>
         <table>
             <tbody>
                 <tr key={count++}>
                     <td className="note-editor-td">
-                        <label htmlFor="title">Note Text:</label>
+                        <label htmlFor="title">Note Text</label>
                     </td>
                     <td className="note-editor-td">
                         <input type="text" id="title" placeholder="Enter text" value={note.info.txt} onChange={handleChange} />
                     </td>
                 </tr>
                 <tr key={count++}>
-                    <td className="note-editor-td editor-link">
+                    <td className="editor-link">
                         <button>{note.id ? 'Save' : 'Add'}</button>
                     </td>
-                    <td className="note-editor-td editor-link">
+                    <td className="editor-link">
                         <Link to="/note">Cancel</Link>
                     </td>
                 </tr>
@@ -152,7 +132,7 @@ function EditTextNote({ note, callbackFuncs }) {
 function EditImageNote({ note, callbackFuncs }) {
     const { handleChange, onSaveNote } = callbackFuncs
     let count = 0
-    return <form className="note-editor-form flex-col" onSubmit={onSaveNote}>
+    return <form className="note-editor-form flex-col" onSubmit={(ev) => onSaveNote(ev, note)}>
         <table>
             <tbody>
 
@@ -176,10 +156,10 @@ function EditImageNote({ note, callbackFuncs }) {
                 </tr>
 
                 <tr key={count++}>
-                    <td className="note-editor-td editor-link">
+                    <td className="editor-link">
                         <button>{note.id ? 'Save' : 'Add'}</button>
                     </td>
-                    <td className="note-editor-td editor-link">
+                    <td className="editor-link">
                         <Link to="/note">Cancel</Link>
                     </td>
                 </tr>
@@ -189,25 +169,98 @@ function EditImageNote({ note, callbackFuncs }) {
 
 }
 
+function EditVideoNote({ note, callbackFuncs }) {
+    const { handleChange, onSaveNote } = callbackFuncs
+    let count = 0
+    return <form className="note-editor-form flex-col" onSubmit={(ev) => onSaveNote(ev, note)}>
+        <table>
+            <tbody>
+                <tr key={count++}>
+                    <td className="note-editor-td">
+                        <label htmlFor="note-img-url">Video URL</label>
+                    </td>
+                    <td className="note-editor-td">
+
+                        <input type="text" id="note-img-url" placeholder="Enter url" value={note.info.url} onChange={handleChange} />
+                    </td>
+                </tr>
+
+                <tr key={count++}>
+                    <td className="editor-link">
+                        <button>{note.id ? 'Save' : 'Add'}</button>
+                    </td>
+                    <td className="editor-link">
+                        <Link to="/note">Cancel</Link>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+
+}
 
 function EditTodoNote({ note, callbackFuncs }) {
-    const { handleChange, onSaveNote } = callbackFuncs
+    const { onSaveNote } = callbackFuncs
     const [currNote, setNote] = useState(note)
     let count = 0
 
+    function handleChange({ target }) {
+        let { name, value, dataset, checked } = target
+        let id = dataset.idx
 
+        if (name === 'todos-title') {
+            setNote((prevNote) => {
+                let info = prevNote.info
+                info = { ...info, label: value }
+                console.log(info)
+                return ({ ...prevNote, info })
+            })
+        }
+
+        else if (name === 'todo') {
+            setNote((prevNote) => {
+                id--
+                const todos = prevNote.info.todos
+                let todo = todos[id]
+                todo = { ...todo, txt: value }
+                todos[id] = todo
+                console.log(todo, todos)
+                return ({ ...prevNote, info: { label: prevNote.info.label, todos } })
+            })
+        }
+
+        else if (name === 'todo-check') {
+            setNote((prevNote) => {
+                id--
+                const todos = prevNote.info.todos
+                let todo = todos[id]
+                let doneAt = (checked) ? new Date().getTime() : null
+                todos[id] = { ...todo, doneAt }
+                return ({ ...prevNote, info: { label: prevNote.info.label, todos } })
+            })
+        }
+
+        else if (name === 'todo-remove') {
+            setNote((prevNote) => {
+                id--
+                const todos = prevNote.info.todos
+                todos.splice(id, 1)
+                return ({ ...prevNote, info: { label: prevNote.info.label, todos } })
+            })
+        }
+    }
     function addLine() {
         currNote.info.todos.push(noteService.getNewTodo())
         const newNote = { ...currNote }
         setNote(newNote)
     }
 
-    return <form className="note-editor-form" onSubmit={onSaveNote}>
+    return <form className="note-editor-form" onSubmit={(ev) => onSaveNote(ev, currNote)}>
         <table>
             <tbody>
-                <tr key={count}>
+                <tr key={'tr-' + count}>
                     <td className="note-editor-td">
-                        <label htmlFor="todos-title">Todo title:</label>
+                        <label htmlFor="todos-title">Todo title</label>
                     </td>
                     <td className="note-editor-td">
                         <input name="todos-title" type="text" id="todos-title" placeholder="Enter todo title" value={currNote.info.label} onChange={handleChange} />
@@ -215,23 +268,30 @@ function EditTodoNote({ note, callbackFuncs }) {
                 </tr>
                 {
                     currNote.info.todos.map(todo =>
-                        <tr key={count++}>
+                        <tr key={'tr-' + (++count)}>
                             <td className="note-editor-td">
-                                <label key={`label-${count}`} htmlFor={count}>Todo tasks:</label>
+                                <label key={`label-${count}`} htmlFor={count}>Todo task</label>
                             </td>
                             <td className="note-editor-td">
-                                <input name="todo" key={count} type="text" id={count} placeholder="Enter todo title" value={todo.txt} onChange={handleChange} />
+                                <input name="todo" key={'text' + count} type="text" data-idx={count} id={'txt-' + count} placeholder="Enter todo title" value={todo.txt} onChange={handleChange} />
                             </td>
+                            <td className="note-editor-td-check">
+                                <input name="todo-check" key={'check' + count} type="checkbox" data-idx={count} id={'checkbox-' + count} checked={(todo.doneAt === null) ? false : true} onChange={handleChange} />
+                            </td>
+                            <td className="note-editor-td-remove">
+                                <button name="todo-remove" data-idx={count} onClick={handleChange}>x</button>
+                            </td>
+
                         </tr>)
                 }
-                <tr key={`add-line-${count}`}>
-                    <td onClick={() => addLine()}>Add Line...</td>
-                </tr>
-                <tr key={count++}>
-                    <td className="note-editor-td editor-link">
+                <tr key={'tr-' + (++count)}>
+                    <td onClick={() => addLine()} className="add-line">
+                        <span>Add Line</span>
+                    </td>
+                    <td className="editor-link">
                         <button>{currNote.id ? 'Save' : 'Add'}</button>
                     </td>
-                    <td className="note-editor-td editor-link">
+                    <td className="editor-link">
                         <Link to="/note">Cancel</Link>
                     </td>
                 </tr>

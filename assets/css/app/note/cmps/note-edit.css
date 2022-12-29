@@ -3,7 +3,14 @@ section.note-editor {
     align-items: center;
     padding-block: 5vh;
     color: var(--textbox-font-color);
+}
 
+div.editor-box {
+    padding-block: 4rem;
+    padding-inline: 7.5rem;
+    border-radius: 10px;
+    background-color: var(--sec-bg-color);
+    
 }
 
 nav.types-menu {
@@ -26,6 +33,11 @@ span.editor-desc {
     font-size: 5rem;
 }
 
+div.editor-box > form {
+    margin-block-start: 4rem;
+}
+
+
 td.note-editor-td>label {
     font-size: 2rem;
     margin-inline-end: 2rem;
@@ -40,31 +52,52 @@ td.note-editor-td {
     padding-block: 0.8rem;
 }
 
-td.note-editor-td>button,
-td.editor-link>a {
+
+td.editor-link>button,
+td.note-editor-td-remove>button,
+td.editor-link>a,
+td.add-line>span {
     font-size: 2rem;
     border: hidden;
     background-color: inherit;
     border-radius: 25%;
 
-    padding: 0.5rem;
     padding-inline: 1rem;
 }
 
-td.editor-link {
-    text-align: center;
-}
-
-td.note-editor-td>button:hover,
-td.editor-link>a:hover {
+td.editor-link>button:hover,
+td.editor-link>a:hover,
+td.add-line>span:hover,
+td.note-editor-td-remove>button:hover {
     cursor: pointer;
     color: white;
     background-color: var(--main-bg-color);
 }
 
-div.editor-box {
-    padding-inline: 7.5rem;
-    padding-block: 1.5rem;
-    border-radius: 10px;
-    background-color: var(--sec-bg-color);
+
+
+td.add-line:hover, 
+td.editor-link:hover {
+    cursor: pointer;
+}
+
+td.add-line, td.editor-link {
+    font-size: 2rem;
+    text-align: center;
+}
+
+td.note-editor-td-check>input {
+    margin-inline: 3rem;
+    scale: 1.5;
+}
+
+td.add-line, td.editor-link {
+    padding-block-start: 2rem;
+    text-align: center;
+    
+}
+
+td.add-line>span{
+    padding-inline: unset;
+    text-align: left;
 }
