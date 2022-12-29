@@ -14,7 +14,7 @@ export function Card({ dev }) {
 
             <p className="card-text">{dev.txt}</p>
 
-            <span>Contact me!</span>
+            <span className="contact-me">Contact me!</span>
             <div className="about-icons flex-row">
                 <a href={dev.contact.facebook} target="_blank">
                     <i className="fa-brands fa-facebook"></i>
