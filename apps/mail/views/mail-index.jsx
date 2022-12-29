@@ -1,4 +1,4 @@
-const { Outlet, NavLink } = ReactRouterDOM
+const { Outlet, NavLink, Link } = ReactRouterDOM
 const { useParams, useNavigate } = ReactRouterDOM
 
 import { MailFilter } from "../cmps/mail-filter.jsx"
@@ -6,14 +6,17 @@ import { MailCompose } from "../cmps/mail-compose.jsx"
 import { mailService } from "../services/mail.service.js"
 import { MailList } from "../cmps/mail-list.jsx"
 import { showSuccessMsg } from "../../../services/event-bus.service.js"
+import { storageService } from "../../../services/storage.service.js"
 const { useEffect, useState } = React
 
 export function MailIndex() {
     const [mails, setMails] = useState([])
     const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
     const [showNewMessage, setShowNewMessage] = useState(false)
-    const { type } = useParams()
-    const navigate = useNavigate()
+    const { type, id } = useParams()
+    const [updatedMails, setUpdatedMails] = useState([])
+    const currentUserMail = storageService.loadFromStorage('userDB').email
+
 
 
     useEffect(() => {
@@ -21,13 +24,48 @@ export function MailIndex() {
             case 'starred':
                 starredMails()
                 break;
+            case 'sent-email':
+                sentMails()
+                break;
+            case 'trash':
+                deletedMails()
+                break;
             default: loadMails()
                 break;
         }
 
-
     }, [filterBy, type])
 
+    function sentMails() {
+        mailService.query(filterBy).then(mails => {
+            return mails.filter(mail => mail.from === currentUserMail && mail.removedAt === null)
+        }).then(setMails)
+    }
+
+    function starredMails() {
+        mailService.query(filterBy).then(mails => {
+            return mails.filter(mail => mail.starred === true && mail.removedAt === null)
+        }).then(setMails)
+    }
+
+    function sortBy(value) {
+        if (value === 'title') {
+            const sortedMailsBySubject = mails.sort((a, b) => {
+                // Use the localeCompare method to compare the name property of each object
+                return a.subject.localeCompare(b.subject);
+            });
+            return setMails([...sortedMailsBySubject])
+        }
+        if (value === 'date') {
+            const sortedMailsByDate = mails.sort((a, b) => {
+                // Convert the date strings to Date objects
+                const dateA = new Date(a.sentAt);
+                const dateB = new Date(b.sentAt);
+                return dateA.getTime() - dateB.getTime();
+            });
+            return setMails([...sortedMailsByDate])
+        }
+    }
 
     function setIsStarredMail(ev, mailId) {
         console.log(ev, mailId)
@@ -48,21 +86,31 @@ export function MailIndex() {
         // setMails((prevMails) => [...prevMails, newMessage])
     }
 
-    function starredMails() {
+    function deletedMails() {
         mailService.query(filterBy).then(mails => {
-            return mails.filter(mail => mail.starred === true)
+            return mails.filter(mail => mail.removedAt !== null)
         }).then(setMails)
     }
 
     function loadMails() {
-        mailService.query(filterBy).then(setMails)
+        mailService.query(filterBy).then(mails => {
+            return mails.filter(mail => mail.from !== currentUserMail && mail.removedAt === null)
+        }).then(setMails)
     }
 
     function onSetFilter(filterByFromFilter) {
         setFilterBy(filterByFromFilter)
     }
 
-    function handleDelete(mailId) {
+    function mailToTrash(mail) {
+        mailService.get(mail.id).then((mail) => {
+            const removedMail = { ...mail, removedAt: new Date().toLocaleDateString() }
+            mailService.save(removedMail)
+            return mails.filter(mail => mail.id !== removedMail.id)
+        }).then(setMails)
+    }
+
+    function handleRemove(mailId) {
         mailService.remove(mailId).then(() => {
             const updatedMails = mails.filter(mail => mail.id !== mailId)
             setMails(updatedMails)
@@ -70,12 +118,31 @@ export function MailIndex() {
         })
     }
 
+    function handleDelete(mailId) {
+        mailService.get(mailId).then((mail) => {
+            if (mail.removedAt === null) {
+                return mailToTrash(mail)
+            } else {
+                return handleRemove(mail.id)
+            }
+        })
+    }
+
+    function handleReadMail(mailId) {
+        mailService.get(mailId).then(mail => {
+            if (mail.isRead === false) {
+                return { ...mail, isRead: true }
+            } else return { ...mail, isRead: false }
+        }).then(updatedMail => {
+            mailService.save(updatedMail)
+        })
+    }
 
     return (
         <div className="mail-index">
             <div className="mail-container">
                 <div className="main-nav-app">
-                    <button onClick={() => setShowNewMessage((show) => !show)}>+Compose</button>
+                    <button onClick={() => setShowNewMessage((show) => !show)}><i className="fa-solid fa-plus"></i>Compose</button>
                     <nav className="main-nav">
                         <NavLink to="/mail/inbox">Inbox</NavLink>
                         <NavLink to="/mail/starred">Starred</NavLink>
@@ -85,15 +152,19 @@ export function MailIndex() {
                     </nav>
                 </div>
                 <div className="main-outlet">
-                    <MailFilter onSetFilter={onSetFilter} />
                     <div className="nested-route">
-                        <Outlet />
+                        {id ? <Outlet /> : null}
+                        {id ? <Link to="/mail/inbox">Back</Link> : null}
                     </div>
-                    <MailCompose sendMail={sendMail} showNewMessage={showNewMessage} />
-                    <MailList handleDelete={handleDelete} mails={mails} setIsStarredMail={setIsStarredMail} />
+                    {id ? null : <MailFilter sortBy={sortBy} onSetFilter={onSetFilter} />}
+                    {id ? null : <MailCompose setShowNewMessage={setShowNewMessage} sendMail={sendMail} showNewMessage={showNewMessage} />}
+                    {id ? null : <MailList handleDelete={handleDelete} handleReadMail={handleReadMail} mails={mails} setIsStarredMail={setIsStarredMail} />}
                 </div>
+
             </div>
         </div>
     )
 }
+
+
 

@@ -31,10 +31,9 @@
 @import './app/mail/cmps/mail-preview.css';
 @import './app/mail/cmps/mail-list.css';
 @import './app/mail/cmps/mail-compose.css';
-
+@import './app/mail/cmps/mail-details.css';
+@import './app/mail/cmps/mail-filter.css';
 
 /* App Note */
 @import './app/note/cmps/note-preview.css';
 @import './app/note/views/notes-index.css';
-
-

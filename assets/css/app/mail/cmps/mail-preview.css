@@ -19,6 +19,15 @@
      display: none;
  }
 
+ .mail-sent-at .unread-icon {
+     display: none;
+ }
+
+ .mail-sent-at .expand-icon {
+     display: none;
+ }
+
+
  .mail-sent-at .sent-at {
      padding-right: 1em;
  }
@@ -27,6 +36,21 @@
      display: block;
  }
 
+ .first-tr:hover .expand-icon {
+     display: block;
+ }
+
+ .first-tr:hover .unread-icon {
+     display: block;
+ }
+
  .first-tr:hover .sent-at {
      display: none;
+ }
+
+ .hover-icons {
+     display: flex;
+     align-items: center;
+     gap: 1.5rem;
+     padding-right: 1.5em;
  }

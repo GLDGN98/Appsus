@@ -31,12 +31,19 @@ export function MailDetails() {
 
     }
 
-
     if (!mail) return <div>Loading...</div>
+    console.log(mail)
+
     return (
-        <div className="mail-details">
-            <h1>{mail.subject}</h1>
-            <h4>{mail.body}</h4>
+        <div>
+            <div style={{ textAlign: 'end' }}>
+                <h2>&lt;{mail.from}&gt;</h2>
+                <h3>{mail.name}</h3>
+            </div>
+            <div className="mail-details">
+                <h1>{mail.subject}</h1>
+                <p>{mail.body}</p>
+            </div>
         </div>
     )
 }

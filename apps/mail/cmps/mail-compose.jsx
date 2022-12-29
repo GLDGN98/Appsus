@@ -1,10 +1,11 @@
-import { mailService } from "../services/mail.service.js"
 const { useState } = React
+const { useNavigate } = ReactRouterDOM
 
 
-export function MailCompose({ sendMail, showNewMessage }) {
-    const [newMessage, setNewMessage] = useState({ to: '', subject: '', body: '', name: 'Mahatma Appsus', from: "user@appsus.com", sentAt: new Date().toLocaleDateString() })
 
+export function MailCompose({ sendMail, showNewMessage, setShowNewMessage }) {
+    const [newMessage, setNewMessage] = useState({ to: '', subject: '', body: '', name: 'Mahatma Appsus', from: "user@appsus.com", sentAt: new Date(), removedAt: null })
+    const navigate = useNavigate()
 
     function handleChange({ target }) {
         let { value, name: field } = target
@@ -16,6 +17,7 @@ export function MailCompose({ sendMail, showNewMessage }) {
     function onSendMail(ev) {
         ev.preventDefault()
         sendMail(newMessage)
+        setShowNewMessage(false)
     }
 
     return (
