@@ -1,33 +1,32 @@
-.mail-preview .first-tr {
-    display: grid;
-    grid-template-columns: 0.5fr 2fr 20fr 1fr;
-    border: 1px solid rgb(235, 234, 234);
-    padding: 0.6em;
-}
+ .first-tr {
+     display: grid;
+     grid-template-columns: 0.5fr 2fr 20fr 1fr;
+     border: 1px solid rgb(235, 234, 234);
+     padding: 0.6em;
+     width: 100%;
+ }
 
+ .first-tr .mail-sent-at {
+     grid-column: 4/5;
+ }
 
-.mail-preview .first-tr .mail-sent-at {
-    grid-column: 4/5;
-}
+ .first-tr:hover {
+     cursor: pointer;
+     box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
+ }
 
+ .mail-sent-at .trash-icon {
+     display: none;
+ }
 
-.new-mail {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    height: 50%;
-    width: 50%;
-    display: grid;
-    grid-template-rows: 50px 50px 50px 50px 50px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
-}
+ .mail-sent-at .sent-at {
+     padding-right: 1em;
+ }
 
-.new-mail button {
-    position: fixed;
-    bottom: 0;
-}
+ .first-tr:hover .trash-icon {
+     display: block;
+ }
 
-.mail-preview .first-tr:hover {
-    cursor: pointer;
-    box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
-}
+ .first-tr:hover .sent-at {
+     display: none;
+ }

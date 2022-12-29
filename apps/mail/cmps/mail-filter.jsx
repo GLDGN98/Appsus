@@ -3,8 +3,7 @@ import { mailService } from "../services/mail.service.js"
 const { useState, useEffect } = React
 
 export function MailFilter({ onSetFilter }) {
-    const [filterByToEdit, setFilterByToEdit] = useState('')
-
+    const [filterByToEdit, setFilterByToEdit] = useState(mailService.getDefaultFilter())
 
     useEffect(() => {
         onSetFilter(filterByToEdit)
@@ -13,11 +12,12 @@ export function MailFilter({ onSetFilter }) {
 
     function handleChange({ target }) {
         let { value } = target
-        // setFilterByToEdit((prevFilter) => ({ ...prevFilter, name: value, subject: value, body: value }))
-        setFilterByToEdit(value)
+        setFilterByToEdit((prev) => ({ ...prev, name: value }))
     }
 
-
+    function changeFilterByRead(ev) {
+        setFilterByToEdit((prev) => ({ ...prev, isRead: ev.target.value }))
+    }
 
 
 
@@ -30,6 +30,11 @@ export function MailFilter({ onSetFilter }) {
                 placeholder="Search..."
                 onChange={handleChange}
             />
+            <select onChange={changeFilterByRead} name="" id="">
+                <option value="">All</option>
+                <option value="read">Read</option>
+                <option value="unread">Unread</option>
+            </select>
         </div>
     )
 }

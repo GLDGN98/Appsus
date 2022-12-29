@@ -3,6 +3,7 @@ import { storageService } from "../../../services/storage.service.js"
 import { asyncStorageService } from "../../../services/async-storage.service.js"
 
 const MAIL_KEY = 'mailDB'
+const USER_KEY = 'userDB'
 
 
 export const mailService = {
@@ -14,18 +15,28 @@ export const mailService = {
 }
 
 _createMails()
+_createUser()
+
 
 function getDefaultFilter() {
-    return { name: '', subject: '', body: '' }
+    return { name: '', isRead: null }
 }
 
-function query(filterBy = '') {
+function query(filterBy = getDefaultFilter()) {
+    console.log(filterBy)
     return asyncStorageService.query(MAIL_KEY)
         .then(mails => {
-            if (filterBy) {
-                const regex = new RegExp(filterBy, 'i')
-                mails = mails.filter(mail => regex.test(mail.name))
+            if (filterBy.name) {
+                const regex = new RegExp(filterBy.name, 'i')
+                mails = mails.filter(mail => regex.test(mail.name) || regex.test(mail.subject) || regex.test(mail.body))
                 console.log(mails)
+            }
+            if (filterBy.isRead) {
+                if (filterBy.isRead === 'read') {
+                    mails = mails.filter(mail => mail.isRead === true)
+                } else if (filterBy.isRead === 'unread') {
+                    mails = mails.filter(mail => mail.isRead === false)
+                }
             }
             return mails
         })
@@ -44,11 +55,9 @@ function remove(mailId) {
     return asyncStorageService.remove(MAIL_KEY, mailId)
 }
 
-
 function get(mailId) {
     return asyncStorageService.get(MAIL_KEY, mailId)
 }
-
 
 function _createMails() {
     let mails = storageService.loadFromStorage(MAIL_KEY)
@@ -59,7 +68,6 @@ function _createMails() {
         storageService.saveToStorage(MAIL_KEY, mails)
     }
 }
-
 
 function _createMail(subject, body, from, name) {
     return {
@@ -73,5 +81,17 @@ function _createMail(subject, body, from, name) {
         to: 'user@appsus.com',
         sentAt: new Date(1551133930594).toLocaleDateString(),
         removedAt: null
+    }
+}
+
+
+function _createUser() {
+    let loggedInUser = storageService.loadFromStorage(USER_KEY)
+    if (!loggedInUser) {
+        loggedInUser = {
+            email: 'user@appsus.com',
+            fullname: 'Mahatma Appsus'
+        }
+        storageService.saveToStorage(USER_KEY, loggedInUser)
     }
 }
