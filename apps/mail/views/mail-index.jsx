@@ -135,6 +135,7 @@ export function MailIndex() {
             } else return { ...mail, isRead: false }
         }).then(updatedMail => {
             mailService.save(updatedMail)
+            console.log(updatedMail)
         })
     }
 

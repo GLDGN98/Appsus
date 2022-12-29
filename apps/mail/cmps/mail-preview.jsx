@@ -7,6 +7,7 @@ export function MailPreview({ mail, handleDelete, setIsStarredMail, handleReadMa
 
     const [isExpanded, setIsExpanded] = useState(false)
     const [isStarred, setIsStarred] = useState(mail.starred)
+    const [isRead, setIsRead] = useState(mail.isRead)
     // const [mouseOver, setMouseOver] = useState(false)
 
     function handleStar(ev, mailId) {
@@ -17,9 +18,14 @@ export function MailPreview({ mail, handleDelete, setIsStarredMail, handleReadMa
         mailService.save(mail)
     }
 
-    function onRead(ev, mailId) {
+    function onRead(ev) {
+        console.log(mail);
+        
         ev.stopPropagation()
-        handleReadMail(mailId)
+        // handleReadMail(mailId)
+        setIsRead((prev) => !prev)
+        mail.isRead = isRead
+        mailService.save(mail)
         // return mailService.get(mailId).then(mail => {
         //     return { ...mail, isRead: true }
         // }).then(mail => mailService.save(mail))
@@ -44,7 +50,7 @@ export function MailPreview({ mail, handleDelete, setIsStarredMail, handleReadMa
                     <div className="hover-icons">
                         <Link to={`/mail/inbox/${mail.id}`}><span title="Expand" className="expand-icon"><i className="fa-solid fa-expand"></i></span></Link>
                         <span title="Delete" className="trash-icon"><i onClick={(ev) => onHandleDelete(ev, mail.id)} className="fa-sharp fa-solid fa-trash"></i></span>
-                        <span onClick={(ev) => onRead(ev, mail.id)} title="Read" className="unread-icon"><i className="fa-regular fa-envelope"></i></span>
+                        <span onClick={onRead} title="Read" className="unread-icon"><i className="fa-regular fa-envelope"></i></span>
                     </div>
                 </td>
             </tr>
