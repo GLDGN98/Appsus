@@ -14,7 +14,6 @@ export function MailIndex() {
     const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
     const [showNewMessage, setShowNewMessage] = useState(false)
     const { type, id } = useParams()
-    const [updatedMails, setUpdatedMails] = useState([])
     const currentUserMail = storageService.loadFromStorage('userDB').email
 
 
@@ -65,16 +64,6 @@ export function MailIndex() {
             });
             return setMails([...sortedMailsByDate])
         }
-    }
-
-    function setIsStarredMail(ev, mailId) {
-        console.log(ev, mailId)
-        //     ev.stopPropagation()
-        //     setIsStarred(prev => !prev)
-        //     mailService.get(mailId).then(mail => setMail({ ...mail, starred: isStarred })).then(mail => {
-        //         return mailService.save(mail)
-        //     })
-        //     console.log('TODO: I will change isStarred key on specific mail (VIA SERVICE), this will cause a re-render of the mail preview as !prevStatus.isStarred')
     }
 
     function sendMail(newMessage) {
@@ -128,16 +117,6 @@ export function MailIndex() {
         })
     }
 
-    function handleReadMail(mailId) {
-        mailService.get(mailId).then(mail => {
-            if (mail.isRead === false) {
-                return { ...mail, isRead: true }
-            } else return { ...mail, isRead: false }
-        }).then(updatedMail => {
-            mailService.save(updatedMail)
-            console.log(updatedMail)
-        })
-    }
 
     return (
         <div className="mail-index">
@@ -159,7 +138,7 @@ export function MailIndex() {
                     </div>
                     {id ? null : <MailFilter sortBy={sortBy} onSetFilter={onSetFilter} />}
                     {id ? null : <MailCompose setShowNewMessage={setShowNewMessage} sendMail={sendMail} showNewMessage={showNewMessage} />}
-                    {id ? null : <MailList handleDelete={handleDelete} handleReadMail={handleReadMail} mails={mails} setIsStarredMail={setIsStarredMail} />}
+                    {id ? null : <MailList handleDelete={handleDelete} mails={mails} />}
                 </div>
 
             </div>
