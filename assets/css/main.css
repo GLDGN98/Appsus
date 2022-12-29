@@ -35,5 +35,6 @@
 
 /* App Note */
 @import './app/note/cmps/note-preview.css';
+@import './app/note/views/notes-index.css';
 
 

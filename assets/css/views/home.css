@@ -30,12 +30,12 @@ nav.home-menu {
     width: 100%;
 }
 
-nav>i {
+nav.home-menu>i {
     border-radius: 50%;
     padding: 4rem;
 }
 
-nav>i:hover {
+nav.home-menu>i:hover {
     cursor: pointer;
     color: blue;
     background-color: rgb(210, 210, 244);

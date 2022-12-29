@@ -3,15 +3,18 @@ const { Link, NavLink , useLocation} = ReactRouterDOM
 export function AppHeader() {
     const pathName = useLocation().pathname
     console.log(pathName)
-    return (pathName !== '/') ? <header className="app-header">
+    return (pathName !== '/') ? <header className="app-header main-layout full flex-row">
+        <div className="header-box flex-row">
+
         <Link to="/">
-            <h3>Appsus.!</h3>
+            <h3 className="app-logo">Appsus.</h3>
         </Link>
-        <nav>
+        <nav className="flex-row">
             <NavLink to="/">Home</NavLink>
             <NavLink to="/about">About</NavLink>
             <NavLink to="/mail">Mail</NavLink>
             <NavLink to="/note">Note</NavLink>
         </nav>
+        </div>
     </header> : ''
 }

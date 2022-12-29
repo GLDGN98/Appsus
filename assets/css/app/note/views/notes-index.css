@@ -1,0 +1,46 @@
+div.notes-page {
+    width: 100%;
+}
+
+section.search-notes-box {
+    margin: 0 auto;
+    margin-block: 2rem;
+    width: 60%;
+    border-radius: 4.5px;
+
+    align-items: center;
+}
+
+input.input-search-note {
+    padding: 1.5rem;
+    font-size: 2rem;
+    flex-grow: 1;
+    color: var(--textbox-font-color);
+    border: 0.1px groove var(--textbox-border-color);
+    height: fit-content;
+}
+
+input.input-search-note:focus {
+    border-color: var(--textbox-border-color);
+}
+
+div.notes-list-box {
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+nav.filter-notes>i {
+    font-size: 4rem;
+    margin-inline: 2rem;
+    color: var(--textbox-border-color)
+}
+
+nav.filter-notes>i:hover {
+    cursor: pointer;
+    color: var(--textbox-font-color)
+}
+
+nav.filter-notes>i.active {
+    background-color: 'blue';
+    color: var(--textbox-font-color)
+}

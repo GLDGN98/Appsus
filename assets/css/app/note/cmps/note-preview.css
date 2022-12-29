@@ -2,10 +2,12 @@ div.note-box {
     font-size: 2rem;
 
     margin: 1rem;
-    padding: 1.5rem;
+    padding: 2rem;
     width: fit-content;
 
     border: 0px hidden black;
+
+    height: fit-content;
 }
 
 
@@ -13,6 +15,8 @@ div.note-tools{
     width: 100%;
     justify-content: space-between;
     margin-block-start: 1rem;
+
+    text-align: center;
 }
 
 input.note-color-tool{
@@ -25,7 +29,7 @@ input.note-color-tool{
 
 
 span.note-text {
-    padding: 2rem;
+    padding-block-end: 2rem;
 }
 
 
@@ -57,4 +61,8 @@ span.note-image-title {
     font-size: 2.2rem;
     text-align: center;
     margin-block-end: 1rem;
+}
+
+img.note-img{
+    margin-block: 1rem;
 }
