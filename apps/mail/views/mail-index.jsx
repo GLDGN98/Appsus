@@ -71,8 +71,6 @@ export function MailIndex() {
     }
 
 
-
-
     return (
         <div className="mail-index">
             <div className="mail-container">

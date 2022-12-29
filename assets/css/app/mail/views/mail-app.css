@@ -1,7 +1,6 @@
 @font-face {
     font-family: 'Lato';
     src: url('../../../../fonts/Lato-Black.ttf')
-
 }
 
 @font-face {
@@ -22,6 +21,6 @@
 
 
 .mail-index {
-    font-size: 1.5em;
+    font-size: 1.5rem;
     font-family: Lato Thin;
 }
