@@ -22,7 +22,11 @@ export function App() {
                     <Route path="/mail" element={<MailIndex />} />
                     <Route path="/mail/:type" element={<MailIndex />} />
                     <Route path="/mail/inbox/:id" element={<MailDetails />} />
+
                     <Route path="/note" element={<NoteIndex />} />
+                    <Route path="/note/edit" element={<NoteEdit />} />
+                    <Route path="/note/edit/:noteId" element={<NoteEdit />} />
+
                 </Routes>
             </main>
         </section>

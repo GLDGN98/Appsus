@@ -47,7 +47,8 @@ export const noteService = {
     save,
     query,
     getDefaultFilter,
-    sortTodos
+    sortTodos,
+    getEmptyNote
 }
 
 function get(noteId) {
