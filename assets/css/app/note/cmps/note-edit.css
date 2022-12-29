@@ -1,0 +1,103 @@
+section.note-editor {
+    width: 100%;
+    align-items: center;
+    padding-block: 5vh;
+    color: var(--textbox-font-color);
+}
+
+div.editor-box {
+    padding-block: 4rem;
+    padding-inline: 7.5rem;
+    border-radius: 10px;
+    background-color: var(--sec-bg-color);
+    
+}
+
+nav.types-menu {
+    width: 80%;
+    font-size: 5rem;
+    justify-content: space-evenly;
+    margin-block: 2rem;
+    color: cornflowerblue;
+}
+
+span.choose-type-add-note {
+    font-size: 6.5rem;
+    width: 50%;
+    color: cornflowerblue;
+    margin-block-end: 10vh;
+}
+
+
+span.editor-desc {
+    font-size: 5rem;
+}
+
+div.editor-box > form {
+    margin-block-start: 4rem;
+}
+
+
+td.note-editor-td>label {
+    font-size: 2rem;
+    margin-inline-end: 2rem;
+}
+
+td.note-editor-td>input {
+    font-size: 2rem;
+}
+
+td.note-editor-td {
+    padding-inline: 0.2rem;
+    padding-block: 0.8rem;
+}
+
+
+td.editor-link>button,
+td.note-editor-td-remove>button,
+td.editor-link>a,
+td.add-line>span {
+    font-size: 2rem;
+    border: hidden;
+    background-color: inherit;
+    border-radius: 25%;
+
+    padding-inline: 1rem;
+}
+
+td.editor-link>button:hover,
+td.editor-link>a:hover,
+td.add-line>span:hover,
+td.note-editor-td-remove>button:hover {
+    cursor: pointer;
+    color: white;
+    background-color: var(--main-bg-color);
+}
+
+
+
+td.add-line:hover, 
+td.editor-link:hover {
+    cursor: pointer;
+}
+
+td.add-line, td.editor-link {
+    font-size: 2rem;
+    text-align: center;
+}
+
+td.note-editor-td-check>input {
+    margin-inline: 3rem;
+    scale: 1.5;
+}
+
+td.add-line, td.editor-link {
+    padding-block-start: 2rem;
+    text-align: center;
+    
+}
+
+td.add-line>span{
+    padding-inline: unset;
+    text-align: left;
+}

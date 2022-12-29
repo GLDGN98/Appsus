@@ -5,7 +5,7 @@ div.notes-page {
 section.search-notes-box {
     margin: 0 auto;
     margin-block: 2rem;
-    width: 60%;
+    width: 70%;
     border-radius: 4.5px;
 
     align-items: center;
@@ -29,13 +29,17 @@ div.notes-list-box {
     flex-wrap: wrap;
 }
 
-nav.filter-notes>i {
+section.search-notes-box>i,
+nav.filter-notes>i,
+i.add-notes-button {
     font-size: 4rem;
     margin-inline: 2rem;
     color: var(--textbox-border-color)
 }
 
-nav.filter-notes>i:hover {
+section.search-notes-box>i:hover,
+nav.filter-notes>i:hover,
+i.add-notes-button:hover {
     cursor: pointer;
     color: var(--textbox-font-color)
 }
@@ -43,4 +47,8 @@ nav.filter-notes>i:hover {
 nav.filter-notes>i.active {
     background-color: 'blue';
     color: var(--textbox-font-color)
+}
+
+i.add-notes-button {
+    margin-inline-start: 10rem;
 }

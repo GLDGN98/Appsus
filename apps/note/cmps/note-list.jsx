@@ -8,20 +8,29 @@ export function NoteList({ notes, filterBy }) {
     const updateFuncs = {
         onRemoveNote,
         onPinnedNote,
-        onUnpinnedNote
+        onUnpinnedNote,
+        onRefreshNotes
     }
 
+
+    function onRefreshNotes() {
+        noteService.query(filterBy).then(results => setNotes(results))
+    }
+    
+    
     function onPinnedNote(pinned) {
         const updatedNotes = currNotes.filter(note => note.id !== pinned.id)
         updatedNotes.unshift(pinned)
         setNotes(updatedNotes)
     }
 
+
     function onUnpinnedNote(unpinned) {
         const updatedNotes = currNotes.filter(note => note.id !== unpinned.id)
         updatedNotes.push(unpinned)
         setNotes(updatedNotes)
     }
+
 
     function onRemoveNote(noteId) {
         const updatedNotes = currNotes.filter(note => note.id !== noteId)

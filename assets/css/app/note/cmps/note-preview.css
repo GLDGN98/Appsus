@@ -3,6 +3,7 @@ div.note-box {
 
     margin: 1rem;
     padding: 2rem;
+    min-width: 20rem;
     width: fit-content;
 
     border: 0px hidden black;
@@ -11,18 +12,29 @@ div.note-box {
 }
 
 
-div.note-tools{
+div.note-tools {
     width: 100%;
     justify-content: space-between;
     margin-block-start: 1rem;
 
     text-align: center;
 }
+div.note-tools>*{
+    color: rgb(71, 71, 71);
+}
+div.note-tools>*:hover {
+    cursor: pointer;
+    color: cadetblue;
+}
 
-input.note-color-tool{
+input.note-color-tool {
     opacity: 0;
     height: 0;
     width: 0;
+}
+
+i.pinned {
+    color: rgb(187, 169, 66);
 }
 
 /* Note Text */
@@ -39,16 +51,16 @@ span.note-text {
 
 /* Note Todo */
 
-ul.note-todo-list{
+ul.note-todo-list {
     list-style: none;
 }
 
-i.todo-checked{
+i.todo-checked {
     margin-inline-start: 1.5rem;
 }
 
 span.done {
-    color:rgb(78, 76, 76);
+    color: rgb(78, 76, 76);
 }
 
 span.note-todo-header {
@@ -63,6 +75,6 @@ span.note-image-title {
     margin-block-end: 1rem;
 }
 
-img.note-img{
+img.note-img {
     margin-block: 1rem;
 }
