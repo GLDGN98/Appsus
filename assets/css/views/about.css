@@ -1,0 +1,8 @@
+section.about{
+    text-align: center;
+}
+
+span.about-header{
+    font-size: 4rem;
+    color: var(--blue-color);
+}

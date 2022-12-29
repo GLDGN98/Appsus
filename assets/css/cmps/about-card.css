@@ -18,7 +18,7 @@ div.about-info {
 
 span.card-header {
     font-size: 2rem;
-    color: var(--clr7);
+    color: rgb(0, 31, 63);
     margin: 0;
 }
 
@@ -40,19 +40,18 @@ div.my-thumb {
 img.about-me-img {
     max-height: 200px;
     max-width: 200px;
-    height: 12vw;
-    width: 13vw;
+    height: 12rem;
+    width: 13rem;
     border-radius: 50%;
 
 }
 
-div.about-icos {
-    height: 2rem;
-    width: 100%;
+div.about-icons {
     margin-block: 0.5rem;
 }
 
-div.about-icos > a {
+div.about-icons > a > i {
     margin-inline-end: 1rem;
-    height: 100%;
+    font-size: 2.5rem;
+    color: var(--blue-color);
 }

@@ -31,7 +31,7 @@ export function About() {
         }
     ]
     return <section className="about">
-        <h1>About our team</h1>
+        <span className="about-header">About our team</span>
         {
             cards.map(card => <Card dev={card} />)
         }

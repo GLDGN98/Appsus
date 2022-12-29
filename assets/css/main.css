@@ -10,6 +10,7 @@
 
 /* Views */
 @import './views/home.css';
+@import './views/about.css';
 
 /* @import './apps/note/views/note-app.css'; */
 
@@ -24,6 +25,7 @@
 @import './cmps/app-header.css';
 @import './cmps/app-footer.css';
 @import './cmps/app-main.css';
+@import './cmps/about-card.css';
 
 /* @import './apps/mail/cmps/mail-list.css'; */
 
