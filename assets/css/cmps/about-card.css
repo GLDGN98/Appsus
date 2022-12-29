@@ -40,10 +40,9 @@ div.my-thumb {
 img.about-me-img {
     max-height: 200px;
     max-width: 200px;
-    height: 12rem;
-    width: 13rem;
-    border-radius: 50%;
-
+    height: 20rem;
+    width: 20rem;
+    border-radius: 35%;
 }
 
 p.card-text{
