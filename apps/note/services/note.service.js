@@ -133,7 +133,7 @@ function _createNotes() {
 
 function getEmptyNote() {
     return {
-        id: "n101",
+        id: utilService.makeId(),
         type: "note-txt",
         isPinned: false,
         info: {

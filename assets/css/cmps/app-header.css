@@ -23,7 +23,7 @@ div.header-box {
     color: white;
 }
 
-nav a {
+nav.header-nav > a {
     font-size: 3rem;
     margin-inline: .5em;
     height: fit-content;

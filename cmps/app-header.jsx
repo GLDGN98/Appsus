@@ -9,7 +9,7 @@ export function AppHeader() {
         <Link to="/">
             <h3 className="app-logo">Appsus.</h3>
         </Link>
-        <nav className="flex-row">
+        <nav className="header-nav flex-row">
             <NavLink to="/">Home</NavLink>
             <NavLink to="/about">About</NavLink>
             <NavLink to="/mail">Mail</NavLink>
