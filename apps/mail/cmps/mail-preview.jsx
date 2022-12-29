@@ -3,33 +3,23 @@ import { mailService } from "../services/mail.service.js"
 const { useState, useEffect, Fragment } = React
 const { Link } = ReactRouterDOM
 
-export function MailPreview({ mail, handleDelete, setIsStarredMail, handleReadMail }) {
+export function MailPreview({ mail, handleDelete }) {
 
     const [isExpanded, setIsExpanded] = useState(false)
     const [isStarred, setIsStarred] = useState(mail.starred)
     const [isRead, setIsRead] = useState(mail.isRead)
-    // const [mouseOver, setMouseOver] = useState(false)
 
-    function handleStar(ev, mailId) {
+    function handleStar(ev) {
         ev.stopPropagation()
-        setIsStarredMail(ev, mailId)
-        setIsStarred((prev) => !prev)
-        mail.starred = isStarred
+        setIsStarred((prev) => mail.starred = !prev)
         mailService.save(mail)
     }
 
     function onRead(ev) {
         console.log(mail);
-        
         ev.stopPropagation()
-        // handleReadMail(mailId)
-        setIsRead((prev) => !prev)
-        mail.isRead = isRead
+        setIsRead((prev) => mail.isRead = !prev)
         mailService.save(mail)
-        // return mailService.get(mailId).then(mail => {
-        //     return { ...mail, isRead: true }
-        // }).then(mail => mailService.save(mail))
-
     }
 
     function onHandleDelete(ev, mailId) {
@@ -42,7 +32,7 @@ export function MailPreview({ mail, handleDelete, setIsStarredMail, handleReadMa
             <tr style={mail.isRead ? { fontFamily: 'Lato Thin', backgroundColor: '#f7f8fa' } : { fontFamily: 'Lato' }} className="first-tr" onClick={() => {
                 setIsExpanded(!isExpanded)
             }}>
-                <td onClick={(ev) => handleStar(ev, mail.id)}>{mail.starred ? <i style={{ color: 'gold' }} className="fa-sharp fa-solid fa-star"></i> : <i className="fa-regular fa-star"></i>}</td>
+                <td onClick={handleStar}>{mail.starred ? <i style={{ color: 'gold' }} className="fa-sharp fa-solid fa-star"></i> : <i className="fa-regular fa-star"></i>}</td>
                 <td>{mail.name}</td>
                 <td>{mail.body}</td>
                 <td className="mail-sent-at">
