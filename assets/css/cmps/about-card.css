@@ -25,7 +25,7 @@ span.card-header {
 span.card-sub-header {
     margin: 0;
     margin-block-start: 0.5rem;
-    font-size: 1.2rem;
+    font-size: 1.6rem;
     color: rgba(105, 114, 183, 0.55);
 }
 
@@ -44,6 +44,11 @@ img.about-me-img {
     width: 13rem;
     border-radius: 50%;
 
+}
+
+p.card-text{
+    font-size: 1.4rem;
+    text-align: left;
 }
 
 div.about-icons {
