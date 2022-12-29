@@ -1,10 +1,9 @@
 import { mailService } from "../services/mail.service.js"
-
 const { useState } = React
 
 
-export function MailCompose() {
-    const [newMessage, setNewMessage] = useState({ to: '', subject: '', body: '' })
+export function MailCompose({ sendMail, showNewMessage }) {
+    const [newMessage, setNewMessage] = useState({ to: '', subject: '', body: '', name: 'Mahatma Appsus', from: "user@appsus.com", sentAt: new Date().toLocaleDateString() })
 
 
     function handleChange({ target }) {
@@ -13,43 +12,42 @@ export function MailCompose() {
     }
 
 
-    function sendMail(ev) {
+
+    function onSendMail(ev) {
         ev.preventDefault()
-        mailService.save(newMessage).then(res => console.log(res))
-
+        sendMail(newMessage)
     }
-
-
 
     return (
         <div className="mail-compose">
-            <form className="new-mail" onSubmit={sendMail}>
-                <h2>New Message</h2>
+            <form className={showNewMessage ? 'new-mail active' : "new-mail"} onSubmit={onSendMail}>
+                <h3>New Message</h3>
                 <div>
-                    <label htmlFor="to">To</label>
                     <input
                         id="to"
                         name="to"
                         type="email"
                         onChange={handleChange}
+                        placeholder="TO..."
                     />
                 </div>
                 <div>
-                    <label htmlFor="subject">Subject</label>
                     <input type="text"
                         id="subject"
                         name="subject"
                         onChange={handleChange}
+                        placeholder="Subject..."
                     />
                 </div>
                 <div>
                     <textarea
-                    cols={100}
-                    rows={30}
+                        cols={100}
+                        rows={30}
                         type="text"
                         id="body"
                         name="body"
                         onChange={handleChange}
+                        placeholder="Message..."
                     />
                 </div>
                 <button>Send</button>
