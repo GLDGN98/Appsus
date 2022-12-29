@@ -7,7 +7,7 @@ export function NotePreview({ note, updateFuncs }) {
 
     let [currNote, setNote] = useState(note)
     let [hovering, setHovering] = useState(false)
-    const { onRemoveNote, onPinnedNote, onUnpinnedNote } = updateFuncs
+    const { onRefreshNotes ,onRemoveNote, onPinnedNote, onUnpinnedNote } = updateFuncs
     const style = { backgroundColor: (currNote.style && currNote.style.backgroundColor) ? currNote.style.backgroundColor : '#e7eaf6' }
 
     function onToolsClick(clickData, color = '') {
@@ -31,6 +31,11 @@ export function NotePreview({ note, updateFuncs }) {
                 newNote.style.backgroundColor = color
                 break
             case 'edit':
+                break
+            case 'copy':
+                const copyNote = {...newNote}
+                delete copyNote.id
+                noteService.save(copyNote).then(note => onRefreshNotes())
                 break
         }
         if (clickData !== 'remove') noteService.save(newNote)
@@ -68,11 +73,13 @@ function DynamicCmp({ note, onToolsClick }) {
     }
 }
 
+
 function NoteTxt({ note, onToolsClick, isPinned = false }) {
     return <div className="note-text-box flex-col">
         <span className="note-text">{note.info.txt}</span>
     </div>
 }
+
 
 function NoteTodo({ note, onToolsClick, isPinned = false }) {
     const todos = noteService.sortTodos(note)
@@ -96,6 +103,8 @@ function NoteTodo({ note, onToolsClick, isPinned = false }) {
         return (todo.doneAt !== null)
     }
 }
+
+
 
 function NoteImg({ note, onToolsClick, isPinned = false }) {
     return <div className="note-img-box flex-col">
@@ -128,18 +137,19 @@ function NoteVideo({ note, onToolsClick, isPinned = false }) {
 function NoteTools({ note, onToolsClick }) {
     const isPinned = (note.isPinned) ? note.isPinned : false
     return <div className="note-tools flex-row">
-        <i onClick={() => onToolsClick('remove')} className="fa-sharp fa-solid fa-trash"></i>
-        <i onClick={() => onToolsClick('mail')} className="fa-sharp fa-solid fa-envelope"></i>
-        <label>
+        <i title="Remove note" onClick={() => onToolsClick('remove')} className="fa-sharp fa-solid fa-trash"></i>
+        <Link to={`/note/edit/${note.id}`}>
+            <i title="Edit not" onClick={() => onToolsClick('edit')} className="fa-solid fa-pen-to-square"></i>
+        </Link>
+        <i onClick={() => onToolsClick('copy')} title="Duplicate note" className="fa-solid fa-clone"></i>
+        <label title="Change note color">
             <i className="fa-solid fa-palette">
                 <input className="note-color-tool" type='color' onChange={(ev) => onToolsClick('color', ev.target.value)}></input>
             </i>
         </label>
-        <Link to={`/note/edit/${note.id}`}>
-            <i onClick={() => onToolsClick('edit')} className="fa-solid fa-pen-to-square"></i>
-        </Link>
-        {isPinned && <i onClick={() => onToolsClick('unpin')} className="fa-solid fa-thumbtack pinned"></i>}
-        {!isPinned && <i onClick={() => onToolsClick('pin')} className="fa-solid fa-thumbtack"></i>}
+        <i onClick={() => onToolsClick('mail')} className="fa-sharp fa-solid fa-envelope"></i>
+        {isPinned && <i title="Remove pin" onClick={() => onToolsClick('unpin')} className="fa-solid fa-thumbtack pinned"></i>}
+        {!isPinned && <i title="Add pin" onClick={() => onToolsClick('pin')} className="fa-solid fa-thumbtack"></i>}
     </div>
 }
 
