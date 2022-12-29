@@ -42,14 +42,38 @@ export function NoteEdit() {
 
     return <section className="note-edit">
         <h2>{noteToEdit.id ? 'Edit this note' : 'Add a new note'}</h2>
-        { (noteToEdit.id && noteToEdit.type === 'text') && <EditTextNote note={noteToEdit} callbackFuncs={callbackFuncs} />}
-        { (noteToEdit.id && noteToEdit.type === 'img') && <EditImageNote note={noteToEdit} callbackFuncs={callbackFuncs} />}
-        { (noteToEdit.id && noteToEdit.type === 'todo') && <EditTodoNote note={noteToEdit} callbackFuncs={callbackFuncs} />}
+        { (noteToEdit.id && noteToEdit.type === 'note-txt') && <EditTextNote note={noteToEdit} callbackFuncs={callbackFuncs} />}
+        { (noteToEdit.id && noteToEdit.type === 'note-img') && <EditImageNote note={noteToEdit} callbackFuncs={callbackFuncs} />}
+        { (noteToEdit.id && noteToEdit.type === 'note-todos') && <EditTodoNote note={noteToEdit} callbackFuncs={callbackFuncs} />}
 
     </section>
 }
 
 function EditTextNote({ note, callbackFuncs }) {
+    const { handleChange, onSaveNote } = callbackFuncs
+    return <form onSubmit={onSaveNote}>
+        <label htmlFor="title">Note Text:</label>
+        <input type="text" name="txt" id="title" placeholder="Enter text" value={note.info.txt} onChange={handleChange} />
+        <div className="edit-actions">
+            <button>{note.id ? 'Save' : 'Add'}</button>
+            <Link to="/note">Cancel</Link>
+        </div>
+    </form>
+
+}
+function EditImageNote({ note, callbackFuncs }) {
+    const { handleChange, onSaveNote } = callbackFuncs
+    return <form onSubmit={onSaveNote}>
+        <label htmlFor="title">Note Text:</label>
+        <input type="text" name="txt" id="title" placeholder="Enter text" value={note.info.txt} onChange={handleChange} />
+        <div className="edit-actions">
+            <button>{note.id ? 'Save' : 'Add'}</button>
+            <Link to="/note">Cancel</Link>
+        </div>
+    </form>
+
+}
+function EditTodoNote({ note, callbackFuncs }) {
     const { handleChange, onSaveNote } = callbackFuncs
     return <form onSubmit={onSaveNote}>
         <label htmlFor="title">Note Text:</label>
