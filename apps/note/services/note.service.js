@@ -172,7 +172,6 @@ function getEmptyNote(type) {
         }
     }
 
-
     const noteVideo  = {
         type: "note-video",
         isPinned: false,
@@ -184,11 +183,36 @@ function getEmptyNote(type) {
         }
     }
 
+    const noteAudio  = {
+        type: "note-audio",
+        isPinned: false,
+        info: {
+            title: '',
+            url: ''
+        },
+        style: {
+            backgroundColor: "#e7eaf6"
+        }
+    }
+
+    // const noteMap = {
+    //     type: "note-map",
+    //     isPinned: false,
+    //     info: {
+    //         lat: 32.128979,
+    //         lng: 34.995968
+    //     },
+    //     style: {
+    //         backgroundColor: "#e7eaf6"
+    //     }
+    // }
 
     if(type === 'txt') return noteText
     else if(type === 'img') return noteImg
     else if(type === 'todos') return noteTodos
     else if(type === 'video') return noteVideo
+    else if(type === 'audio') return noteAudio
+    // else if(type === 'map') return noteMap
 }
 
 function getNewTodo() {

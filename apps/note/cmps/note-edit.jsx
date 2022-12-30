@@ -1,8 +1,11 @@
-const { useState, useEffect } = React
+const { useState, useEffect, useRef } = React
 const { useNavigate, useParams, Link } = ReactRouterDOM
 
 import { noteService } from "../services/note.service.js"
 import { eventBusService, showSuccessMsg } from "../../../services/event-bus.service.js"
+
+// import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api"
+// import { Map, Marker } from "./map.jsx"
 
 export function NoteEdit() {
     const [noteToEdit, setNoteToEdit] = useState(null)
@@ -15,6 +18,7 @@ export function NoteEdit() {
         loadNote()
     }, [])
 
+
     function loadNote() {
         noteService.get(noteId)
             .then((note) => setNoteToEdit(note))
@@ -23,6 +27,7 @@ export function NoteEdit() {
                 navigate('/note')
             })
     }
+
 
     function handleChange({ target }) {
 
@@ -37,11 +42,17 @@ export function NoteEdit() {
             else if (id === 'note-img-url') setNoteToEdit((prevNote) => ({ ...prevNote, info: { url: value, title: prevNote.info.title } }))
         }
 
+        else if (noteToEdit.type === 'note-audio') {
+            if (id === 'note-audio-title') setNoteToEdit((prevNote) => ({ ...prevNote, info: { title: value, url: prevNote.info.url } }))
+            else if (id === 'note-audio-url') setNoteToEdit((prevNote) => ({ ...prevNote, info: { url: value, title: prevNote.info.title } }))
+        }
+
         else if (noteToEdit.type === 'note-video') {
             setNoteToEdit((prevNote) => ({ ...prevNote, info: { url: value } }))
         }
 
     }
+
 
     function onSaveNote(ev, newSave) {
         ev.preventDefault()
@@ -71,16 +82,20 @@ export function NoteEdit() {
 }
 
 function TypeMenu({ onTypeSelect }) {
-    let iconText = 'fa-sharp fa-solid fa-font'
-    let iconImg = "fa-solid fa-image"
-    let iconTodo = "fa-solid fa-list"
-    let iconVideo = "fa-brands fa-youtube"
+    const iconText = 'fa-sharp fa-solid fa-font'
+    const iconImg = "fa-solid fa-image"
+    const iconTodo = "fa-solid fa-list"
+    const iconVideo = "fa-brands fa-youtube"
+    const iconAudio = "fa-sharp fa-solid fa-microphone"
+    // const iconMap = "fa-sharp fa-solid fa-location-dot"
 
     return <nav className="types-menu flex-row">
         <i title="Text type" onClick={() => { onTypeSelect('txt') }} className={iconText}></i>
         <i title="Image type" onClick={() => { onTypeSelect('img') }} className={iconImg}></i>
         <i title="Video type" onClick={() => { onTypeSelect('video') }} className={iconVideo}></i>
         <i title="Todos type" onClick={() => { onTypeSelect('todos') }} className={iconTodo}></i>
+        <i title="Audio type" onClick={() => { onTypeSelect('audio') }} className={iconAudio}></i>
+        {/* <i title="Map type" onClick={() => { onTypeSelect('map') }} className={iconMap}></i> */}
     </nav>
 }
 
@@ -96,6 +111,10 @@ function DynamicEditNoteCmp({ note, callbackFuncs }) {
             return <EditImageNote note={note} callbackFuncs={callbackFuncs} />
         case 'note-video':
             return <EditVideoNote note={note} callbackFuncs={callbackFuncs} />
+        case 'note-audio':
+            return <EditAudioNote note={note} callbackFuncs={callbackFuncs} />
+        // case 'note-map':
+        //     return <EditMapNote note={note} callbackFuncs={callbackFuncs} />
     }
 }
 
@@ -128,6 +147,36 @@ function EditTextNote({ note, callbackFuncs }) {
 
 }
 
+// function EditMapNote({ note, callbackFuncs }) {
+//     const { handleChange, onSaveNote } = callbackFuncs
+//     let count = 0
+//     let lat = note.info.lat
+//     let lng = note.info.lng
+//     const elMapRef = useRef(null)
+
+//     return <form className="note-editor-form" onSubmit={(ev) => onSaveNote(ev, note)}>
+//         <div className="map-box" ref={elMapRef}>
+//             <Wrapper apiKey={"AIzaSyCDYeMm_dibJ0MJsnPjtYTDIfZPaxKjif4"} render={render}>
+//                 <Map center={{ lat, lng }} zoom={15}>
+//                     <Marker position={{ lat, lng }} />
+//                 </Map>
+//             </Wrapper>
+//         </div>
+//         <table>
+//             <tbody>
+//                 <tr key={count++}>
+//                     <td className="editor-link">
+//                         <button>{note.id ? 'Save' : 'Add'}</button>
+//                     </td>
+//                     <td className="editor-link">
+//                         <Link to="/note">Cancel</Link>
+//                     </td>
+//                 </tr>
+//             </tbody>
+//         </table >
+//     </form >
+
+// }
 
 function EditImageNote({ note, callbackFuncs }) {
     const { handleChange, onSaveNote } = callbackFuncs
@@ -152,6 +201,46 @@ function EditImageNote({ note, callbackFuncs }) {
                     <td className="note-editor-td">
 
                         <input type="text" id="note-img-url" placeholder="Enter url" value={note.info.url} onChange={handleChange} />
+                    </td>
+                </tr>
+
+                <tr key={count++}>
+                    <td className="editor-link">
+                        <button>{note.id ? 'Save' : 'Add'}</button>
+                    </td>
+                    <td className="editor-link">
+                        <Link to="/note">Cancel</Link>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+
+}
+
+function EditAudioNote({ note, callbackFuncs }) {
+    const { handleChange, onSaveNote } = callbackFuncs
+    let count = 0
+    return <form className="note-editor-form flex-col" onSubmit={(ev) => onSaveNote(ev, note)}>
+        <table>
+            <tbody>
+
+                <tr key={count++}>
+                    <td className="note-editor-td">
+                        <label htmlFor="title">Note Title</label>
+                    </td>
+                    <td className="note-editor-td">
+                        <input type="text" id="note-audio-title" placeholder="Enter text" value={note.info.title} onChange={handleChange} />
+                    </td>
+                </tr>
+
+                <tr key={count++}>
+                    <td className="note-editor-td">
+                        <label htmlFor="note-img-url">Audio URL</label>
+                    </td>
+                    <td className="note-editor-td">
+
+                        <input type="text" id="note-audio-url" placeholder="Enter url" value={note.info.url} onChange={handleChange} />
                     </td>
                 </tr>
 
