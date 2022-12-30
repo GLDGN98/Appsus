@@ -14,8 +14,10 @@ export function MailFilter({ onSetFilter, sortBy }) {
         setFilterByToEdit((prev) => ({ ...prev, name: value }))
     }
 
-    function changeFilterByRead(ev) {
-        setFilterByToEdit((prev) => ({ ...prev, isRead: ev.target.value }))
+    function changeFilterBy(ev) {
+        if (ev.target.value === 'read' || 'unread') {
+            return setFilterByToEdit((prev) => ({ ...prev, isRead: ev.target.value }))
+        }
     }
 
     function onSortBy(ev) {
@@ -36,7 +38,7 @@ export function MailFilter({ onSetFilter, sortBy }) {
                 />
             </div>
             <div className="select">
-                <select onChange={changeFilterByRead} name="" id="">
+                <select onChange={changeFilterBy} name="" id="">
                     <option value="">All</option>
                     <option value="read">Read</option>
                     <option value="unread">Unread</option>
@@ -47,6 +49,8 @@ export function MailFilter({ onSetFilter, sortBy }) {
                     <option value="">Select Sorting</option>
                     <option value="title">By Title</option>
                     <option value="date">By Date</option>
+                    <option value="name">By Name</option>
+                    <option value="read">By Read</option>
                 </select>
             </div>
         </div>
