@@ -61,8 +61,12 @@ function remove(noteId) {
 }
 
 function save(note) {
-    if (note.id) return asyncStorageService.put(NOTE_DB_KEY, note)
-    else return asyncStorageService.post(NOTE_DB_KEY, note)
+    if(note.id) {
+        return asyncStorageService.put(NOTE_DB_KEY, note)
+    }
+    else {
+        return asyncStorageService.post(NOTE_DB_KEY, note)
+    }
 }
 
 function query(filterBy = getDefaultFilter()) {
