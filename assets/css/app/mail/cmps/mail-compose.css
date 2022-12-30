@@ -1,13 +1,45 @@
 .new-mail {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     right: -50%;
     height: 50%;
-    width: 50%;
-    display: grid;
-    grid-template-rows: 50px 50px 50px 50px 50px;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
     transition: right 0.3s;
+    gap: 1rem;
+}
+
+.new-message-header-bg {
+    background-color: grey;
+    padding: 1rem;
+}
+
+.new-message-header i {
+    color: rgb(205, 203, 203);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+
+.new-message-header i:hover {
+    background-color: #fff;
+    color: black;
+    padding: 0.5rem;
+    border-radius: 2em;
+
+
+
+}
+
+.new-message-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    margin-inline-end: 1rem;
+
 }
 
 .new-mail.active {
@@ -15,18 +47,19 @@
 }
 
 .new-mail h3 {
-    background-color: grey;
     color: white;
-    padding: 0.3em;
+    padding-left: 1rem;
 }
 
 .new-mail textarea {
     border: none;
     background: none;
+    outline: none;
 }
 
 .new-mail input {
     border: none;
+    outline: none;
 }
 
 .new-mail button {

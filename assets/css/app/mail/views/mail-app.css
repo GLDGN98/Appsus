@@ -9,6 +9,11 @@
 
 }
 
+@font-face {
+    font-family: 'Poppins';
+    src: url('../../../../fonts/Poppins-Regular.ttf');
+}
+
 .mail-index .main-nav {
     display: flex;
     flex-direction: column;
@@ -21,6 +26,7 @@
 }
 
 .mail-index {
+    width: 100%;
     font-size: 1.5rem;
     font-family: Lato Thin;
     padding: 1rem;
@@ -84,5 +90,19 @@
 
 .fa-star:hover {
     background-color: #dee2e5;
-    border-radius: 2em;  
+    border-radius: 2em;
 }
+
+.go-back {
+    background-color: #80a1db;
+    color: white;
+    padding: 0.7rem 2rem;
+    border-radius: 2em;
+}
+
+
+.go-back:hover {
+    background-color: #5e7caf;
+
+}
+
