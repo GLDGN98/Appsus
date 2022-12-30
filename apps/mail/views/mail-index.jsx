@@ -1,6 +1,8 @@
 const { Outlet, NavLink, Link } = ReactRouterDOM
 const { useParams, useNavigate } = ReactRouterDOM
 
+import { Spinner } from "../../../assets/css/app/mail/cmps/spinner.jsx"
+
 import { MailFilter } from "../cmps/mail-filter.jsx"
 import { MailCompose } from "../cmps/mail-compose.jsx"
 import { mailService } from "../services/mail.service.js"
@@ -14,29 +16,39 @@ export function MailIndex() {
     const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
     const [showNewMessage, setShowNewMessage] = useState(false)
     const [isDrafted, setIsDrafted] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
     const { type, id } = useParams()
     const currentUserMail = storageService.loadFromStorage('userDB').email
 
 
     useEffect(() => {
+        setIsLoading(true)
         switch (type) {
             case 'starred':
+                setIsLoading(false)
                 starredMails()
                 break;
             case 'sent-email':
+                setIsLoading(false)
                 sentMails()
                 break;
             case 'trash':
+                setIsLoading(false)
                 deletedMails()
                 break;
             case 'drafts':
+                setIsLoading(false)
                 draftedMails()
                 break;
-            default: loadMails()
+            default:
+                setIsLoading(false)
+                loadMails()
                 break;
         }
 
     }, [filterBy, type])
+
+    console.log(isLoading, 'is loading')
 
     function sentMails() {
         mailService.query(filterBy).then(mails => {
@@ -56,7 +68,6 @@ export function MailIndex() {
         }).then(setMails)
     }
 
-
     function sortBy(value) {
         if (value === 'title') {
             const sortedMailsBySubject = mails.sort((a, b) => {
@@ -70,7 +81,7 @@ export function MailIndex() {
                 // Convert the date strings to Date objects
                 const dateA = new Date(a.sentAt);
                 const dateB = new Date(b.sentAt);
-                return dateA.getTime() - dateB.getTime();
+                return dateB.getTime() - dateA.getTime();
             });
             return setMails([...sortedMailsByDate])
         }
@@ -162,11 +173,11 @@ export function MailIndex() {
                 <div className="main-nav-app">
                     <button onClick={onCompose}><i className="fa-solid fa-plus"></i>Compose</button>
                     <nav className="main-nav">
-                        <NavLink to="/mail/inbox">Inbox</NavLink>
-                        <NavLink to="/mail/starred">Starred</NavLink>
-                        <NavLink to="/mail/drafts">Drafts</NavLink>
-                        <NavLink to="/mail/sent-email">Sent Mail</NavLink>
-                        <NavLink to="/mail/trash">Trash</NavLink>
+                        <NavLink to="/mail/inbox"><i class="fa-solid fa-inbox"></i>Inbox</NavLink>
+                        <NavLink to="/mail/starred"><i class="fa-regular fa-star"></i>Starred</NavLink>
+                        <NavLink to="/mail/drafts"><i class="fa-regular fa-copy"></i>Drafts</NavLink>
+                        <NavLink to="/mail/sent-email"><i class="fa-regular fa-paper-plane"></i>Sent</NavLink>
+                        <NavLink to="/mail/trash"><i class="fa-regular fa-trash-can"></i>Trash</NavLink>
                     </nav>
                 </div>
                 <div className="main-outlet">

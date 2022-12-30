@@ -9,6 +9,7 @@
     box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
     transition: right 0.3s;
     gap: 1rem;
+    background-color: white;
 }
 
 .new-message-header-bg {
@@ -29,8 +30,12 @@
     padding: 0.5rem;
     border-radius: 2em;
 
+}
 
-
+.new-mail-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
 }
 
 .new-message-header {
@@ -63,8 +68,6 @@
 }
 
 .new-mail button {
-    position: fixed;
-    bottom: 0;
     background-color: #0095ff;
     border: 1px solid transparent;
     border-radius: 3px;
