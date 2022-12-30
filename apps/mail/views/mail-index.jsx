@@ -22,33 +22,26 @@ export function MailIndex() {
 
 
     useEffect(() => {
-        setIsLoading(true)
         switch (type) {
             case 'starred':
-                setIsLoading(false)
                 starredMails()
                 break;
             case 'sent-email':
-                setIsLoading(false)
                 sentMails()
                 break;
             case 'trash':
-                setIsLoading(false)
                 deletedMails()
                 break;
             case 'drafts':
-                setIsLoading(false)
                 draftedMails()
                 break;
             default:
-                setIsLoading(false)
                 loadMails()
                 break;
         }
 
     }, [filterBy, type])
 
-    console.log(isLoading, 'is loading')
 
     function sentMails() {
         mailService.query(filterBy).then(mails => {
@@ -80,7 +73,7 @@ export function MailIndex() {
             const sortedMailsByDate = mails.sort((a, b) => {
                 // Convert the date strings to Date objects
                 const dateA = new Date(a.sentAt);
-            const dateB = new Date(b.sentAt);
+                const dateB = new Date(b.sentAt);
                 return dateB.getTime() - dateA.getTime();
             });
             return setMails([...sortedMailsByDate])
@@ -180,16 +173,18 @@ export function MailIndex() {
                         <NavLink to="/mail/trash"><i class="fa-regular fa-trash-can"></i>Trash</NavLink>
                     </nav>
                 </div>
-                <div className="main-outlet">
-                    <div className="nested-route">
-                        {id ? <Outlet /> : null}
-                        {id ? <Link className="go-back" to="/mail/inbox">Back</Link> : null}
+                {!isLoading &&
+                    <div className="main-outlet">
+                        <div className="nested-route">
+                            {id ? <Outlet /> : null}
+                            {id ? <Link className="go-back" to="/mail/inbox">Back</Link> : null}
+                        </div>
+                        {id ? null : <MailFilter sortBy={sortBy} onSetFilter={onSetFilter} />}
+                        {id ? null : <MailCompose isDrafted={isDrafted} setShowNewMessage={setShowNewMessage} sendMail={sendMail} showNewMessage={showNewMessage} />}
+                        {id ? null : <MailList handleDelete={handleDelete} mails={mails} />}
                     </div>
-                    {id ? null : <MailFilter sortBy={sortBy} onSetFilter={onSetFilter} />}
-                    {id ? null : <MailCompose isDrafted={isDrafted} setShowNewMessage={setShowNewMessage} sendMail={sendMail} showNewMessage={showNewMessage} />}
-                    {id ? null : <MailList handleDelete={handleDelete} mails={mails} />}
-                </div>
-
+                }
+                {isLoading && <div>LOADING!!!!</div>}
             </div>
         </div>
     )

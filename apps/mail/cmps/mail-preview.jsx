@@ -2,7 +2,7 @@ import { mailService } from "../services/mail.service.js"
 
 import { LongTxt } from "./long-txt.jsx"
 
-const { useState, useEffect, Fragment } = React
+const { useState, useEffect, Fragment, useRef } = React
 const { Link } = ReactRouterDOM
 
 export function MailPreview({ mail, handleDelete }) {
@@ -10,6 +10,8 @@ export function MailPreview({ mail, handleDelete }) {
     const [isExpanded, setIsExpanded] = useState(false)
     const [isStarred, setIsStarred] = useState(mail.starred)
     const [isRead, setIsRead] = useState(mail.isRead)
+    const expandRef = useRef()
+    const trashRef = useRef()
 
     function handleStar(ev) {
         ev.stopPropagation()
@@ -43,6 +45,24 @@ export function MailPreview({ mail, handleDelete }) {
         }
     }
 
+    function addExpandAnimation() {
+        expandRef.current.classList.add('animate__heartBeat')
+    }
+
+    function removeExpandAnimation() {
+        expandRef.current.classList.remove('animate__heartBeat')
+
+    }
+
+    function addTrashAnimation() {
+        trashRef.current.classList.add('animate__swing')
+    }
+
+    function removeTrashAnimation() {
+        trashRef.current.classList.remove('animate__swing')
+    }
+
+
     return (
         <Fragment>
             <tr style={mail.isRead ? { fontFamily: 'Lato Thin', backgroundColor: '#f2f6fc' } : { fontFamily: 'Lato' }} className="first-tr" onClick={() => {
@@ -55,8 +75,8 @@ export function MailPreview({ mail, handleDelete }) {
                 <td className="mail-sent-at">
                     <span className="sent-at">{getTimeSinceSent(new Date(mail.sentAt))}</span>
                     <div className="hover-icons">
-                        <Link to={`/mail/inbox/${mail.id}`}><span title="Expand" className="expand-icon"><i className="fa-solid fa-expand"></i></span></Link>
-                        <span title="Delete" className="trash-icon"><i onClick={(ev) => onHandleDelete(ev, mail.id)} className="fa-solid fa-trash-can"></i></span>
+                        <Link to={`/mail/inbox/${mail.id}`}><span title="Expand" ref={expandRef} onMouseEnter={addExpandAnimation} onMouseOut={removeExpandAnimation} className="expand-icon"><i className="fa-solid fa-expand"></i></span></Link>
+                        <span title="Delete" ref={trashRef} onMouseEnter={addTrashAnimation} onMouseOut={removeTrashAnimation} className="trash-icon"><i onClick={(ev) => onHandleDelete(ev, mail.id)} className="fa-solid fa-trash-can"></i></span>
                         <span onClick={onRead} className="unread-icon">{mail.isRead ? <i title="Unread" class="fa-solid fa-envelope-open"></i> : <i title="Read" class="fa-solid fa-envelope"></i>}</span>
                     </div>
                 </td>
