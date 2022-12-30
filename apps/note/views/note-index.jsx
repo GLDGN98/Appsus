@@ -80,7 +80,7 @@ export function NoteIndex() {
             </Link>
         </section>
         {!isLoading && <NoteList notes={notes} filterBy={filterBy} />}
-        {isLoading && <div>Loading...</div>}
+        {isLoading && <div className="loading-screen flex-col"><img className="loading-page" src="../../assets//img/loading2.png" /></div>}
     </div>
 
 }

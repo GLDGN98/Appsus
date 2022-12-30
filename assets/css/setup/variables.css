@@ -20,3 +20,8 @@
     --app-width-xl: 2200px;
 
 }
+
+img.loading-page {
+    height: 25rem;
+    width: auto;
+}

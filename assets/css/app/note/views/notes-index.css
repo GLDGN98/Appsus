@@ -1,7 +1,14 @@
 div.notes-page {
     width: 100%;
+    
 }
 
+div.loading-screen {
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
 section.search-notes-box {
     margin: 0 auto;
     margin-block: 2rem;

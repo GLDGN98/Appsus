@@ -30,7 +30,7 @@ export function About() {
     return <section className="about">
         <span className="about-header">About our team</span>
         {
-            cards.map(card => <Card dev={card} />)
+            cards.map(card => <Card key={card.name} dev={card} />)
         }
     </section>
 }

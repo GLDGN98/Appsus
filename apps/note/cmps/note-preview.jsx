@@ -1,6 +1,7 @@
-const { useState, useEffect } = React
+const { useState, useEffect, useRef } = React
 const { Link } = ReactRouterDOM
 
+import { utilService } from "../../../services/util.service.js"
 import { noteService } from "../services/note.service.js"
 
 export function NotePreview({ note, updateFuncs }) {
@@ -9,6 +10,12 @@ export function NotePreview({ note, updateFuncs }) {
     let [hovering, setHovering] = useState(false)
     const { onRefreshNotes, onRemoveNote, onPinnedNote, onUnpinnedNote } = updateFuncs
     const style = { backgroundColor: (currNote.style && currNote.style.backgroundColor) ? currNote.style.backgroundColor : '#e7eaf6' }
+    const toolsRef = useRef()
+    const boxRef = useRef()
+
+    useEffect(() => {
+        utilService.animateCSS(boxRef.current, 'zoomIn')
+    },[currNote])
 
     function onToolsClick(clickData, color = '') {
         const newNote = { ...currNote }
@@ -50,11 +57,18 @@ export function NotePreview({ note, updateFuncs }) {
         setHovering(true)
     }
 
+    useEffect(() => {
+        if (hovering) utilService.animateCSS(toolsRef.current, 'fadeIn')
 
-    return <div onMouseEnter={(() => showNoteTools())} onMouseLeave={(() => hideNoteTools())} className="note-box" style={{ backgroundColor: style.backgroundColor }}>
+    }, [hovering])
+
+    
+
+
+    return <div ref={boxRef} onMouseEnter={(() => showNoteTools())} onMouseLeave={(() => hideNoteTools())} className="note-box" style={{ backgroundColor: style.backgroundColor }}>
         <DynamicCmp onToolsClick={onToolsClick} note={currNote} />
-        {hovering && <NoteTools note={currNote} onToolsClick={onToolsClick} />}
-    </div>
+        {hovering && <div ref={toolsRef}> <NoteTools  note={currNote} onToolsClick={onToolsClick} hovering={hovering} /> </div>}
+        </div>
 }
 
 
@@ -154,8 +168,9 @@ function NoteVideo({ note, onToolsClick, isPinned = false }) {
 }
 
 
-function NoteTools({ note, onToolsClick }) {
+function NoteTools({ note, onToolsClick, hovering }) {
     const isPinned = (note.isPinned) ? note.isPinned : false
+
     return <div className="note-tools flex-row">
         <i title="Remove note" onClick={() => onToolsClick('remove')} className="fa-sharp fa-solid fa-trash"></i>
         <Link to={`/note/edit/${note.id}`}>
