@@ -68,6 +68,10 @@ function _createMails() {
         mails.push(_createMail('Football', 'We would to invite you to a special football game happens in friday, next week!', 'footballclub@gmail.com', 'FC Club', new Date(1551435930594)))
         mails.push(_createMail('Your password has changed!', 'Thats an email confirmation saying that you password have been changed successfully!', 'lgndlkdc@gmail.com', 'Facebook', new Date(1521137130594)))
         mails.push(_createMail('Paurchse recipt', 'We send you the recipe from the resturant you ordered the food from! ', 'wolt@gmail.com', 'Wolt', new Date(1151133930594)))
+        mails.push(_createMail('Inactive Account Warning', 'Our records indicate you created a Cronometer account on Thu, 15 Feb 2018 and have not been active since Thu, 15 Feb 2018.To protect your privacy, this account has been scheduled for automatic deletion in 24 hours. If you wish to keep your Cronometer account, simply log in before this time, and your account will be preserved.', ' <support@cronometer.com', 'Cronometer Support', new Date(1609308800000)))
+        mails.push(_createMail('Confirm your email address', 'Nancy decided to make the porta-potty her home.There was no telling what thoughts would come from the machine.Twin 4-month-olds slept in the shade of the palm tree while the mother tanned in the sun.He knew it was going to be a bad day when he saw mountain lions roaming the streets.I had a friend in high school named Rick Shaw, but he was fairly useless as a mode of transport.', ' <KatzVeGarjobak@Harta.com', 'Bone Olam', new Date(1672101223129)))
+        mails.push(_createMail('Some said you are', 'Toddlers feeding raccoons surprised even the seasoned park ranger. It was the scarcity that fueled his creativity. Imagine his surprise when he discovered that the safe was full of pudding. The water flowing down the river didn’t look that powerful from the carThere was no telling what thoughts would come from the machine.', 'PeroreiLehem@Schnitzel.off', 'Shauli', new Date(1672201223129)))
+
         storageService.saveToStorage(MAIL_KEY, mails)
     }
 }

@@ -29,8 +29,12 @@
     padding: 0.5rem;
     border-radius: 2em;
 
+}
 
-
+.new-mail-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
 }
 
 .new-message-header {
@@ -63,8 +67,6 @@
 }
 
 .new-mail button {
-    position: fixed;
-    bottom: 0;
     background-color: #0095ff;
     border: 1px solid transparent;
     border-radius: 3px;

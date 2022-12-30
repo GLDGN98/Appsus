@@ -29,9 +29,29 @@ export function MailPreview({ mail, handleDelete }) {
         handleDelete(mailId)
     }
 
+    function getTimeSinceSent(date) {
+        // Get the current time
+        const currentTime = new Date();
+        const secondsSinceSent = (currentTime - date) / 1000;
+        if (secondsSinceSent < 86400) {
+            return date.toLocaleTimeString(undefined, { hour: "numeric", minute: "numeric" });
+        }
+        else if (secondsSinceSent < 604800) {
+            return date.toLocaleDateString(undefined, { weekday: "long" });
+        }
+        else {
+            return date.toLocaleDateString();
+        }
+    }
+
+
+
+
+
+
     return (
         <Fragment>
-            <tr style={mail.isRead ? { fontFamily: 'Lato Thin', backgroundColor: '#f7f8fa' } : { fontFamily: 'Lato' }} className="first-tr" onClick={() => {
+            <tr style={mail.isRead ? { fontFamily: 'Lato Thin', backgroundColor: '#f2f6fc' } : { fontFamily: 'Lato' }} className="first-tr" onClick={() => {
                 setIsExpanded(!isExpanded)
             }}>
                 <td onClick={handleStar}>{mail.starred ? <i style={{ color: 'gold' }} className="fa-sharp fa-solid fa-star"></i> : <i className="fa-regular fa-star"></i>}</td>
@@ -39,7 +59,7 @@ export function MailPreview({ mail, handleDelete }) {
                 {/* <td>{mail.body}</td> */}
                 <td><LongTxt txt={mail.body} length={120} /></td>
                 <td className="mail-sent-at">
-                    <span className="sent-at">{new Date(mail.sentAt).toLocaleDateString()}</span>
+                    <span className="sent-at">{getTimeSinceSent(new Date(mail.sentAt))}</span>
                     <div className="hover-icons">
                         <Link to={`/mail/inbox/${mail.id}`}><span title="Expand" className="expand-icon"><i className="fa-solid fa-expand"></i></span></Link>
                         <span title="Delete" className="trash-icon"><i onClick={(ev) => onHandleDelete(ev, mail.id)} className="fa-solid fa-trash-can"></i></span>

@@ -60,7 +60,6 @@ export function MailCompose({ sendMail, showNewMessage, setShowNewMessage, isDra
                 <div className="new-message-header-bg">
                     <div className="new-message-header">
                         <h3>New Message</h3>
-                        <i class="fa-solid fa-trash-can"></i>
                     </div>
                 </div>
                 <div>
@@ -91,7 +90,11 @@ export function MailCompose({ sendMail, showNewMessage, setShowNewMessage, isDra
                         placeholder="Message..."
                     />
                 </div>
-                <button>Send</button>
+                <div className="new-mail-buttons">
+                    <button>Send</button>
+                    <i class="fa-solid fa-trash-can"></i>
+                </div>
+
             </form>
         </div>
     )

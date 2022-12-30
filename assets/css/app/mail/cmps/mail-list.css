@@ -2,23 +2,28 @@
     width: 100%;
 }
 
-.main-nav a.active {
-    border: 1px solid rgb(188, 203, 232);
-    background: aliceblue;
-    border-radius: 0.3em;
-    text-decoration: none;
-    width: 100%;
-    text-align: center;
 
+
+.main-nav a {
+    display: grid;
+    grid-template-columns: 3em 5em;
+    transition: 0.2s all;
+    padding-left: 1rem;
+}
+
+
+.main-nav a.active {
+
+    text-decoration: none;
+    background-color: #d3e3fd;
+    border-top-right-radius: 2em;
+    border-bottom-right-radius: 2em;
 }
 
 
 .main-nav a:hover {
-    width: 100%;
-    text-align: center;
-    border: 1px solid cornflowerblue;
-    background: aliceblue;
-    border-radius: 0.3em;
-    text-decoration: none;
-    font-weight: 600;
+    background-color: #d9dde5a9;
+    border-top-right-radius: 2em;
+    border-bottom-right-radius: 2em;
+
 }

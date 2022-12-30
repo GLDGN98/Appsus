@@ -17,6 +17,37 @@
 .mail-index .main-nav {
     display: flex;
     flex-direction: column;
+    gap: 5px;
+}
+
+.mail-index .main-nav .fa-star {
+    margin-left: -0.4rem;
+}
+
+.main-nav a {
+    display: grid;
+    grid-template-columns: 3em 5em;
+    transition: 0.2s all;
+    padding: 0.2rem;
+    max-height: 27px;
+}
+
+
+.main-nav a.active {
+
+    color: #041e49;
+    text-decoration: none;
+    background-color: #d3e3fd;
+    border-top-right-radius: 2em;
+    border-bottom-right-radius: 2em;
+}
+
+
+.main-nav a:hover {
+    background-color: #d9dde5a9;
+    border-top-right-radius: 2em;
+    border-bottom-right-radius: 2em;
+
 }
 
 .mail-container {
@@ -29,7 +60,8 @@
     width: 100%;
     font-size: 1.5rem;
     font-family: Lato Thin;
-    padding: 1rem;
+    padding: 0.2rem;
+    overflow-x: hidden;
 }
 
 .main-nav-app {
@@ -48,7 +80,7 @@
     font-size: 1.3rem;
     font-weight: 600;
     outline: 0;
-    padding: 12px 18px;
+    padding: 0.7rem 1.2rem;
     position: relative;
     text-align: center;
     text-decoration: none;
@@ -105,4 +137,3 @@
     background-color: #5e7caf;
 
 }
-
