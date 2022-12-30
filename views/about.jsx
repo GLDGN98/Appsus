@@ -26,6 +26,7 @@ export function About() {
             }
         }
     ]
+    
     return <section className="about">
         <span className="about-header">About our team</span>
         {

@@ -7,12 +7,11 @@ export function NotePreview({ note, updateFuncs }) {
 
     let [currNote, setNote] = useState(note)
     let [hovering, setHovering] = useState(false)
-    const { onRefreshNotes ,onRemoveNote, onPinnedNote, onUnpinnedNote } = updateFuncs
+    const { onRefreshNotes, onRemoveNote, onPinnedNote, onUnpinnedNote } = updateFuncs
     const style = { backgroundColor: (currNote.style && currNote.style.backgroundColor) ? currNote.style.backgroundColor : '#e7eaf6' }
 
     function onToolsClick(clickData, color = '') {
         const newNote = { ...currNote }
-        console.log(clickData, color)
         switch (clickData) {
             case 'unpin':
                 newNote.isPinned = false
@@ -33,7 +32,7 @@ export function NotePreview({ note, updateFuncs }) {
             case 'edit':
                 break
             case 'copy':
-                const copyNote = {...newNote}
+                const copyNote = { ...newNote }
                 delete copyNote.id
                 noteService.save(copyNote).then(note => onRefreshNotes())
                 break
@@ -70,6 +69,10 @@ function DynamicCmp({ note, onToolsClick }) {
             return <NoteImg onToolsClick={onToolsClick} note={note} />
         case 'note-video':
             return <NoteVideo onToolsClick={onToolsClick} note={note} />
+        case 'note-audio':
+            return <NoteAudio onToolsClick={onToolsClick} note={note} />
+        // case 'note-map':
+        //     return <NoteMap onToolsClick={onToolsClick} note={note} />
     }
 }
 
@@ -80,6 +83,13 @@ function NoteTxt({ note, onToolsClick, isPinned = false }) {
     </div>
 }
 
+// function NoteMap({ note, onToolsClick, isPinned = false }) {
+//     return <div className="note-text-box flex-col">
+//         {
+//             // load map
+//         }
+//     </div>
+// }
 
 function NoteTodo({ note, onToolsClick, isPinned = false }) {
     const todos = noteService.sortTodos(note)
@@ -111,6 +121,16 @@ function NoteImg({ note, onToolsClick, isPinned = false }) {
         <span className="note-image-title">{note.info.title}</span>
         <img className="note-img" src={note.info.url} />
 
+    </div>
+}
+
+
+function NoteAudio({ note, onToolsClick, isPinned = false }) {
+    return <div className="note-img-box flex-col">
+        <span className="note-image-title">{note.info.title}</span>
+        <audio controls>
+            <source src={note.info.url} />
+        </audio>
     </div>
 }
 

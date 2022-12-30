@@ -13,6 +13,8 @@ export function NoteIndex() {
     let iconImg = "fa-solid fa-image"
     let iconTodo = "fa-solid fa-list"
     let iconVideo = "fa-brands fa-youtube"
+    let iconAudio = "fa-sharp fa-solid fa-microphone"
+    // let iconMap = "fa-sharp fa-solid fa-location-dot"
     _setFilterIconsClasses()
 
     
@@ -33,6 +35,8 @@ export function NoteIndex() {
         else if (filterBy.type === 'todo') iconTodo += ' active'
         else if (filterBy.type === 'img') iconImg += ' active'
         else if (filterBy.type === 'video') iconVideo += ' active'
+        else if (filterBy.type === 'audio') iconAudio += ' active'
+        // else if (filterBy.type === 'map') iconMap += ' active'
     }
 
 
@@ -68,6 +72,8 @@ export function NoteIndex() {
                 <i title="Image type" onClick={() => { onFilterChangeType('img') }} className={iconImg}></i>
                 <i title="Video type" onClick={() => { onFilterChangeType('video') }} className={iconVideo}></i>
                 <i title="Todos type" onClick={() => { onFilterChangeType('todo') }} className={iconTodo}></i>
+                <i title="Audio type" onClick={() => { onFilterChangeType('audio') }} className={iconAudio}></i>
+                {/* <i title="Map type" onClick={() => { onFilterChangeType('map') }} className={iconMap}></i> */}
             </nav>
             <Link to={`/note/edit`}>
                 <i title="Add new note" className="add-notes-button fa-solid fa-plus"></i>
