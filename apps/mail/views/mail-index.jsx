@@ -80,7 +80,7 @@ export function MailIndex() {
             const sortedMailsByDate = mails.sort((a, b) => {
                 // Convert the date strings to Date objects
                 const dateA = new Date(a.sentAt);
-                const dateB = new Date(b.sentAt);
+            const dateB = new Date(b.sentAt);
                 return dateB.getTime() - dateA.getTime();
             });
             return setMails([...sortedMailsByDate])

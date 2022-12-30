@@ -20,6 +20,11 @@
     gap: 5px;
 }
 
+.main-nav i {
+    display: flex;
+    align-items: center;
+}
+
 .mail-index .main-nav .fa-star {
     margin-left: -0.4rem;
 }

@@ -43,10 +43,6 @@ export function MailPreview({ mail, handleDelete }) {
         }
     }
 
-
-
-
-
     return (
         <Fragment>
             <tr style={mail.isRead ? { fontFamily: 'Lato Thin', backgroundColor: '#f2f6fc' } : { fontFamily: 'Lato' }} className="first-tr" onClick={() => {

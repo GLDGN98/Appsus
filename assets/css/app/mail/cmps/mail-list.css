@@ -4,26 +4,3 @@
 
 
 
-.main-nav a {
-    display: grid;
-    grid-template-columns: 3em 5em;
-    transition: 0.2s all;
-    padding-left: 1rem;
-}
-
-
-.main-nav a.active {
-
-    text-decoration: none;
-    background-color: #d3e3fd;
-    border-top-right-radius: 2em;
-    border-bottom-right-radius: 2em;
-}
-
-
-.main-nav a:hover {
-    background-color: #d9dde5a9;
-    border-top-right-radius: 2em;
-    border-bottom-right-radius: 2em;
-
-}
