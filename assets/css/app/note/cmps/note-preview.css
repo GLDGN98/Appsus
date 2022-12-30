@@ -9,6 +9,8 @@ div.note-box {
     border: 0px hidden black;
 
     height: fit-content;
+    
+    
 }
 
 
@@ -19,9 +21,11 @@ div.note-tools {
 
     text-align: center;
 }
+
 div.note-tools>*{
     color: rgb(71, 71, 71);
 }
+
 div.note-tools>*:hover {
     cursor: pointer;
     color: cadetblue;
