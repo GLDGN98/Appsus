@@ -9,6 +9,7 @@ const { useNavigate } = ReactRouterDOM
 export function MailCompose({ sendMail, showNewMessage, setShowNewMessage, isDrafted }) {
     const [newMessage, setNewMessage] = useState({ to: '', subject: '', body: '', name: 'Mahatma Appsus', from: "user@appsus.com", sentAt: new Date(), removedAt: null, isRead: true, isSent: false })
     const navigate = useNavigate()
+    const [toggleExpandMail, setToggleExapndMail] = useState(false)
     const formRef = useRef(null)
     let mailDraftInterval = useRef(null)
 
@@ -45,13 +46,14 @@ export function MailCompose({ sendMail, showNewMessage, setShowNewMessage, isDra
         showSuccessMsg('Mail sent successfully!')
     }
 
-    //     Add a draft folder – email that is being composed is auto saved every 5 
-    // seconds and can be viewed in the draft folder until sent
+    function onExpandMail() {
+        setToggleExapndMail((prev) => !prev)
+        const form = formRef.current
+        form.classList.toggle('expand-message')
 
-    // function saveDraftedMails(mail) {
-    //     console.log('ho')
+    }
 
-    // }
+    // <div style={{ visibility: this.state.driverDetails.firstName != undefined? 'visible': 'hidden'}}></div>
 
 
     return (
@@ -60,10 +62,16 @@ export function MailCompose({ sendMail, showNewMessage, setShowNewMessage, isDra
                 <div className="new-message-header-bg">
                     <div className="new-message-header">
                         <h3>New Message</h3>
+                        <div>
+                            <i onClick={onExpandMail} class="fa-solid fa-up-right-and-down-left-from-center"></i>
+                            <i onClick={() => setShowNewMessage(false)} class="fa-solid fa-xmark"></i>
+                        </div>
                     </div>
+
                 </div>
                 <div>
                     <input
+                        required
                         id="to"
                         name="to"
                         type="email"
@@ -77,10 +85,15 @@ export function MailCompose({ sendMail, showNewMessage, setShowNewMessage, isDra
                         name="subject"
                         onChange={handleChange}
                         placeholder="Subject..."
+                        required
                     />
                 </div>
-                <div>
+                <div style={{
+                    width: '100%',
+                    height: '100%'
+                }}>
                     <textarea
+                        required
                         cols={100}
                         rows={30}
                         type="text"
