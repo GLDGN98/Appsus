@@ -30,20 +30,18 @@ export function MailPreview({ mail, handleDelete }) {
     }
 
     function getTimeSinceSent(date) {
-        // Get the current time
         const currentTime = new Date();
         const secondsSinceSent = (currentTime - date) / 1000;
         if (secondsSinceSent < 86400) {
             return date.toLocaleTimeString(undefined, { hour: "numeric", minute: "numeric" });
         }
-        else if (secondsSinceSent < 604800) {
-            return date.toLocaleDateString(undefined, { weekday: "long" });
+        else if (secondsSinceSent < 15552000) {
+            return date.toLocaleDateString(undefined, { month: "short", day: "numeric" });
         }
         else {
             return date.toLocaleDateString();
         }
     }
-
 
 
 
