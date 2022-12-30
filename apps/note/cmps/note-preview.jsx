@@ -4,6 +4,7 @@ const { Link } = ReactRouterDOM
 import { utilService } from "../../../services/util.service.js"
 import { noteService } from "../services/note.service.js"
 
+
 export function NotePreview({ note, updateFuncs }) {
 
     let [currNote, setNote] = useState(note)
@@ -15,7 +16,7 @@ export function NotePreview({ note, updateFuncs }) {
 
     useEffect(() => {
         utilService.animateCSS(boxRef.current, 'zoomIn')
-    },[currNote])
+    }, [])
 
     function onToolsClick(clickData, color = '') {
         const newNote = { ...currNote }
@@ -41,11 +42,15 @@ export function NotePreview({ note, updateFuncs }) {
             case 'copy':
                 const copyNote = { ...newNote }
                 delete copyNote.id
-                noteService.save(copyNote).then(note => onRefreshNotes())
+                noteService.save(copyNote).then(note => {
+                    if (note) onRefreshNotes()
+                })
                 break
         }
-        if (clickData !== 'remove') noteService.save(newNote)
-        setNote(newNote)
+        if (clickData !== 'remove' && clickData !== 'copy') {
+            noteService.save(newNote)
+            setNote(newNote)
+        }
     }
 
     function hideNoteTools() {
@@ -62,13 +67,13 @@ export function NotePreview({ note, updateFuncs }) {
 
     }, [hovering])
 
-    
+
 
 
     return <div ref={boxRef} onMouseEnter={(() => showNoteTools())} onMouseLeave={(() => hideNoteTools())} className="note-box" style={{ backgroundColor: style.backgroundColor }}>
         <DynamicCmp onToolsClick={onToolsClick} note={currNote} />
-        {hovering && <div ref={toolsRef}> <NoteTools  note={currNote} onToolsClick={onToolsClick} hovering={hovering} /> </div>}
-        </div>
+        {hovering && <div ref={toolsRef}> <NoteTools note={currNote} onToolsClick={onToolsClick} hovering={hovering} /> </div>}
+    </div>
 }
 
 
