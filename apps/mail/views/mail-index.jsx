@@ -8,7 +8,7 @@ import { mailService } from "../services/mail.service.js"
 import { MailList } from "../cmps/mail-list.jsx"
 import { eventBusService, showErrorMsg, showSuccessMsg } from "../../../services/event-bus.service.js"
 import { storageService } from "../../../services/storage.service.js"
-const { useEffect, useState } = React
+const { useEffect, useState , useRef} = React
 
 export function MailIndex() {
     const [mails, setMails] = useState([])
@@ -22,7 +22,7 @@ export function MailIndex() {
     const [params] = useSearchParams()
     const [newNoteMessage, setNewNoteMessage] = useState(null)
 
-
+    const mainNavRef = useRef()
 
 
     useEffect(() => {
@@ -185,13 +185,19 @@ export function MailIndex() {
         setIsDrafted((drafted) => !drafted)
     }
 
+    function toggleMenu() {
+       document.body.classList.toggle('menu-open-b')
+    }
 
     return (
         <div className="mail-index">
             <div className="mail-container">
                 <div className="main-nav-app">
                     <button onClick={onCompose}><i className="fa-solid fa-plus"></i>Compose</button>
-                    <nav className="main-nav">
+                    <div onClick={toggleMenu} className="menu-mobile">
+                        <i className="fa-solid fa-bars"></i>
+                    </div>
+                    <nav ref={mainNavRef} className="main-nav">
                         <NavLink to="/mail/inbox"><i className="fa-solid fa-inbox"></i>Inbox</NavLink>
                         <NavLink to="/mail/starred"><i className="fa-regular fa-star"></i>Starred</NavLink>
                         <NavLink to="/mail/drafts"><i className="fa-regular fa-copy"></i>Drafts</NavLink>

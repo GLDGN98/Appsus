@@ -30,12 +30,10 @@ export function MailFilter({ onSetFilter, sortBy, setShowNav, showNav }) {
 
 
 
+
     return (
         <div className="mail-filter">
             <div className="search-wrapper">
-                <div onClick={expandHamburger} className="hamburger">
-                    <i className="fa-solid fa-bars"></i>
-                </div>
                 <i className="fa-sharp fa-solid fa-magnifying-glass"></i>
                 <input
                     type="text"
