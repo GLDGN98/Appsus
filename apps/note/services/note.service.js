@@ -78,7 +78,8 @@ export const noteService = {
     sortTodos,
     getEmptyNote,
     getNewTodo,
-    getNoteMailURL
+    getNoteMailURL,
+    getLabelsColors
 }
 
 function get(noteId) {
@@ -322,4 +323,14 @@ function getEmptyNote(type) {
 
 function getNewTodo() {
     return  { txt: '', doneAt: null}
+}
+
+function getLabelsColors(label){
+    if(label === 'Critical') return '#e65656'
+    if(label === 'Family') return '#1957c3'
+    if(label === 'Work') return '#2dae0c'
+    if(label === 'Friends') return '#c7cc3d'
+    if(label === 'Spam') return '#e28902'
+    if(label === 'Memories') return '#ea00ff'
+    if(label === 'Romantic') return '#7504ff'
 }
