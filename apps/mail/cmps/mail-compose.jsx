@@ -76,8 +76,8 @@ export function MailCompose({ sendMail, showNewMessage, setShowNewMessage, isDra
                     <div className="new-message-header">
                         <h3>New Message</h3>
                         <div>
-                            <i onClick={onExpandMail} class="fa-solid fa-up-right-and-down-left-from-center"></i>
-                            <i onClick={onCloseMailMessage} class="fa-solid fa-xmark"></i>
+                            <i onClick={onExpandMail} className="fa-solid fa-up-right-and-down-left-from-center"></i>
+                            <i onClick={onCloseMailMessage} className="fa-solid fa-xmark"></i>
                         </div>
                     </div>
 
@@ -118,7 +118,7 @@ export function MailCompose({ sendMail, showNewMessage, setShowNewMessage, isDra
                 </div>
                 <div className="new-mail-buttons">
                     <button>Send</button>
-                    <i class="fa-solid fa-trash-can"></i>
+                    <i className="fa-solid fa-trash-can"></i>
                 </div>
 
             </form>

@@ -16,6 +16,7 @@ export function MailIndex() {
     const [showNewMessage, setShowNewMessage] = useState(false)
     const [isDrafted, setIsDrafted] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
+    const [showNav, setShowNav] = useState(false)
     const { type, id } = useParams()
     const currentUserMail = storageService.loadFromStorage('userDB').email
 
@@ -158,17 +159,19 @@ export function MailIndex() {
         setShowNewMessage((show) => !show)
         setIsDrafted((drafted) => !drafted)
     }
+
+
     return (
         <div className="mail-index">
             <div className="mail-container">
                 <div className="main-nav-app">
                     <button onClick={onCompose}><i className="fa-solid fa-plus"></i>Compose</button>
                     <nav className="main-nav">
-                        <NavLink to="/mail/inbox"><i class="fa-solid fa-inbox"></i>Inbox</NavLink>
-                        <NavLink to="/mail/starred"><i class="fa-regular fa-star"></i>Starred</NavLink>
-                        <NavLink to="/mail/drafts"><i class="fa-regular fa-copy"></i>Drafts</NavLink>
-                        <NavLink to="/mail/sent-email"><i class="fa-regular fa-paper-plane"></i>Sent</NavLink>
-                        <NavLink to="/mail/trash"><i class="fa-regular fa-trash-can"></i>Trash</NavLink>
+                        <NavLink to="/mail/inbox"><i className="fa-solid fa-inbox"></i>Inbox</NavLink>
+                        <NavLink to="/mail/starred"><i className="fa-regular fa-star"></i>Starred</NavLink>
+                        <NavLink to="/mail/drafts"><i className="fa-regular fa-copy"></i>Drafts</NavLink>
+                        <NavLink to="/mail/sent-email"><i className="fa-regular fa-paper-plane"></i>Sent</NavLink>
+                        <NavLink to="/mail/trash"><i className="fa-regular fa-trash-can"></i>Trash</NavLink>
                     </nav>
 
                 </div>
@@ -178,7 +181,7 @@ export function MailIndex() {
                             {id ? <Outlet /> : null}
                             {id ? <Link className="go-back" to="/mail/inbox">Back</Link> : null}
                         </div>
-                        {id ? null : <MailFilter sortBy={sortBy} onSetFilter={onSetFilter} />}
+                        {id ? null : <MailFilter showNav={showNav} setShowNav={setShowNav} sortBy={sortBy} onSetFilter={onSetFilter} />}
                         {id ? null : <MailCompose setIsDrafted={setIsDrafted} isDrafted={isDrafted} setShowNewMessage={setShowNewMessage} sendMail={sendMail} showNewMessage={showNewMessage} />}
                         {id ? null : <MailList handleDelete={handleDelete} mails={mails} />}
                     </div>

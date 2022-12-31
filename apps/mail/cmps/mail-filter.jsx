@@ -2,7 +2,7 @@ import { mailService } from "../services/mail.service.js"
 
 const { useState, useEffect } = React
 
-export function MailFilter({ onSetFilter, sortBy }) {
+export function MailFilter({ onSetFilter, sortBy, setShowNav, showNav }) {
     const [filterByToEdit, setFilterByToEdit] = useState(mailService.getDefaultFilter())
 
     useEffect(() => {
@@ -25,13 +25,20 @@ export function MailFilter({ onSetFilter, sortBy }) {
     }
 
 
+    console.log(showNav)
+    function expandHamburger() {
+        setShowNav((prev) => !prev)
+    }
+
+
+
     return (
         <div className="mail-filter">
             <div className="search-wrapper">
-                <a className="hamburger" href="#">
-                    <i class="fa-solid fa-bars"></i>
-                </a>
-                <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
+                <div onClick={expandHamburger} className="hamburger">
+                    <i className="fa-solid fa-bars"></i>
+                </div>
+                <i className="fa-sharp fa-solid fa-magnifying-glass"></i>
                 <input
                     type="text"
                     id="search"

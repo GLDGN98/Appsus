@@ -20,11 +20,11 @@
     background-color: rgb(159, 159, 147);
     display: table;
     border-radius: 2em;
-    transition: 0.3s padding;
+    transition: all 0.3s;
 }
 
 .book-index .add-book-index:hover {
-    padding: 1.3em;
+    scale: 1.10;
     background-color: antiquewhite;
 
 }

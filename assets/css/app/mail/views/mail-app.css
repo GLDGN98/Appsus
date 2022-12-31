@@ -143,7 +143,6 @@
 
 }
 
-
 .hamburger {
     display: none;
 }
@@ -151,7 +150,6 @@
 
 
 @media (max-width: 440px) {
-
 
     .main-nav-app a {
         display: none;
@@ -210,5 +208,9 @@
         position: absolute;
         width: 100%;
         gap: 10px;
+    }
+
+    .second-tr td {
+        max-width: 350px;
     }
 }
