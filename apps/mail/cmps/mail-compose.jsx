@@ -12,6 +12,8 @@ export function MailCompose({ sendMail, showNewMessage, setShowNewMessage, isDra
     const [toggleExpandMail, setToggleExapndMail] = useState(false)
     const [draftMail, setDraftMail] = useState({})
     const formRef = useRef(null)
+    const subjectRef = useRef(null)
+    const bodyRef = useRef(null)
     let mailDraftInterval = useRef(null)
 
 
@@ -21,15 +23,13 @@ export function MailCompose({ sendMail, showNewMessage, setShowNewMessage, isDra
             const newMail = { ...newMessage, subject: mail.title, body: mail.body }
             console.log(newMail)
             setNewMessage(newMail)
-            let subject = formRef.current[1].value
-            let body = formRef.current[2].value
-            subject = mail.title
-            body = mail.body
+            subjectRef.current.value = mail.title
+            bodyRef.current.value = mail.body
+
         })
     }, [])
 
     useEffect(() => {
-
         if (isDrafted === true) {
             mailDraftInterval.current = setInterval(() => {
                 saveDraftedMails()
@@ -43,10 +43,14 @@ export function MailCompose({ sendMail, showNewMessage, setShowNewMessage, isDra
         }
     }, [isDrafted])
 
+
+
+
     function handleChange({ target }) {
         let { value, name: field } = target
         setNewMessage((prevMessage) => ({ ...prevMessage, [field]: value }))
     }
+
 
 
 
@@ -106,6 +110,7 @@ export function MailCompose({ sendMail, showNewMessage, setShowNewMessage, isDra
                 </div>
                 <div>
                     <input type="text"
+                        ref={subjectRef}
                         id="subject"
                         name="subject"
                         onChange={handleChange}
@@ -118,6 +123,7 @@ export function MailCompose({ sendMail, showNewMessage, setShowNewMessage, isDra
                     height: '100%'
                 }}>
                     <textarea
+                        ref={bodyRef}
                         required
                         cols={100}
                         rows={30}
