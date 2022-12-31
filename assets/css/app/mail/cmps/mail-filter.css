@@ -21,7 +21,7 @@
 
 .search-wrapper #search {
     border: none;
-    font: 1.2rem Lato Thin;
+    font: 1rem Lato Thin;
     font-weight: 600;
     margin: 0.2rem;
 
@@ -30,6 +30,10 @@
 
 .search-wrapper #search:focus {
     outline: none;
+}
+
+.search-wrapper #search::placeholder {
+    padding-left: initial;
 }
 
 

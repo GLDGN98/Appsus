@@ -1,0 +1,37 @@
+/* .app-header {
+
+  background-color: var(--clr1);
+  color: var(--clr1bg);
+  padding: 1em;
+  width: 100%;
+}
+
+.app-header h1 {
+  position: fixed;
+  top: 0.3em;
+}
+
+.app-nav {
+  text-align: end;
+}
+
+.app-nav a {
+  padding: 1em;
+  border: 1px solid gainsboro;
+  color: white;
+}
+
+.app-nav a:hover {
+  background-color: rgb(62, 62, 55);
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media(max-width: 720px) {
+  .app-header {
+    color: var(--clr2bg);
+  }
+} */

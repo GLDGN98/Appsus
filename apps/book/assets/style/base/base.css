@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap');
+
+
+* {
+  box-sizing: border-box;
+
+}
+
+html {}
+
+
+
+body {
+  margin: 0;
+  color: var(--gray3);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Montserrat', sans-serif;
+  margin: .5em 0 .5em;
+  font-family: 'Edu VIC WA NT Beginner', cursive;
+}
+
+p {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0 0 1em;
+}
+
+a {
+  font-family: 'Montserrat', sans-serif;
+  text-decoration: none;
+  color: unset;
+}
+
+label {
+  font-family: 'Montserrat', sans-serif;
+}
+
+
+
+/* Dont stretch my Media */
+img,
+embed,
+video,
+object {
+  max-width: 100%
+}
+
+/* Simple and useful CSS Debugging Technique */
+.debug * {
+  outline: 1px solid gold
+}

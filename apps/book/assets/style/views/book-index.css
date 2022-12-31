@@ -1,0 +1,30 @@
+.book-index {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+    max-width: 1200px;
+    margin: 60px auto;
+    background-color: rgba(75, 90, 103, 0.194);
+    border-radius: 30px;
+    padding: 60px;
+}
+
+
+
+.book-index .add-book-index {
+    margin: 0;
+    padding: 1em;
+    background-color: rgb(159, 159, 147);
+    display: table;
+    border-radius: 2em;
+    transition: 0.3s padding;
+}
+
+.book-index .add-book-index:hover {
+    padding: 1.3em;
+    background-color: antiquewhite;
+
+}
