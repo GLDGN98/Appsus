@@ -6,7 +6,7 @@ export function About() {
             name: 'Gal Zohar',
             title: 'Fullstack Developer',
             txt: 'I\'m a 27 from Oranit, Israel. I am a junior developr who learn Fullstack development at Coding Academy.',
-            img: '../assets/img/dev/gal.jpg',
+            img: '/assets/img/dev/gal.jpg',
             contact: {
                 facebook: 'https://www.facebook.com/profile.php?id=100077018276598',
                 github: 'https://github.com/GalZohar4021',
@@ -17,7 +17,7 @@ export function About() {
             name: 'Gilad Dagan',
             title: 'Fullstack Developer',
             txt: 'I\'m a 24 from Herzliya, Israel. I am a junior developr who learn Fullstack development at Coding Academy.',
-            img: '../assets/img/dev/gilad.jpg',
+            img: '/assets/img/dev/gilad.jpg',
             contact: {
                 facebook: 'https://www.facebook.com/gilad.dagan.9',
                 github: 'https://github.com/GLDGN98',

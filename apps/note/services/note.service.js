@@ -151,7 +151,7 @@ function getNoteMailURL(note) {
             return `Todo: ${todo.txt} is ${todoDone}done`
         }).join(', ')
     }
-    console.log(url)
+    // console.log(url)
     return url
         
 }
