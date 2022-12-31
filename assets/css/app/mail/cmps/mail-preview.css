@@ -1,6 +1,6 @@
  .first-tr {
      display: grid;
-     grid-template-columns: 0.5fr 2.5fr 20fr 1fr;
+     grid-template-columns: 0.5fr 2.5fr 20fr 1.6fr;
      border: 1px solid rgb(235, 234, 234);
      padding: 0.3em;
      width: 100%;
@@ -13,6 +13,11 @@
  .first-tr:hover {
      cursor: pointer;
      box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
+ }
+
+ .first-tr td {
+    display: flex;
+    align-items: center;
  }
 
  .mail-sent-at .trash-icon {

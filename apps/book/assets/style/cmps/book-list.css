@@ -14,10 +14,10 @@
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
-    
+
 }
 
-.books-list li > article {
+.books-list li>article {
     margin-inline: 8rem;
 }
 
@@ -66,7 +66,9 @@
 .book-list img:hover {
     scale: 1.05;
 }
-div.book-details>a , div.book-details>button {
+
+div.book-details>a,
+div.book-details>button {
     font-size: 1.8rem;
     background-color: rgba(28, 84, 151, 0.51);
     border-radius: 10px;
@@ -74,6 +76,7 @@ div.book-details>a , div.book-details>button {
     padding: 1rem;
     color: white;
 }
+
 .book-details {
     display: flex;
     flex-direction: column;
@@ -91,14 +94,14 @@ div.book-details>a , div.book-details>button {
     width: 80%;
 }
 
-.book-details > h1 {
+.book-details>h1 {
     font-size: 3.5rem;
 }
 
-.book-details > h4 {
+.book-details>h4 {
     font-size: 1.5rem;
 }
 
-.book-details > img {
+.book-details>img {
     max-width: 90%;
 }
