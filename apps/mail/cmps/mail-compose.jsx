@@ -22,9 +22,10 @@ export function MailCompose({ sendMail, showNewMessage, setShowNewMessage, isDra
             const newMail = { ...newMessage, subject: mail.title, body: mail.body }
             console.log(newMail)
             setNewMessage(newMail)
-            subjectRef.current.value = mail.title
-            bodyRef.current.value = mail.body
-
+            if (subjectRef.current !== null && bodyRef.current.value !== null) {
+                subjectRef.current.value = mail.title
+                bodyRef.current.value = mail.body
+            }
         })
     }, [])
 
@@ -61,7 +62,6 @@ export function MailCompose({ sendMail, showNewMessage, setShowNewMessage, isDra
         setShowNewMessage(false)
         navigate('/mail/sent-mail')
         formRef.current.reset();
-        showSuccessMsg('Mail sent successfully!')
     }
 
     function onExpandMail() {

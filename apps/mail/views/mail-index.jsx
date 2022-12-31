@@ -33,6 +33,7 @@ export function MailIndex() {
             const mail = { title, body }
             console.log(mail)
             setNewNoteMessage(mail)
+
         }
     }, [])
 
@@ -89,14 +90,12 @@ export function MailIndex() {
     function sortBy(value) {
         if (value === 'title') {
             const sortedMailsBySubject = mails.sort((a, b) => {
-                // Use the localeCompare method to compare the name property of each object
                 return a.subject.localeCompare(b.subject);
             });
             return setMails([...sortedMailsBySubject])
         }
         if (value === 'date') {
             const sortedMailsByDate = mails.sort((a, b) => {
-                // Convert the date strings to Date objects
                 const dateA = new Date(a.sentAt);
                 const dateB = new Date(b.sentAt);
                 return dateB.getTime() - dateA.getTime();
@@ -105,7 +104,6 @@ export function MailIndex() {
         }
         if (value === 'name') {
             const sortedMailsByName = mails.sort((a, b) => {
-                // Use the localeCompare method to compare the name property of each object
                 return a.name.localeCompare(b.name);
             });
             return setMails([...sortedMailsByName])
@@ -125,9 +123,7 @@ export function MailIndex() {
         mailService.save(newMessage).then(() => {
             const updatedMails = [...mails, newMessage]
             setMails(updatedMails)
-            // navigate('/mail/sent-email')
         })
-        // setMails((prevMails) => [...prevMails, newMessage])
     }
 
     function deletedMails() {
@@ -150,7 +146,6 @@ export function MailIndex() {
         mailService.get(mail.id).then((mail) => {
             const removedMail = { ...mail, removedAt: new Date().toLocaleDateString() }
             mailService.save(removedMail)
-            showSuccessMsg('Mail moved successfully to the trash')
             return mails.filter(mail => mail.id !== removedMail.id)
         }).then(setMails)
             .catch((err) => {
@@ -163,7 +158,6 @@ export function MailIndex() {
         mailService.remove(mailId).then(() => {
             const updatedMails = mails.filter(mail => mail.id !== mailId)
             setMails(updatedMails)
-            showSuccessMsg('Deleted Successfully!')
         }).catch((err) => {
             console.log('error while trying to remove message', err);
             showErrorMsg('Something went wrong while trying to remove message!')
