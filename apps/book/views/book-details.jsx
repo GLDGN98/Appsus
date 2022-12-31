@@ -59,7 +59,7 @@ export function BookDetails() {
 
     if (!book) return <div>Loading...</div>
     return (
-        <div>
+        <div className="book-details-box">
             <section className="book-details">
                 <Link to={`/book/${nextBookId}`}>Next Book</Link>
                 <Link to={`/book/${prevBookId}`}>Prev Book</Link>
