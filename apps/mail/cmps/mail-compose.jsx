@@ -17,7 +17,6 @@ export function MailCompose({ sendMail, showNewMessage, setShowNewMessage, isDra
     let mailDraftInterval = useRef(null)
 
 
-
     useEffect(() => {
         eventBusService.on('params-mail-loaded', (mail) => {
             const newMail = { ...newMessage, subject: mail.title, body: mail.body }
@@ -43,16 +42,10 @@ export function MailCompose({ sendMail, showNewMessage, setShowNewMessage, isDra
         }
     }, [isDrafted])
 
-
-
-
     function handleChange({ target }) {
         let { value, name: field } = target
         setNewMessage((prevMessage) => ({ ...prevMessage, [field]: value }))
     }
-
-
-
 
     function saveDraftedMails() {
         const to = formRef.current[0].value
@@ -61,7 +54,6 @@ export function MailCompose({ sendMail, showNewMessage, setShowNewMessage, isDra
         const draftMail = ({ ...newMessage, to, body, subject })
         setDraftMail(draftMail)
     }
-
 
     function onSendMail(ev) {
         ev.preventDefault()
@@ -82,7 +74,6 @@ export function MailCompose({ sendMail, showNewMessage, setShowNewMessage, isDra
     function onCloseMailMessage() {
         setShowNewMessage(false)
         setIsDrafted(false)
-
     }
 
     return (
