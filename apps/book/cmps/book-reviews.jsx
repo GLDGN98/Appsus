@@ -1,6 +1,5 @@
 
 const { useState } = React
-import { deleteReview } from "../services/review.service.js"
 import { bookService } from "../services/book.service.js"
 
 export function BookReviews({ book, setBook }) {
@@ -22,7 +21,7 @@ export function BookReviews({ book, setBook }) {
                 <h2>Username : {review.username}</h2>
                 <h3>Rate : {'✨'.repeat(review.rating)}</h3>
                 <h4>Read At: {review.readAt}</h4>
-                <button onClick={() => onDeleteReview(review.id)}>DELETE</button>
+                <button className="book-delete-btn" onClick={() => onDeleteReview(review.id)}>DELETE</button>
             </div>)}
         </div>
     )
