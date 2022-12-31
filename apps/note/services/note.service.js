@@ -9,6 +9,7 @@ const notes = [
         type: "note-txt",
         isPinned: true,
         info: {
+            title: 'Yo',
             txt: "Fullstack Me Baby!"
         }
     },
@@ -143,6 +144,7 @@ function getEmptyNote(type) {
         type: "note-txt",
         isPinned: false,
         info: {
+            title: '',
             txt: ''
         },
         style: {
