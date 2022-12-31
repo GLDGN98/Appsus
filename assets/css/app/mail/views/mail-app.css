@@ -155,6 +155,7 @@ div.menu-mobile {
     cursor: pointer;
 
     display: none;
+    font-size: 2.5rem;
 }
 
 nav.main-nav {
@@ -174,6 +175,7 @@ body.menu-open-mail div.main-screen-mail {
 }
 
 @media (max-width: 440px) {
+    
     div.menu-mobile {
         display: unset;
     }
