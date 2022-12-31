@@ -11,6 +11,15 @@ const notes = [
         info: {
             title: 'Yo',
             txt: "Fullstack Me Baby!"
+        },
+        labels: {
+            critical: false,
+            family: false,
+            work: false,
+            friends: false,
+            spam: false,
+            memories: false,
+            romantic: false
         }
     },
     {
@@ -22,6 +31,15 @@ const notes = [
         },
         style: {
             backgroundColor: "#00d"
+        },
+        labels: {
+            critical: false,
+            family: false,
+            work: false,
+            friends: false,
+            spam: false,
+            memories: false,
+            romantic: false
         }
     },
     {
@@ -35,6 +53,15 @@ const notes = [
                 { txt: "Go home", doneAt: null },
                 { txt: "Go work", doneAt: 187111555 }
             ]
+        },
+        labels: {
+            critical: false,
+            family: false,
+            work: false,
+            friends: false,
+            spam: false,
+            memories: false,
+            romantic: false
         }
     }
 ]
@@ -166,6 +193,15 @@ function getEmptyNote(type) {
         },
         style: {
             backgroundColor: "#e7eaf6"
+        },
+        labels: {
+            critical: false,
+            family: false,
+            work: false,
+            friends: false,
+            spam: false,
+            memories: false,
+            romantic: false
         }
     }
 
@@ -178,6 +214,15 @@ function getEmptyNote(type) {
         },
         style: {
             backgroundColor: "#e7eaf6"
+        },
+        labels: {
+            critical: false,
+            family: false,
+            work: false,
+            friends: false,
+            spam: false,
+            memories: false,
+            romantic: false
         }
     }
 
@@ -192,6 +237,15 @@ function getEmptyNote(type) {
         },
         style: {
             backgroundColor: "#e7eaf6"
+        },
+        labels: {
+            critical: false,
+            family: false,
+            work: false,
+            friends: false,
+            spam: false,
+            memories: false,
+            romantic: false
         }
     }
 
@@ -204,6 +258,16 @@ function getEmptyNote(type) {
         style: {
             backgroundColor: "#e7eaf6"
         }
+        ,
+        labels: {
+            critical: false,
+            family: false,
+            work: false,
+            friends: false,
+            spam: false,
+            memories: false,
+            romantic: false
+        }
     }
 
     const noteAudio  = {
@@ -215,6 +279,15 @@ function getEmptyNote(type) {
         },
         style: {
             backgroundColor: "#e7eaf6"
+        },
+        labels: {
+            critical: false,
+            family: false,
+            work: false,
+            friends: false,
+            spam: false,
+            memories: false,
+            romantic: false
         }
     }
 
@@ -227,7 +300,16 @@ function getEmptyNote(type) {
     //     },
     //     style: {
     //         backgroundColor: "#e7eaf6"
-    //     }
+    //     },
+        // labels: {
+        //     critical: false,
+        //     family: false,
+        //     work: false,
+        //     friends: false,
+        //     spam: false,
+        //     memories: false,
+        //     romantic: false
+        // }
     // }
 
     if(type === 'txt') return noteText

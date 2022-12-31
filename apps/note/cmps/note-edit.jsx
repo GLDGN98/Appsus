@@ -413,6 +413,53 @@ function EditTodoNote({ note, callbackFuncs }) {
                 </tr>
             </tbody>
         </table>
+        
     </form >
 
+}
+
+function Labels({ note }) {
+
+    const labels = [
+        {
+            label: 'Critical',
+            state: note.labels.critical
+        },
+        {
+            label: 'Family',
+            state: note.labels.family
+        },
+        {
+            label: 'Work',
+            state: note.labels.work
+        },
+        {
+            label: 'Friends',
+            state: note.labels.friends
+        },
+        {
+            label: 'Spam',
+            state: note.labels.spam
+        },
+        {
+            label: 'Memories',
+            state: note.labels.memories
+        },
+        {
+            label: 'Romantic',
+            state: note.labels.romantic
+        }
+    ]
+
+
+    return <div className="labels-editor">
+        {
+            labels.map(label => <Label label={label.label} state={label.state} />)
+        }
+    </div>
+}
+
+function Label({ label, state }) {
+    const className = state ? 'label-tag on' : 'label-tag'
+    return <span className={className}>{label}</span>
 }
