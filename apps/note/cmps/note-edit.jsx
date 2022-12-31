@@ -77,7 +77,7 @@ export function NoteEdit() {
         const note = noteService.getEmptyNote(type)
         note.info.txt = params.get('txt')
         note.info.title = params.get('title')
-        console.log(note)
+        // console.log(note)
         setNoteToEdit(note)
     }
 
@@ -119,7 +119,7 @@ function TypeMenu({ onTypeSelect }) {
 
 
 function DynamicEditNoteCmp({ note, callbackFuncs }) {
-    console.log(note)
+    // console.log(note)
     switch (note.type) {
         case 'note-txt':
             return <EditTextNote note={note} callbackFuncs={callbackFuncs} />

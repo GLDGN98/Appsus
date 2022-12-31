@@ -2,7 +2,6 @@ const { Link, NavLink, useLocation } = ReactRouterDOM
 
 export function AppHeader() {
     const pathName = useLocation().pathname
-    console.log(pathName)
 
     function toggleMenu() {
         document.body.classList.toggle('menu-open')
