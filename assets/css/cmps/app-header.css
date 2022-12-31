@@ -19,6 +19,7 @@ div.header-box {
 }
 
 .app-logo {
+    margin-inline-start: 3rem;
     font-size: 5rem;
     color: white;
 }
@@ -61,21 +62,10 @@ nav.header-nav>button.menu-toggle-btn {
     display: none;
 }
 
-div.main-screen {
-    position: fixed;
-    inset: 0;
-    background-color: #121212db;
-    /* display: none; */
-    cursor: pointer;
-    opacity: 0;
-    transition: opacity 0.6s;
-    pointer-events: none;
-    z-index: 1;
-}
+
 
 body.menu-open nav.links>a {
     display: flex;
-    box-shadow: -6px 0px 14px rgb(0 0 0 / 20%);
     max-height: 100vh;
     z-index: 1;
 }
@@ -111,5 +101,19 @@ body.menu-open div.main-screen {
         padding-block: 2rem;
     }
 
+    div.main-screen {
+        position: fixed;
+        inset: 0;
+        background-color: #121212db;
+        /* display: none; */
+        cursor: pointer;
+        opacity: 0;
+        transition: opacity 0.6s;
+        pointer-events: none;
+        z-index: 1;
+    }
+    body.menu-open nav.links>a {
+        box-shadow: -6px 0px 14px rgb(0 0 0 / 20%);
+    }
 
 }

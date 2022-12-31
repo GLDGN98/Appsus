@@ -1,8 +1,18 @@
 section.about{
+    width: 100%;
     text-align: center;
+    background-image: url('../../img/about-wallpaper.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 span.about-header{
     font-size: 4rem;
     color: var(--blue-color);
+}
+
+@media (max-width: 1200px) {
+    section.about{
+        background-image: url('../../img/about-wallpaper-s.jpg');
+    }
 }

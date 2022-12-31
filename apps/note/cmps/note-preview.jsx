@@ -98,7 +98,8 @@ function DynamicCmp({ note, onToolsClick }) {
 
 function NoteTxt({ note, onToolsClick, isPinned = false }) {
     return <div className="note-text-box flex-col">
-        <span className="note-text">{note.info.txt}</span>
+        <span className="note-title">{note.info.title}</span>
+        <p className="note-text">{note.info.txt}</p>
     </div>
 }
 

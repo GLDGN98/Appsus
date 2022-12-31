@@ -1,5 +1,5 @@
 const { useState, useEffect, useRef } = React
-const { useNavigate, useParams, Link } = ReactRouterDOM
+const { useNavigate, useParams, Link, useSearchParams } = ReactRouterDOM
 
 import { noteService } from "../services/note.service.js"
 import { eventBusService, showSuccessMsg } from "../../../services/event-bus.service.js"
@@ -12,12 +12,20 @@ export function NoteEdit() {
     const navigate = useNavigate()
     const { noteId } = useParams()
     const callbackFuncs = { handleChange, onSaveNote }
-
+    let [params] = useSearchParams()
     useEffect(() => {
-        if (!noteId) return
+        if (!noteId) {
+
+            const type = params.get('type')
+            if (type && isValidType(type)) return getParamsNote(type)
+            else return
+        }
         loadNote()
     }, [])
 
+    function isValidType(type) {
+        return (type === 'txt' || type === 'video' || type === 'audio' || type === 'img' || type === 'todos')
+    }
 
     function loadNote() {
         noteService.get(noteId)
@@ -34,7 +42,8 @@ export function NoteEdit() {
         let { value, id } = target
 
         if (noteToEdit.type === 'note-txt') {
-            setNoteToEdit((prevNote) => ({ ...prevNote, info: { txt: value } }))
+            if (id === 'txt-title') setNoteToEdit((prevNote) => ({ ...prevNote, info: { title: value, txt: prevNote.info.txt } }))
+            else if (id === 'txt-txt') setNoteToEdit((prevNote) => ({ ...prevNote, info: { txt: value, title: prevNote.info.title } }))
         }
 
         else if (noteToEdit.type === 'note-img') {
@@ -61,6 +70,14 @@ export function NoteEdit() {
             showSuccessMsg('Note Saved')
             navigate('/note')
         })
+    }
+
+    function getParamsNote(type) {
+        const note = noteService.getEmptyNote(type)
+        note.info.txt = params.get('txt')
+        note.info.title = params.get('title')
+        console.log(note)
+        setNoteToEdit(note)
     }
 
 
@@ -125,15 +142,24 @@ function EditTextNote({ note, callbackFuncs }) {
     return <form className="note-editor-form" onSubmit={(ev) => onSaveNote(ev, note)}>
         <table className="form-table">
             <tbody>
-                <tr key={count++}>
+                <tr key={count}>
                     <td className="note-editor-td">
-                        <label htmlFor="title">Note Text</label>
+                        <label htmlFor="txt-title">Note Title</label>
                     </td>
                     <td className="note-editor-td">
-                        <input type="text" id="title" placeholder="Enter text" value={note.info.txt} onChange={handleChange} />
+                        <input type="text" id="txt-title" placeholder="Enter title" value={note.info.title} onChange={handleChange} />
                     </td>
                 </tr>
-                <tr key={count++}>
+                <tr key={++count}>
+
+                    <td className="note-editor-td">
+                        <label htmlFor="txt-txt">Note Text</label>
+                    </td>
+                    <td className="note-editor-td">
+                        <input type="text" id="txt-txt" placeholder="Enter text" value={note.info.txt} onChange={handleChange} />
+                    </td>
+                </tr>
+                <tr key={++count}>
                     <td className="editor-link">
                         <button>{note.id ? 'Save' : 'Add'}</button>
                     </td>

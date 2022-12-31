@@ -43,9 +43,13 @@ i.pinned {
 
 /* Note Text */
 
+span.note-title {
+    text-align: center;
+    font-size: 2rem;
 
-span.note-text {
-    padding-block-end: 2rem;
+}
+p.note-text {
+    font-size: 1.2rem;
 }
 
 
