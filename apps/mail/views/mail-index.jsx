@@ -6,7 +6,7 @@ import { MailFilter } from "../cmps/mail-filter.jsx"
 import { MailCompose } from "../cmps/mail-compose.jsx"
 import { mailService } from "../services/mail.service.js"
 import { MailList } from "../cmps/mail-list.jsx"
-import { showErrorMsg, showSuccessMsg } from "../../../services/event-bus.service.js"
+import { eventBusService, showErrorMsg, showSuccessMsg } from "../../../services/event-bus.service.js"
 import { storageService } from "../../../services/storage.service.js"
 const { useEffect, useState } = React
 
@@ -30,10 +30,18 @@ export function MailIndex() {
         if (composeState === 'on') {
             const title = params.get('title')
             const body = params.get('body')
-            setShowNewMessage(true)
-            setNewNoteMessage(title, body)
+            const mail = { title, body }
+            console.log(mail)
+            setNewNoteMessage(mail)
         }
     }, [])
+
+    useEffect(() => {
+          if(newNoteMessage) {
+            eventBusService.emit('params-mail-loaded',newNoteMessage)
+            setShowNewMessage(true)
+          }
+    }, [newNoteMessage])
 
 
 

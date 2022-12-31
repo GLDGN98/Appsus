@@ -139,7 +139,7 @@ function _createNotes() {
     }
 }
 function getNoteMailURL(note) {
-    const url = ''
+    let url = ''
     if(note.type === 'note-txt') url = `/mail?compose=on&title=${note.info.title}&body=${note.info.txt}`
     if(note.type === 'note-img') url = `/mail?compose=on&title=${note.info.title}&body=See this image! Url: ${note.info.url}`
     if(note.type === 'note-video') url = `/mail?compose=on&title=Share video note&body=See this video! Url: ${note.info.url}`

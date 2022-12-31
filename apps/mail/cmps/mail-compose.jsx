@@ -4,7 +4,7 @@ import { mailService } from "../services/mail.service.js"
 const { useState, useRef, useEffect } = React
 const { useNavigate, useSearchParams } = ReactRouterDOM
 
-
+import { eventBusService } from "../../../services/event-bus.service.js"
 
 export function MailCompose({ sendMail, showNewMessage, setShowNewMessage, isDrafted, setIsDrafted, newNoteMessage }) {
     const [newMessage, setNewMessage] = useState({ to: '', subject: '', body: '', name: 'Mahatma Appsus', from: "user@appsus.com", sentAt: new Date(), removedAt: null, isRead: true, isSent: false })
@@ -17,9 +17,14 @@ export function MailCompose({ sendMail, showNewMessage, setShowNewMessage, isDra
 
 
     useEffect(() => {
-        if (newNoteMessage) {
-            setNewMessage((prev) => ({ ...prev, subject: newNoteMessage.title, body: newNoteMessage.body }))
-        }
+        eventBusService.on('params-mail-loaded', (mail) => {
+            console.log(mail)
+            setNewMessage((prev) => ({ ...prev, subject: mail.title, body: mail.body }))
+        })
+        // if (newNoteMessage) {
+        //     console.log(newNoteMessage)
+        //     setNewMessage((prev) => ({ ...prev, subject: newNoteMessage.title, body: newNoteMessage.body }))
+        // }
     }, [])
 
     useEffect(() => {
