@@ -198,7 +198,7 @@ export function MailIndex() {
                     <div onClick={toggleMenu} className="menu-mobile">
                         <i className="fa-solid fa-bars"></i>
                     </div>
-                    <nav ref={mainNavRef} className="main-nav flex-col">
+                    <nav onClick={() => toggleMenu()} ref={mainNavRef} className="main-nav flex-col">
                         <NavLink to="/mail/inbox"><i className="fa-solid fa-inbox"></i>Inbox</NavLink>
                         <NavLink to="/mail/starred"><i className="fa-regular fa-star"></i>Starred</NavLink>
                         <NavLink to="/mail/drafts"><i className="fa-regular fa-copy"></i>Drafts</NavLink>

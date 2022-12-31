@@ -177,6 +177,7 @@ body.menu-open-mail div.main-screen-mail {
     div.menu-mobile {
         display: unset;
     }
+
     .main-nav-app a {
         display: none;
     }
@@ -236,15 +237,20 @@ body.menu-open-mail div.main-screen-mail {
         max-width: 350px;
     }
 
-
-    nav.main-nav>a {
+    nav.main-nav {
         flex-direction: column;
         position: absolute;
         top: 0;
         right: 0;
         width: 100vw;
-        display: none;
+    }
+
+    nav.main-nav>a {
         justify-content: space-around;
+        width: 100%;
+        display: none;
+        background: #667db6;
+        padding-block: 2rem;
     }
 
     body.menu-open-mail nav.main-nav>a {
