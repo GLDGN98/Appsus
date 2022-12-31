@@ -6,15 +6,17 @@ section.note-editor {
 }
 
 div.editor-box {
+    width: 50%;
     padding-block: 4rem;
     padding-inline: 7.5rem;
     border-radius: 10px;
     background-color: var(--sec-bg-color);
-    
 }
 
+/* Select type to add note */
+
 nav.types-menu {
-    width: 80%;
+    width: 100%;
     font-size: 5rem;
     justify-content: space-evenly;
     margin-block: 2rem;
@@ -22,46 +24,106 @@ nav.types-menu {
 }
 
 span.choose-type-add-note {
-    font-size: 6.5rem;
-    width: 50%;
+    text-align: center;
+    font-size: 5.5rem;
+    width: 100%;
     color: cornflowerblue;
     margin-block-end: 10vh;
 }
 
 
+/* Editor page*/
+
+table.form-table {
+    display: table;
+    text-align: left;
+    width: 80%;
+}
+
+table.form-table>tbody>tr {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+table.form-table>tbody>tr>td {
+    display: flex;
+    flex-direction: row;
+    margin-block: 1rem;
+}
+
 span.editor-desc {
-    font-size: 5rem;
+    font-size: 4rem;
 }
 
-div.editor-box > form {
-    margin-block-start: 4rem;
-}
-
-
-td.note-editor-td>label {
+div.editor-box>form {
+    margin-block-start: 2rem;
     font-size: 2rem;
-    margin-inline-end: 2rem;
 }
 
 td.note-editor-td>input {
+    width: 100%;
+    height: 100%;
     font-size: 2rem;
+}
+
+td.note-editor-td-label>label {
+    height: 100%;
+
+}
+
+td.note-editor-td-label {
+    align-items: flex-end;
+    padding-inline-end: 2rem;
+
 }
 
 td.note-editor-td {
     padding-inline: 0.2rem;
-    padding-block: 0.8rem;
+    align-items: flex-end;
+    flex-grow: 5;
 }
 
 
-td.editor-link>button,
+
+
+
+
+
+
+
+/* Todos Editor tools*/
+
+
+
+td.note-editor-td-remove>button {
+    border: hidden;
+    background-color: inherit;
+}
+
 td.note-editor-td-remove>button,
+td.note-editor-td-check>input {
+    justify-content: center;
+    align-items: center;
+}
+
+td.note-editor-td-check,
+td.note-editor-td-remove {
+    justify-content: space-around;
+    scale: 1.5;
+    width: fit-content;
+    padding-inline: 1.5rem;
+    flex-grow: 0.5;
+}
+
+
+
+td.editor-link>button,
 td.editor-link>a,
 td.add-line>span {
-    font-size: 2rem;
     border: hidden;
     background-color: inherit;
     border-radius: 25%;
-
     padding-inline: 1rem;
 }
 
@@ -74,30 +136,105 @@ td.note-editor-td-remove>button:hover {
     background-color: var(--main-bg-color);
 }
 
+td.add-line,
+td.editor-link {
+    padding-block-start: 2rem;
+    text-align: center;
 
+}
 
-td.add-line:hover, 
+td.add-line:hover,
 td.editor-link:hover {
     cursor: pointer;
 }
 
-td.add-line, td.editor-link {
+
+td.add-line,
+td.editor-link,
+td.editor-link>button {
     font-size: 2rem;
     text-align: center;
 }
 
-td.note-editor-td-check>input {
-    margin-inline: 3rem;
-    scale: 1.5;
+
+@media (max-width: 1000px) {
+    div.editor-box {
+        width: 80%;
+    }
 }
 
-td.add-line, td.editor-link {
-    padding-block-start: 2rem;
-    text-align: center;
-    
+@media (max-width: 800px) {
+
+    td.note-editor-td-check,
+    td.note-editor-td-remove {
+        padding-inline: 0.5rem;
+        scale: 1.2;
+    }
+
+    span.choose-type-add-note {
+        font-size: 4rem;
+        margin-block: 1.4rem;
+    }
+
+    nav.types-menu {
+        font-size: 4rem;
+        margin-block: 1.4rem;
+    }
+
+    span.editor-desc {
+        font-size: 3rem;
+    }
+
+
+    div.editor-box {
+        width: 100%;
+        padding-block: 2rem;
+        padding-inline: 3.5rem;
+        border-radius: 10px;
+        background-color: var(--sec-bg-color);
+    }
+
+    div.editor-box>form {
+        margin-block-start: 3rem;
+        font-size: 2rem;
+    }
+
+    td.note-editor-td>input {
+        font-size: 1.4rem;
+    }
 }
 
-td.add-line>span{
-    padding-inline: unset;
-    text-align: left;
+@media (max-width: 600px) {
+    td.note-editor-td-check,
+    td.note-editor-td-remove {
+        scale: 1.0;
+    }
+    span.choose-type-add-note {
+        font-size: 3rem;
+        margin-block: 1.4rem;
+    }
+
+    nav.types-menu {
+        font-size: 3rem;
+        margin-block: 1.4rem;
+    }
+
+    span.editor-desc {
+        font-size: 3rem;
+    }
+
+    div.editor-box>form {
+        margin-block-start: 2rem;
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 300px) {
+    div.editor-box>form {
+        margin-block-start: 2rem;
+        font-size: 1.75rem;
+    }
+    td.note-editor-td>input {
+        font-size: 1.4rem;
+    }
 }

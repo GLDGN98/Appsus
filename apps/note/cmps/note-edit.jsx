@@ -123,7 +123,7 @@ function EditTextNote({ note, callbackFuncs }) {
     const { handleChange, onSaveNote } = callbackFuncs
     let count = 0
     return <form className="note-editor-form" onSubmit={(ev) => onSaveNote(ev, note)}>
-        <table>
+        <table className="form-table">
             <tbody>
                 <tr key={count++}>
                     <td className="note-editor-td">
@@ -182,7 +182,7 @@ function EditImageNote({ note, callbackFuncs }) {
     const { handleChange, onSaveNote } = callbackFuncs
     let count = 0
     return <form className="note-editor-form flex-col" onSubmit={(ev) => onSaveNote(ev, note)}>
-        <table>
+        <table className="form-table">
             <tbody>
 
                 <tr key={count++}>
@@ -222,7 +222,7 @@ function EditAudioNote({ note, callbackFuncs }) {
     const { handleChange, onSaveNote } = callbackFuncs
     let count = 0
     return <form className="note-editor-form flex-col" onSubmit={(ev) => onSaveNote(ev, note)}>
-        <table>
+        <table className="form-table">
             <tbody>
 
                 <tr key={count++}>
@@ -262,7 +262,7 @@ function EditVideoNote({ note, callbackFuncs }) {
     const { handleChange, onSaveNote } = callbackFuncs
     let count = 0
     return <form className="note-editor-form flex-col" onSubmit={(ev) => onSaveNote(ev, note)}>
-        <table>
+        <table className="form-table">
             <tbody>
                 <tr key={count++}>
                     <td className="note-editor-td">
@@ -345,10 +345,10 @@ function EditTodoNote({ note, callbackFuncs }) {
     }
 
     return <form className="note-editor-form" onSubmit={(ev) => onSaveNote(ev, currNote)}>
-        <table>
+        <table className="form-table">
             <tbody>
                 <tr key={'tr-' + count}>
-                    <td className="note-editor-td">
+                    <td className="note-editor-td-label">
                         <label htmlFor="todos-title">Todo title</label>
                     </td>
                     <td className="note-editor-td">
@@ -357,8 +357,8 @@ function EditTodoNote({ note, callbackFuncs }) {
                 </tr>
                 {
                     currNote.info.todos.map(todo =>
-                        <tr key={'tr-' + (++count)}>
-                            <td className="note-editor-td">
+                        <tr key={'tr-' + (++count)} className="">
+                            <td className="note-editor-td-label">
                                 <label key={`label-${count}`} htmlFor={count}>Todo task</label>
                             </td>
                             <td className="note-editor-td">
