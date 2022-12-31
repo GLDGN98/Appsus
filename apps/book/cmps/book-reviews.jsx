@@ -15,7 +15,7 @@ export function BookReviews({ book, setBook }) {
     }
 
     return (
-        <div>
+        <div className="book-reviews">
             <h2>Reviews</h2>
             {!book.reviews.length && <h1>No reviews to show</h1>}
             {book.reviews.length && book.reviews.map((review) => <div key={review.id} className="review">

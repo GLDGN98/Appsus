@@ -4,3 +4,46 @@
     align-items: center;
     margin-bottom: 2rem;
 }
+
+
+input#username,
+input#rating,
+input#date {
+    margin-right: 3em;
+}
+
+
+.add-review label {
+    font-family: Poppins;
+    padding: .5rem;
+}
+
+.add-review button {
+    border: none;
+    padding: 1rem;
+    background-color: azure;
+    border-radius: 2em;
+    border: 1px solid gainsboro;
+    font-family: Lato;
+}
+
+
+.book-reviews {
+    font-family: Lato;
+    margin-bottom: 2rem;
+
+}
+
+.book-reviews h2 {
+    margin-bottom: 1rem;
+}
+
+.book-details button {
+    cursor: pointer;
+    background: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 1em;
+    font-family: 'Poppins';
+    box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+}
