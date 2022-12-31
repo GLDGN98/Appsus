@@ -1,6 +1,6 @@
 div.notes-page {
     width: 100%;
-    
+
 }
 
 div.loading-screen {
@@ -9,6 +9,7 @@ div.loading-screen {
     align-items: center;
     justify-content: center;
 }
+
 section.search-notes-box {
     margin: 0 auto;
     margin-block: 2rem;
@@ -58,4 +59,48 @@ nav.filter-notes>i.active {
 
 i.add-notes-button {
     margin-inline-start: 10rem;
+}
+
+@media (max-width: 1200px) {
+
+    section.search-notes-box {
+        width: 90%;
+    }
+
+    section.search-notes-box>i,
+    nav.filter-notes>i,
+    i.add-notes-button {
+        font-size: 3rem;
+        margin-inline: 1.5rem;
+    }
+    input.input-search-note {
+        padding: 1.2rem;
+        font-size: 1.7rem;
+    }
+    
+}
+
+@media (max-width: 800px) {
+    section.search-notes-box {
+        width: 100%;
+    }
+
+
+    section.search-notes-box>i,
+    nav.filter-notes>i,
+    i.add-notes-button {
+        font-size: 2.5rem;
+    }
+    nav.filter-notes {
+        margin-block: 0rem;
+    }
+}
+@media (max-width: 400px) {
+    section.search-notes-box {
+        flex-direction: column;
+    }
+
+    nav.filter-notes {
+        margin-block: 2rem;
+    }
 }
