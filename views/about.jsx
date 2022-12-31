@@ -18,7 +18,7 @@ export function About() {
             name: 'Gilad Dagan',
             title: 'Fullstack Developer',
             txt: 'I\'m a 24 from Herzliya, Israel. I am a junior developr who learn Fullstack development at Coding Academy.',
-            img: '../assets/img/dev/gilad.jpg',
+            img: '../../Appsus/assets/img/dev/gilad.jpg',
             contact: {
                 facebook: 'https://www.facebook.com/gilad.dagan.9',
                 github: 'https://github.com/GLDGN98',
