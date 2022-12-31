@@ -19,7 +19,6 @@ export function NoteEdit() {
 
     useEffect(() => {
         if (!noteId) {
-
             const type = params.get('type')
             if (type && isValidType(type)) return getParamsNote(type)
             else return

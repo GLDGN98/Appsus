@@ -5,7 +5,6 @@ export function Home() {
     const nav = useNavigate()
 
     function _onNavTo(page) {
-        console.log(page, nav)
         switch (page) {
             case 'mail':
                 nav('/mail')
