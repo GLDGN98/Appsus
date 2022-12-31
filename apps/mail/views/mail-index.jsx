@@ -159,7 +159,6 @@ export function MailIndex() {
         setShowNewMessage((show) => !show)
         setIsDrafted((drafted) => !drafted)
     }
-
     return (
         <div className="mail-index">
             <div className="mail-container">
