@@ -2,7 +2,7 @@ const { useState, useEffect } = React
 const { useNavigate, useParams, Link, useSearchParams } = ReactRouterDOM
 
 import { noteService } from "../services/note.service.js"
-import { eventBusService, showSuccessMsg } from "../../../services/event-bus.service.js"
+import { showSuccessMsg } from "../../../services/event-bus.service.js"
 
 // import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api"
 // import { Map, Marker } from "./map.jsx"

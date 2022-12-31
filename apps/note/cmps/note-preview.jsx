@@ -3,7 +3,7 @@ const { Link } = ReactRouterDOM
 
 import { utilService } from "../../../services/util.service.js"
 import { noteService } from "../services/note.service.js"
-
+import { showSuccessMsg } from "../../../services/event-bus.service.js"
 
 export function NotePreview({ note, updateFuncs }) {
 
@@ -32,6 +32,7 @@ export function NotePreview({ note, updateFuncs }) {
             case 'remove':
                 noteService.remove(currNote.id).then(() =>
                     onRemoveNote(currNote.id))
+                    showSuccessMsg('Note removed')
                 break
             case 'color':
                 if (!newNote.style) newNote.style = {}
@@ -43,6 +44,7 @@ export function NotePreview({ note, updateFuncs }) {
                 const copyNote = { ...newNote }
                 delete copyNote.id
                 noteService.save(copyNote).then(note => {
+                    showSuccessMsg('Note copied')
                     if (note) onRefreshNotes()
                 })
                 break

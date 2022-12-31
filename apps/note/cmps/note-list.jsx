@@ -2,6 +2,7 @@ const { useState, useEffect } = React
 
 import { NotePreview } from './note-preview.jsx'
 import { noteService } from '../services/note.service.js'
+import { showSuccessMsg } from "../../../services/event-bus.service.js"
 
 export function NoteList({ notes, filterBy }) {
     const [currNotes, setNotes] = useState(notes)
@@ -20,6 +21,7 @@ export function NoteList({ notes, filterBy }) {
     
     function onPinnedNote(pinned) {
         const updatedNotes = currNotes.filter(note => note.id !== pinned.id)
+        showSuccessMsg('Note pinned')
         updatedNotes.unshift(pinned)
         setNotes(updatedNotes)
     }
@@ -28,6 +30,7 @@ export function NoteList({ notes, filterBy }) {
     function onUnpinnedNote(unpinned) {
         const updatedNotes = currNotes.filter(note => note.id !== unpinned.id)
         updatedNotes.push(unpinned)
+        showSuccessMsg('Note pin removed')
         setNotes(updatedNotes)
     }
 

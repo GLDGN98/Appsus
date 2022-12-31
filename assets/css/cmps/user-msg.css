@@ -1,22 +1,32 @@
 .user-msg {
-    background-color: lightgray;
-    padding: 1em;
+    background-color: rgb(32, 3, 105);
+    padding: 1rem;
     position: absolute;
-    top: 1em;
-    right: 1em;
-    border-radius: 2em;
+    right: 1rem;
+    bottom: 1rem;
+    border-radius: 2rem;
+    height: 2vh;
+    font-size: 3rem;
+    padding-inline: 3rem;
+    padding-block: 2rem;
+    text-align: center;
 }
 
 .user-msg.success {
-    background-color: rgb(153, 195, 153);
+    background-color: rgb(6, 87, 6);
 }
 
 .user-msg.error {
-    background-color: rgb(201, 168, 173);
+    background-color: rgba(118, 15, 30, 0.884);
 }
 
-
+.user-msg button:hover{
+    cursor: pointer;
+}
 .user-msg button{
     float: right;
-    margin: 1em;
+    margin: 1rem;
+    font-size: 2rem;
+    border: hidden;
+    background-color: inherit;
 }
