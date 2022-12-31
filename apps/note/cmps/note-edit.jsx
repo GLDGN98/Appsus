@@ -413,7 +413,7 @@ function EditTodoNote({ note, callbackFuncs }) {
                 </tr>
             </tbody>
         </table>
-        
+        <Labels note={note} />
     </form >
 
 }
@@ -454,12 +454,27 @@ function Labels({ note }) {
 
     return <div className="labels-editor">
         {
-            labels.map(label => <Label label={label.label} state={label.state} />)
+            labels.map(label => <Label note={note} label={label.label} state={label.state} />)
         }
     </div>
 }
 
-function Label({ label, state }) {
-    const className = state ? 'label-tag on' : 'label-tag'
-    return <span className={className}>{label}</span>
+function Label({ note, label, state }) {
+    const [currState, setState] = useState(state)
+    const style = getLabelStyle(currState)
+    const className = 'labels-editor' + currState ? ' on' : ''
+
+    function getLabelStyle(state) {
+        const color = noteService.getLabelsColors(label)
+        if (state) return { border: '3px solid ' + color, backgroundColor: color, color: 'white'}
+        else return { border: '3px outset ' + color, backgroundColor: 'white', color: color}
+    }
+
+    function toggleLabel(label) {
+        note.labels[label] = !currState
+        noteService.save(note)
+        setState(!currState)
+    }
+
+    return <span onClick={() => toggleLabel(label)} className={className} style={style}>{label}</span>
 }

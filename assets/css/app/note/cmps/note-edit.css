@@ -204,11 +204,32 @@ td.editor-link>button {
     }
 }
 
+div.labels-editor {
+    float: right;
+}
+
+div.labels-editor>span:hover{
+    cursor: pointer;
+}
+
+div.labels-editor>span {
+    margin-inline-start: 2rem;
+    padding-inline: 1rem;
+}
+
+div.labels-editor>span.on {
+    margin-inline-start: 2rem;
+    border: 2px solid black;
+}
+
+
 @media (max-width: 600px) {
+
     td.note-editor-td-check,
     td.note-editor-td-remove {
         scale: 1.0;
     }
+
     span.choose-type-add-note {
         font-size: 3rem;
         margin-block: 1.4rem;
@@ -234,6 +255,7 @@ td.editor-link>button {
         margin-block-start: 2rem;
         font-size: 1.75rem;
     }
+
     td.note-editor-td>input {
         font-size: 1.4rem;
     }
