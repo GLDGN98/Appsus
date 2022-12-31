@@ -15,36 +15,7 @@ export function NoteEdit() {
     const [params] = useSearchParams()
     console.log(noteToEdit)
 
-    let labels = [
-        {
-            label: 'Critical',
-            state: noteToEdit?noteToEdit.labels.critical : false
-        },
-        {
-            label: 'Family',
-            state: noteToEdit?noteToEdit.labels.family : false
-        },
-        {
-            label: 'Work',
-            state: noteToEdit?noteToEdit.labels.work : false
-        },
-        {
-            label: 'Friends',
-            state: noteToEdit?noteToEdit.labels.friends : false
-        },
-        {
-            label: 'Spam',
-            state: noteToEdit?noteToEdit.labels.spam : false
-        },
-        {
-            label: 'Memories',
-            state: noteToEdit?noteToEdit.labels.memories : false
-        },
-        {
-            label: 'Romantic',
-            state: noteToEdit?noteToEdit.labels.romantic : false
-        }
-    ]
+
 
     useEffect(() => {
         if (!noteId) {
