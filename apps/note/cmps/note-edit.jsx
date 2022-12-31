@@ -13,6 +13,38 @@ export function NoteEdit() {
     const { noteId } = useParams()
     const callbackFuncs = { handleChange, onSaveNote }
     const [params] = useSearchParams()
+    console.log(noteToEdit)
+
+    let labels = [
+        {
+            label: 'Critical',
+            state: noteToEdit?noteToEdit.labels.critical : false
+        },
+        {
+            label: 'Family',
+            state: noteToEdit?noteToEdit.labels.family : false
+        },
+        {
+            label: 'Work',
+            state: noteToEdit?noteToEdit.labels.work : false
+        },
+        {
+            label: 'Friends',
+            state: noteToEdit?noteToEdit.labels.friends : false
+        },
+        {
+            label: 'Spam',
+            state: noteToEdit?noteToEdit.labels.spam : false
+        },
+        {
+            label: 'Memories',
+            state: noteToEdit?noteToEdit.labels.memories : false
+        },
+        {
+            label: 'Romantic',
+            state: noteToEdit?noteToEdit.labels.romantic : false
+        }
+    ]
 
     useEffect(() => {
         if (!noteId) {
@@ -24,13 +56,17 @@ export function NoteEdit() {
         loadNote()
     }, [])
 
+    
+
     function isValidType(type) {
         return (type === 'txt' || type === 'video' || type === 'audio' || type === 'img' || type === 'todos')
     }
 
     function loadNote() {
         noteService.get(noteId)
-            .then((note) => setNoteToEdit(note))
+            .then((note) => {
+                setNoteToEdit(note)
+            })
             .catch((err) => {
                 console.log('Had issues in note details', err)
                 navigate('/note')
@@ -38,10 +74,15 @@ export function NoteEdit() {
     }
 
 
-    function handleChange({ target }) {
+    function handleChange({ labels, target }) {
+
+        // if (labels) {
+        //     console.log(labels)
+        //     setNoteToEdit((prevNote) => ({ ...prevNote, labels: { ...prevNote.labels, [labels.name.toLowerCase()]: labels.value } }))
+        //     return
+        // }
 
         let { value, id } = target
-
         if (noteToEdit.type === 'note-txt') {
             if (id === 'txt-title') setNoteToEdit((prevNote) => ({ ...prevNote, info: { title: value, txt: prevNote.info.txt } }))
             else if (id === 'txt-txt') setNoteToEdit((prevNote) => ({ ...prevNote, info: { txt: value, title: prevNote.info.title } }))
@@ -92,6 +133,11 @@ export function NoteEdit() {
         {(noteToEdit) && <div className="editor-box">
             <span className="editor-desc">{(noteToEdit.id) ? 'Edit this note' : 'Add a new note'}</span>
             <DynamicEditNoteCmp note={noteToEdit} callbackFuncs={callbackFuncs} />
+            {/* <div className="labels-editor">
+                {
+                    labels.map(label => <Label callbackFuncs={callbackFuncs} label={label.label} state={noteToEdit.labels[label.label.toLowerCase()]} />)
+                }
+            </div> */}
         </div>}
 
         {(!noteToEdit) && <span className="choose-type-add-note">Choose type of the note to add</span>}
@@ -328,7 +374,6 @@ function EditTodoNote({ note, callbackFuncs }) {
             setNote((prevNote) => {
                 let info = prevNote.info
                 info = { ...info, label: value }
-                console.log(info)
                 return ({ ...prevNote, info })
             })
         }
@@ -340,7 +385,6 @@ function EditTodoNote({ note, callbackFuncs }) {
                 let todo = todos[id]
                 todo = { ...todo, txt: value }
                 todos[id] = todo
-                console.log(todo, todos)
                 return ({ ...prevNote, info: { label: prevNote.info.label, todos } })
             })
         }
@@ -413,68 +457,26 @@ function EditTodoNote({ note, callbackFuncs }) {
                 </tr>
             </tbody>
         </table>
-        <Labels note={note} />
     </form >
 
 }
 
-function Labels({ note }) {
+// function Label({ label, state, callbackFuncs }) {
+//     const [currState, setState] = useState(state)
+//     const style = getLabelStyle(currState)
+//     const { handleChange } = callbackFuncs
+//     const className = 'labels-editor' + currState ? ' on' : ''
 
-    const labels = [
-        {
-            label: 'Critical',
-            state: note.labels.critical
-        },
-        {
-            label: 'Family',
-            state: note.labels.family
-        },
-        {
-            label: 'Work',
-            state: note.labels.work
-        },
-        {
-            label: 'Friends',
-            state: note.labels.friends
-        },
-        {
-            label: 'Spam',
-            state: note.labels.spam
-        },
-        {
-            label: 'Memories',
-            state: note.labels.memories
-        },
-        {
-            label: 'Romantic',
-            state: note.labels.romantic
-        }
-    ]
+//     function getLabelStyle(state) {
+//         const color = noteService.getLabelsColors(label)
+//         if (state) return { border: '3px solid ' + color, backgroundColor: color, color: 'white' }
+//         else return { border: '3px outset ' + color, backgroundColor: 'white', color: color }
+//     }
 
+//     function toggleLabel(label) {
+//         handleChange({ labels: { name: label, value: !currState } })
+//         setState(!currState)
+//     }
 
-    return <div className="labels-editor">
-        {
-            labels.map(label => <Label note={note} label={label.label} state={label.state} />)
-        }
-    </div>
-}
-
-function Label({ note, label, state }) {
-    const [currState, setState] = useState(state)
-    const style = getLabelStyle(currState)
-    const className = 'labels-editor' + currState ? ' on' : ''
-
-    function getLabelStyle(state) {
-        const color = noteService.getLabelsColors(label)
-        if (state) return { border: '3px solid ' + color, backgroundColor: color, color: 'white'}
-        else return { border: '3px outset ' + color, backgroundColor: 'white', color: color}
-    }
-
-    function toggleLabel(label) {
-        note.labels[label] = !currState
-        noteService.save(note)
-        setState(!currState)
-    }
-
-    return <span onClick={() => toggleLabel(label)} className={className} style={style}>{label}</span>
-}
+//     return <span onClick={() => toggleLabel(label)} className={className} style={style}>{label}</span>
+// }

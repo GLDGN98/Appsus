@@ -5,7 +5,7 @@ export function About() {
         {
             name: 'Gal Zohar',
             title: 'Fullstack Developer',
-            txt: 'I\'m a 27 from Oranit, Israel. I am a junior developer who learn Fullstack development at Coding Academy.',
+            txt: 'I\'m a 27 from Oranit, Israel. I am a junior developer who learn Fullstack development at Coding Academy. My tools: JS including React,Angular and jQuery, HTML, CSS, C#, Java and SQL. I love diving, hiking and have a good time with may pets. I am looking to learn and grow as developer.',
             img: 'assets/img/dev/gal.jpg',
             contact: {
                 facebook: 'https://www.facebook.com/profile.php?id=100077018276598',
@@ -16,7 +16,7 @@ export function About() {
         {
             name: 'Gilad Dagan',
             title: 'Fullstack Developer',
-            txt: 'I\'m a 24 from Herzliya, Israel. I am a junior developer who learn Fullstack development at Coding Academy.',
+            txt: '@Hi, my name is Gilad Dagan and I am a 24-year-old junior full-stack web developer. I am passionate about creating engaging and intuitive user experiences through the use of HTML, CSS, JavaScript, and various web development frameworks. I am constantly seeking to expand my skillset and stay up-to-date with the latest industry trends and best practices. As a team player, I thrive in collaborative environments and am always looking for new opportunities to grow and learn as a developer.',
             img: 'assets/img/dev/gilad.jpg',
             contact: {
                 facebook: 'https://www.facebook.com/gilad.dagan.9',

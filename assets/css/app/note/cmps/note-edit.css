@@ -204,7 +204,7 @@ td.editor-link>button {
     }
 }
 
-div.labels-editor {
+/* div.labels-editor {
     float: right;
 }
 
@@ -215,13 +215,13 @@ div.labels-editor>span:hover{
 div.labels-editor>span {
     margin-inline-start: 2rem;
     padding-inline: 1rem;
-}
+} 
 
 div.labels-editor>span.on {
     margin-inline-start: 2rem;
     border: 2px solid black;
 }
-
+*/
 
 @media (max-width: 600px) {
 
