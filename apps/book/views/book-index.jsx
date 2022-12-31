@@ -43,7 +43,7 @@ export function BookIndex() {
     return (
         <div className="book-index">
             <BookAdd setBooks={setBooks} onAddBook={onAddBook} />
-            <div>
+            <div className="books-box">
                 <BookFilter onSetFilter={onSetFilter} />
                 <Link className="add-book-index" to="/book/edit">ADD YOUR BOOK</Link>
                 <BookList onDeleteBook={onDeleteBook} books={books}
