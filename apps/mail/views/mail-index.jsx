@@ -186,7 +186,8 @@ export function MailIndex() {
     }
 
     function toggleMenu() {
-        document.body.classList.toggle('menu-open-mail')
+        if (window.visualViewport.width < 440) document.body.classList.toggle('menu-open-mail')
+
     }
 
     return (
