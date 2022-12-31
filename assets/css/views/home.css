@@ -2,29 +2,44 @@ section.home {
     height: 100vh;
     width: 100vw;
 
-    background: url('../../img/hero.jpg') no-repeat 0 0 fixed;
+    /* background: url('../../img/hero.jpg') no-repeat 0 0 fixed; */
     background-size: cover;
-}
 
-div.hero-menu-box {
-    position: absolute;
-    top: 12%;
-    left: 10%;
-    width: 70rem;
-
+    justify-content: center;
     align-items: center;
 }
 
+div.hero-img {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+
+    background-image: url('../../img/hero.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+div.hero-menu-box {
+    z-index: 2;
+    box-shadow: 4px 4px 20px black;
+    width: 75vw;
+
+    align-items: center;
+    background-color: rgba(25, 27, 31, 0.578);
+    margin-block-start: 30vh;
+}
+
 h1.welcome-hdr {
-    font-size: 8rem;
-    color: white;
+    font-size: 5rem;
+    color: rgb(171, 171, 187);
     width: fit-content;
 
 }
 
 nav.home-menu {
     font-size: 8rem;
-    color: whitesmoke;
+    color: rgb(171, 171, 187);
     padding: 1.5rem;
     justify-content: space-evenly;
     width: 100%;
@@ -41,21 +56,19 @@ nav.home-menu>i:hover {
     background-color: rgb(210, 210, 244);
 }
 
-@media (max-width: 2040px) {
-    section.home {
-        background-image: url('../../img/hero-large.jpg');
-    }
-}
 
 @media (max-width: 1500px) {
-    section.home {
-        background-image: url('../../img/hero-small.jpg');
+    div.hero-img {
+        background-image: url('../../img/hero-medium.jpg');
     }
 }
 
 
-@media (max-width: 500px) {
-    section.home {
+@media (max-width: 800px) {
+    div.hero-img {
         background-image: url('../../img/hero-xs.jpg');
+    }
+    div.hero-menu-box {
+        width: 90vw;
     }
 }
