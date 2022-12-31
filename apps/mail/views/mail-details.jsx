@@ -40,7 +40,7 @@ export function MailDetails() {
 
     return (
         <div>
-            <div style={{ textAlign: 'end' }}>
+            <div className="mail-sender" style={{ textAlign: 'end' }}>
                 <h2>&lt;{mail.from}&gt;</h2>
                 <h3>{mail.name}</h3>
             </div>

@@ -11,3 +11,17 @@
     padding: 5rem;
     border-radius: 2em;
 }
+
+.mail-sender {
+    margin-inline-end: 2rem;
+}
+
+@media (max-width: 440px) {
+    .mail-container {
+        width: 100vw;
+    }
+
+    .mail-details {
+        width: 80vw;
+    }
+}
