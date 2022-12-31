@@ -141,16 +141,17 @@ function _createNotes() {
 function getNoteMailURL(note) {
     let url = ''
     if(note.type === 'note-txt') url = `/mail?compose=on&title=${note.info.title}&body=${note.info.txt}`
-    if(note.type === 'note-img') url = `/mail?compose=on&title=${note.info.title}&body=See this image! Url: ${note.info.url}`
-    if(note.type === 'note-video') url = `/mail?compose=on&title=Share video note&body=See this video! Url: ${note.info.url}`
-    if(note.type === 'note-audio') url = `/mail?compose=on&title=${note.info.title}&body=Hear this audio! Url: ${note.info.url}`
+    if(note.type === 'note-img') url = `/mail?compose=on&title=${note.info.title}&body=See%20this%20image!%20Url-'${note.info.url}`
+    if(note.type === 'note-video') url = `/mail?compose=on&title=Share%20video%20note&body=See%20this%20video!%20Url-${note.info.url}`
+    if(note.type === 'note-audio') url = `/mail?compose=on&title=${note.info.title}&body=Hear%20this%20audio!%20Url-${note.info.url}`
     if(note.type === 'note-todos') {
         url = `/mail?compose=on&title=${note.info.label}&body=`
         url += note.info.todos.map(todo => {
          const todoDone = todo.doneAt ? '' : 'not '   
-            return `\nTodo: ${todo.txt} is ${todoDone}done`
-        }).join
+            return `Todo: ${todo.txt} is ${todoDone}done`
+        }).join(', ')
     }
+    console.log(url)
     return url
         
 }
