@@ -28,16 +28,8 @@ export function MailFilter({ onSetFilter, sortBy, setShowNav, showNav }) {
         setShowNav((prev) => !prev)
     }
 
-    function toggleMenu() {
-        document.body.classList.toggle('menu-open-mail')
-    }
-
-
     return (
         <div className="mail-filter">
-            <div onClick={toggleMenu} className="menu-mobile">
-                <i className="fa-solid fa-bars"></i>
-            </div>
             <div className="search-wrapper">
                 <i className="fa-sharp fa-solid fa-magnifying-glass"></i>
                 <input
