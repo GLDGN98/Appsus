@@ -77,7 +77,7 @@ export function MailPreview({ mail, handleDelete }) {
                     <div className="hover-icons">
                         <Link to={`/mail/inbox/${mail.id}`}><span title="Expand" ref={expandRef} onMouseEnter={addExpandAnimation} onMouseOut={removeExpandAnimation} className="expand-icon"><i className="fa-solid fa-expand"></i></span></Link>
                         <span title="Delete" ref={trashRef} onMouseEnter={addTrashAnimation} onMouseOut={removeTrashAnimation} className="trash-icon"><i onClick={(ev) => onHandleDelete(ev, mail.id)} className="fa-solid fa-trash-can"></i></span>
-                        <span onClick={onRead} className="unread-icon">{mail.isRead ? <i title="Unread" class="fa-solid fa-envelope-open"></i> : <i title="Read" class="fa-solid fa-envelope"></i>}</span>
+                        <span onClick={onRead} className="unread-icon">{mail.isRead ? <i title="Unread" className="fa-solid fa-envelope-open"></i> : <i title="Read" class="fa-solid fa-envelope"></i>}</span>
                     </div>
                 </td>
             </tr>

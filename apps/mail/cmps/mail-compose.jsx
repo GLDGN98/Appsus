@@ -2,11 +2,11 @@ import { showSuccessMsg } from "../../../services/event-bus.service.js"
 import { mailService } from "../services/mail.service.js"
 
 const { useState, useRef, useEffect } = React
-const { useNavigate } = ReactRouterDOM
+const { useNavigate, useSearchParams } = ReactRouterDOM
 
 
 
-export function MailCompose({ sendMail, showNewMessage, setShowNewMessage, isDrafted, setIsDrafted }) {
+export function MailCompose({ sendMail, showNewMessage, setShowNewMessage, isDrafted, setIsDrafted, newNoteMessage }) {
     const [newMessage, setNewMessage] = useState({ to: '', subject: '', body: '', name: 'Mahatma Appsus', from: "user@appsus.com", sentAt: new Date(), removedAt: null, isRead: true, isSent: false })
     const navigate = useNavigate()
     const [toggleExpandMail, setToggleExapndMail] = useState(false)
@@ -15,6 +15,12 @@ export function MailCompose({ sendMail, showNewMessage, setShowNewMessage, isDra
     let mailDraftInterval = useRef(null)
 
 
+
+    useEffect(() => {
+        if (newNoteMessage) {
+            setNewMessage((prev) => ({ ...prev, subject: newNoteMessage.title, body: newNoteMessage.body }))
+        }
+    }, [])
 
     useEffect(() => {
 
@@ -76,8 +82,8 @@ export function MailCompose({ sendMail, showNewMessage, setShowNewMessage, isDra
                     <div className="new-message-header">
                         <h3>New Message</h3>
                         <div>
-                            <i onClick={onExpandMail} class="fa-solid fa-up-right-and-down-left-from-center"></i>
-                            <i onClick={onCloseMailMessage} class="fa-solid fa-xmark"></i>
+                            <i onClick={onExpandMail} className="fa-solid fa-up-right-and-down-left-from-center"></i>
+                            <i onClick={onCloseMailMessage} className="fa-solid fa-xmark"></i>
                         </div>
                     </div>
 
@@ -118,7 +124,7 @@ export function MailCompose({ sendMail, showNewMessage, setShowNewMessage, isDra
                 </div>
                 <div className="new-mail-buttons">
                     <button>Send</button>
-                    <i class="fa-solid fa-trash-can"></i>
+                    <i className="fa-solid fa-trash-can"></i>
                 </div>
 
             </form>

@@ -14,3 +14,56 @@
     justify-content: flex-end;
     align-items: center;
 }
+
+
+.delete-book {
+    background-color: #fb8989;
+    border: none;
+    cursor: pointer;
+}
+
+.select-book {
+    background-color: peachpuff;
+    padding: 0.1rem;
+    padding-inline-start: 0.5em;
+    padding-inline-end: 0.5em;
+}
+
+.book-btns {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding-top: 5px;
+}
+
+.book-filter button {
+    margin-top: 1em;
+    padding: 1em 2em;
+    background: #dbdbdb;
+    font-family: Lato;
+    border: 1px solid white;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+
+.book-filter button:hover {
+    scale: 1.05;
+}
+
+
+.book-list img:hover {
+    scale: 1.05;
+}
+
+.book-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: #e3dada;
+    border-radius: 2em;
+    font-family: 'Poppins';
+}

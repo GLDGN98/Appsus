@@ -31,6 +31,10 @@ export function MailDetails() {
 
     }
 
+    function sendToNote() {
+        navigate(`/note/edit?type=txt&title=${mail.subject}&txt=${mail.body}`)
+    }
+
     if (!mail) return <div>Loading...</div>
     console.log(mail)
 
@@ -43,6 +47,7 @@ export function MailDetails() {
             <div className="mail-details">
                 <h1>{mail.subject}</h1>
                 <p>{mail.body}</p>
+                <button onClick={sendToNote}>To Note</button>
             </div>
         </div>
     )
