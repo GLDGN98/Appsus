@@ -5,6 +5,10 @@ import { AppHeader } from "./cmps/app-header.jsx"
 import { About } from "./views/about.jsx"
 import { Home } from "./views/home.jsx"
 
+import { BookDetails } from './apps/book/views/book-details.jsx'
+import { BookEdit } from './apps/book/views/book-edit.jsx'
+import { BookIndex } from './apps/book/views/book-index.jsx'
+
 import { MailIndex } from "./apps/mail/views/mail-index.jsx"
 import { MailDetails } from "./apps/mail/views/mail-details.jsx"
 
@@ -16,10 +20,19 @@ import { UserMsg } from "./cmps/user-msg.jsx"
 export function App() {
     return <Router>
 
-        <section className="app flex-col">
+
+        <section className="app flex-col main-layout app">
             <AppHeader />
             <main className="flex-row">
                 <Routes>
+                    {/* book */}
+                    <Route element={<BookIndex />} path="/book" />
+                    <Route element={<BookDetails />} path="/book/:bookId" />
+                    <Route element={<BookEdit />} path="/book/edit" />
+                    <Route element={<BookEdit />} path="/book/edit/:bookId" />
+                    {/* book * */}
+
+
                     <Route path="/" element={<Home />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/mail" element={<MailIndex />} >

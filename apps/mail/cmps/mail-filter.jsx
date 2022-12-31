@@ -28,6 +28,9 @@ export function MailFilter({ onSetFilter, sortBy }) {
     return (
         <div className="mail-filter">
             <div className="search-wrapper">
+                <a className="hamburger" href="#">
+                    <i class="fa-solid fa-bars"></i>
+                </a>
                 <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
                 <input
                     type="text"

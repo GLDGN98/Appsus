@@ -71,7 +71,7 @@ export function MailPreview({ mail, handleDelete }) {
                 <td onClick={handleStar}>{mail.starred ? <i style={{ color: 'gold' }} className="fa-sharp fa-solid fa-star"></i> : <i className="fa-regular fa-star"></i>}</td>
                 <td>{mail.name}</td>
                 {/* <td>{mail.body}</td> */}
-                <td><LongTxt txt={mail.body} length={120} /></td>
+                <td>{mail.body.length ? <LongTxt txt={mail.body} length={120} /> : null}</td>
                 <td className="mail-sent-at">
                     <span className="sent-at">{getTimeSinceSent(new Date(mail.sentAt))}</span>
                     <div className="hover-icons">

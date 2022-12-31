@@ -1,7 +1,6 @@
 const { Outlet, NavLink, Link } = ReactRouterDOM
 const { useParams, useNavigate } = ReactRouterDOM
 
-import { Spinner } from "../../../assets/css/app/mail/cmps/spinner.jsx"
 
 import { MailFilter } from "../cmps/mail-filter.jsx"
 import { MailCompose } from "../cmps/mail-compose.jsx"
@@ -45,7 +44,7 @@ export function MailIndex() {
 
     function sentMails() {
         mailService.query(filterBy).then(mails => {
-            return mails.filter(mail => mail.from === currentUserMail && mail.removedAt === null)
+            return mails.filter(mail => mail.from === currentUserMail && mail.removedAt === null && mail.isSent !== false)
         }).then(setMails)
     }
 
@@ -57,7 +56,7 @@ export function MailIndex() {
 
     function draftedMails() {
         mailService.query(filterBy).then(mails => {
-            return mails.filter(mail => mail.from === currentUserMail && mail.sentAt === null)
+            return mails.filter(mail => mail.from === currentUserMail && mail.isSent === false && mail.removedAt === null)
         }).then(setMails)
     }
 
@@ -171,6 +170,7 @@ export function MailIndex() {
                         <NavLink to="/mail/sent-email"><i class="fa-regular fa-paper-plane"></i>Sent</NavLink>
                         <NavLink to="/mail/trash"><i class="fa-regular fa-trash-can"></i>Trash</NavLink>
                     </nav>
+
                 </div>
                 {!isLoading &&
                     <div className="main-outlet">
@@ -179,7 +179,7 @@ export function MailIndex() {
                             {id ? <Link className="go-back" to="/mail/inbox">Back</Link> : null}
                         </div>
                         {id ? null : <MailFilter sortBy={sortBy} onSetFilter={onSetFilter} />}
-                        {id ? null : <MailCompose isDrafted={isDrafted} setShowNewMessage={setShowNewMessage} sendMail={sendMail} showNewMessage={showNewMessage} />}
+                        {id ? null : <MailCompose setIsDrafted={setIsDrafted} isDrafted={isDrafted} setShowNewMessage={setShowNewMessage} sendMail={sendMail} showNewMessage={showNewMessage} />}
                         {id ? null : <MailList handleDelete={handleDelete} mails={mails} />}
                     </div>
                 }

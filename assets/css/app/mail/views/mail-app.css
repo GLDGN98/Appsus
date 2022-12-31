@@ -142,3 +142,53 @@
     background-color: #5e7caf;
 
 }
+
+
+.hamburger {
+    display: none;
+}
+
+
+
+@media (max-width: 760px) {
+    .main-nav-app {
+        display: none;
+    }
+
+    .hamburger {
+        display: inline-block;
+    }
+
+    .mail-filter .search-wrapper {
+        border: 1px solid rgb(153, 161, 170);
+        border-radius: 0.3em;
+        width: 20em;
+    }
+
+    .mail-filter {
+        max-width: 350px;
+        gap: 10px;
+    }
+
+    .mail-filter .fa-magnifying-glass {
+        display: none;
+    }
+
+    .mail-list .first-tr {
+        display: grid;
+        grid-template-columns: 0.5fr 2.5fr 8fr 3fr;
+        /* place-content: center; */
+        place-items: center;
+        grid-template-rows: 50px;
+        gap: 10px;
+        border: 1px solid rgb(235, 234, 234);
+        padding: 0.3em;
+        width: 100%;
+        text-align: center;
+        max-width: 350px;
+    }
+
+    .mail-container {
+        grid-template-columns: 10fr;
+    }
+}

@@ -6,30 +6,30 @@ const { useNavigate } = ReactRouterDOM
 
 
 
-export function MailCompose({ sendMail, showNewMessage, setShowNewMessage, isDrafted }) {
+export function MailCompose({ sendMail, showNewMessage, setShowNewMessage, isDrafted, setIsDrafted }) {
     const [newMessage, setNewMessage] = useState({ to: '', subject: '', body: '', name: 'Mahatma Appsus', from: "user@appsus.com", sentAt: new Date(), removedAt: null, isRead: true, isSent: false })
     const navigate = useNavigate()
     const [toggleExpandMail, setToggleExapndMail] = useState(false)
+    const [draftMail, setDraftMail] = useState({})
     const formRef = useRef(null)
     let mailDraftInterval = useRef(null)
 
 
 
-    // useEffect(() => {
-    //     console.log(isDrafted)
+    useEffect(() => {
 
-    //     if (isDrafted === true) {
-    //         mailDraftInterval.current = setInterval(() => {
-    //             saveDraftedMails(newMessage)
-    //         }, 5000)
-    //     }
-
-    //     if (isDrafted === false) {
-    //         clearInterval(mailDraftInterval.current)
-    //         setNewMessage.sentAt = new Date()
-    //     }
-
-    // }, [isDrafted])
+        if (isDrafted === true) {
+            mailDraftInterval.current = setInterval(() => {
+                saveDraftedMails()
+            }, 5000)
+        }
+        if (isDrafted === false) {
+            if (draftMail.body && draftMail.subject) {
+                mailService.save(draftMail)
+            }
+            clearInterval(mailDraftInterval.current)
+        }
+    }, [isDrafted])
 
     function handleChange({ target }) {
         let { value, name: field } = target
@@ -37,9 +37,19 @@ export function MailCompose({ sendMail, showNewMessage, setShowNewMessage, isDra
     }
 
 
+
+    function saveDraftedMails() {
+        const to = formRef.current[0].value
+        const subject = formRef.current[1].value
+        const body = formRef.current[2].value
+        const draftMail = ({ ...newMessage, to, body, subject })
+        setDraftMail(draftMail)
+    }
+
+
     function onSendMail(ev) {
         ev.preventDefault()
-        sendMail(newMessage)
+        sendMail({ ...newMessage, isSent: true })
         setShowNewMessage(false)
         navigate('/mail/sent-mail')
         formRef.current.reset();
@@ -53,8 +63,11 @@ export function MailCompose({ sendMail, showNewMessage, setShowNewMessage, isDra
 
     }
 
-    // <div style={{ visibility: this.state.driverDetails.firstName != undefined? 'visible': 'hidden'}}></div>
+    function onCloseMailMessage() {
+        setShowNewMessage(false)
+        setIsDrafted(false)
 
+    }
 
     return (
         <div className="mail-compose">
@@ -64,7 +77,7 @@ export function MailCompose({ sendMail, showNewMessage, setShowNewMessage, isDra
                         <h3>New Message</h3>
                         <div>
                             <i onClick={onExpandMail} class="fa-solid fa-up-right-and-down-left-from-center"></i>
-                            <i onClick={() => setShowNewMessage(false)} class="fa-solid fa-xmark"></i>
+                            <i onClick={onCloseMailMessage} class="fa-solid fa-xmark"></i>
                         </div>
                     </div>
 

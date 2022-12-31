@@ -1,0 +1,21 @@
+.book-filter form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+}
+
+
+
+.book-filter form label {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.5em;
+    padding: 10px;
+}
+
+::-webkit-input-placeholder {
+    font-style: italic;
+    font-size: 1.2em;
+    padding: 50px;
+  }
