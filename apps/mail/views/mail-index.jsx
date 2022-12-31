@@ -185,18 +185,19 @@ export function MailIndex() {
     }
 
     function toggleMenu() {
-       document.body.classList.toggle('menu-open-b')
+       document.body.classList.toggle('menu-open-mail')
     }
 
     return (
         <div className="mail-index">
+            <div className="main-screen-mail" onClick={() => toggleMenu()}></div>
             <div className="mail-container">
                 <div className="main-nav-app">
                     <button onClick={onCompose}><i className="fa-solid fa-plus"></i>Compose</button>
                     <div onClick={toggleMenu} className="menu-mobile">
                         <i className="fa-solid fa-bars"></i>
                     </div>
-                    <nav ref={mainNavRef} className="main-nav">
+                    <nav ref={mainNavRef} className="main-nav flex-col">
                         <NavLink to="/mail/inbox"><i className="fa-solid fa-inbox"></i>Inbox</NavLink>
                         <NavLink to="/mail/starred"><i className="fa-regular fa-star"></i>Starred</NavLink>
                         <NavLink to="/mail/drafts"><i className="fa-regular fa-copy"></i>Drafts</NavLink>
