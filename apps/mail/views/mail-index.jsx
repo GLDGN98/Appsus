@@ -20,7 +20,7 @@ export function MailIndex() {
     const { type, id } = useParams()
     const currentUserMail = storageService.loadFromStorage('userDB').email
     const [params] = useSearchParams()
-    const [newNoteMessage, setNewNoteMessage] = useState({})
+    const [newNoteMessage, setNewNoteMessage] = useState(null)
 
 
 
@@ -36,11 +36,12 @@ export function MailIndex() {
         }
     }, [])
 
+
     useEffect(() => {
-          if(newNoteMessage) {
-            eventBusService.emit('params-mail-loaded',newNoteMessage)
+        if (newNoteMessage) {
+            eventBusService.emit('params-mail-loaded', newNoteMessage)
             setShowNewMessage(true)
-          }
+        }
     }, [newNoteMessage])
 
 

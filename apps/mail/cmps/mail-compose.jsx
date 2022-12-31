@@ -6,7 +6,7 @@ const { useNavigate, useSearchParams } = ReactRouterDOM
 
 import { eventBusService } from "../../../services/event-bus.service.js"
 
-export function MailCompose({ sendMail, showNewMessage, setShowNewMessage, isDrafted, setIsDrafted, newNoteMessage }) {
+export function MailCompose({ sendMail, showNewMessage, setShowNewMessage, isDrafted, setIsDrafted }) {
     const [newMessage, setNewMessage] = useState({ to: '', subject: '', body: '', name: 'Mahatma Appsus', from: "user@appsus.com", sentAt: new Date(), removedAt: null, isRead: true, isSent: false })
     const navigate = useNavigate()
     const [toggleExpandMail, setToggleExapndMail] = useState(false)
@@ -18,13 +18,14 @@ export function MailCompose({ sendMail, showNewMessage, setShowNewMessage, isDra
 
     useEffect(() => {
         eventBusService.on('params-mail-loaded', (mail) => {
-            console.log(mail)
-            setNewMessage((prev) => ({ ...prev, subject: mail.title, body: mail.body }))
+            const newMail = { ...newMessage, subject: mail.title, body: mail.body }
+            console.log(newMail)
+            setNewMessage(newMail)
+            let subject = formRef.current[1].value
+            let body = formRef.current[2].value
+            subject = mail.title
+            body = mail.body
         })
-        // if (newNoteMessage) {
-        //     console.log(newNoteMessage)
-        //     setNewMessage((prev) => ({ ...prev, subject: newNoteMessage.title, body: newNoteMessage.body }))
-        // }
     }, [])
 
     useEffect(() => {
