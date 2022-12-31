@@ -50,7 +50,8 @@ export const noteService = {
     getDefaultFilter,
     sortTodos,
     getEmptyNote,
-    getNewTodo
+    getNewTodo,
+    getNoteMailURL
 }
 
 function get(noteId) {
@@ -137,7 +138,22 @@ function _createNotes() {
         utilService.saveToStorage(NOTE_DB_KEY, notes)
     }
 }
-
+function getNoteMailURL(note) {
+    const url = ''
+    if(note.type === 'note-txt') url = `/mail?compose=on&title=${note.info.title}&body=${note.info.txt}`
+    if(note.type === 'note-img') url = `/mail?compose=on&title=${note.info.title}&body=See this image! Url: ${note.info.url}`
+    if(note.type === 'note-video') url = `/mail?compose=on&title=Share video note&body=See this video! Url: ${note.info.url}`
+    if(note.type === 'note-audio') url = `/mail?compose=on&title=${note.info.title}&body=Hear this audio! Url: ${note.info.url}`
+    if(note.type === 'note-todos') {
+        url = `/mail?compose=on&title=${note.info.label}&body=`
+        url += note.info.todos.map(todo => {
+         const todoDone = todo.doneAt ? '' : 'not '   
+            return `\nTodo: ${todo.txt} is ${todoDone}done`
+        }).join
+    }
+    return url
+        
+}
 function getEmptyNote(type) {
     
     const noteText  = {

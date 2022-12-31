@@ -46,8 +46,9 @@ export function NotePreview({ note, updateFuncs }) {
                     if (note) onRefreshNotes()
                 })
                 break
+
         }
-        if (clickData !== 'remove' && clickData !== 'copy') {
+        if (clickData !== 'remove' && clickData !== 'copy' && clickData !== 'email') {
             noteService.save(newNote)
             setNote(newNote)
         }
@@ -188,7 +189,9 @@ function NoteTools({ note, onToolsClick, hovering }) {
                 <input className="note-color-tool" type='color' onChange={(ev) => onToolsClick('color', ev.target.value)}></input>
             </i>
         </label>
-        <i onClick={() => onToolsClick('mail')} className="fa-sharp fa-solid fa-envelope"></i>
+        <Link to={noteService.getNoteMailURL(note)}>
+            <i onClick={() => onToolsClick('email')} className="fa-sharp fa-solid fa-envelope"></i>
+        </Link>
         {isPinned && <i title="Remove pin" onClick={() => onToolsClick('unpin')} className="fa-solid fa-thumbtack pinned"></i>}
         {!isPinned && <i title="Add pin" onClick={() => onToolsClick('pin')} className="fa-solid fa-thumbtack"></i>}
     </div>
