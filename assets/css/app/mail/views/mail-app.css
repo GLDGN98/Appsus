@@ -150,9 +150,17 @@
 
 
 
-@media (max-width: 760px) {
-    .main-nav-app {
+@media (max-width: 440px) {
+
+
+    .main-nav-app a {
         display: none;
+    }
+
+    .main-nav-app button {
+        position: fixed;
+        top: 90%;
+        left: 70%;
     }
 
     .hamburger {
@@ -168,6 +176,7 @@
     .mail-filter {
         max-width: 350px;
         gap: 10px;
+        margin: 0 auto;
     }
 
     .mail-filter .fa-magnifying-glass {
@@ -190,5 +199,16 @@
 
     .mail-container {
         grid-template-columns: 10fr;
+    }
+
+    .main-outlet {
+        margin: 0 auto;
+    }
+
+    .new-mail.active {
+        right: 0;
+        position: absolute;
+        width: 100%;
+        gap: 10px;
     }
 }
