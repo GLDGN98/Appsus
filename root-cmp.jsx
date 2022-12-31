@@ -19,8 +19,6 @@ import { UserMsg } from "./cmps/user-msg.jsx"
 
 export function App() {
     return <Router>
-
-
         <section className="app flex-col main-layout app">
             <AppHeader />
             <main className="flex-row">
