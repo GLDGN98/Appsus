@@ -24,8 +24,6 @@ export function MailFilter({ onSetFilter, sortBy, setShowNav, showNav }) {
         sortBy(ev.target.value)
     }
 
-
-    console.log(showNav)
     function expandHamburger() {
         setShowNav((prev) => !prev)
     }

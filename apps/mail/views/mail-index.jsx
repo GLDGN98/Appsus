@@ -1,5 +1,5 @@
 const { Outlet, NavLink, Link } = ReactRouterDOM
-const { useParams, useNavigate } = ReactRouterDOM
+const { useParams, useNavigate, useSearchParams } = ReactRouterDOM
 
 
 import { MailFilter } from "../cmps/mail-filter.jsx"
@@ -19,6 +19,22 @@ export function MailIndex() {
     const [showNav, setShowNav] = useState(false)
     const { type, id } = useParams()
     const currentUserMail = storageService.loadFromStorage('userDB').email
+    const [params] = useSearchParams()
+    const [newNoteMessage, setNewNoteMessage] = useState({})
+
+
+
+
+    useEffect(() => {
+        const composeState = params.get('compose')
+        if (composeState === 'on') {
+            const title = params.get('title')
+            const body = params.get('body')
+            setShowNewMessage(true)
+            setNewNoteMessage(title, body)
+        }
+    }, [])
+
 
 
     useEffect(() => {
@@ -182,7 +198,7 @@ export function MailIndex() {
                             {id ? <Link className="go-back" to="/mail/inbox">Back</Link> : null}
                         </div>
                         {id ? null : <MailFilter showNav={showNav} setShowNav={setShowNav} sortBy={sortBy} onSetFilter={onSetFilter} />}
-                        {id ? null : <MailCompose setIsDrafted={setIsDrafted} isDrafted={isDrafted} setShowNewMessage={setShowNewMessage} sendMail={sendMail} showNewMessage={showNewMessage} />}
+                        {id ? null : <MailCompose newNoteMessage={newNoteMessage} setIsDrafted={setIsDrafted} isDrafted={isDrafted} setShowNewMessage={setShowNewMessage} sendMail={sendMail} showNewMessage={showNewMessage} />}
                         {id ? null : <MailList handleDelete={handleDelete} mails={mails} />}
                     </div>
                 }

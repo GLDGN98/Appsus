@@ -2,11 +2,11 @@ import { showSuccessMsg } from "../../../services/event-bus.service.js"
 import { mailService } from "../services/mail.service.js"
 
 const { useState, useRef, useEffect } = React
-const { useNavigate } = ReactRouterDOM
+const { useNavigate, useSearchParams } = ReactRouterDOM
 
 
 
-export function MailCompose({ sendMail, showNewMessage, setShowNewMessage, isDrafted, setIsDrafted }) {
+export function MailCompose({ sendMail, showNewMessage, setShowNewMessage, isDrafted, setIsDrafted, newNoteMessage }) {
     const [newMessage, setNewMessage] = useState({ to: '', subject: '', body: '', name: 'Mahatma Appsus', from: "user@appsus.com", sentAt: new Date(), removedAt: null, isRead: true, isSent: false })
     const navigate = useNavigate()
     const [toggleExpandMail, setToggleExapndMail] = useState(false)
@@ -15,6 +15,12 @@ export function MailCompose({ sendMail, showNewMessage, setShowNewMessage, isDra
     let mailDraftInterval = useRef(null)
 
 
+
+    useEffect(() => {
+        if (newNoteMessage) {
+            setNewMessage((prev) => ({ ...prev, subject: newNoteMessage.title, body: newNoteMessage.body }))
+        }
+    }, [])
 
     useEffect(() => {
 
