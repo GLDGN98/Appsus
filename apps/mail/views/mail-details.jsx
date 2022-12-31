@@ -1,12 +1,13 @@
 import { mailService } from "../services/mail.service.js"
 
-const { useState, useEffect } = React
+const { useState, useEffect, useRef } = React
 const { useParams, useNavigate, Link } = ReactRouterDOM
 
 export function MailDetails() {
     const [mail, setMail] = useState(null)
     const { id } = useParams()
     const navigate = useNavigate()
+    const noteRef = useRef()
 
 
     useEffect(() => {
@@ -32,7 +33,10 @@ export function MailDetails() {
     }
 
     function sendToNote() {
-        navigate(`/note/edit?type=txt&title=${mail.subject}&txt=${mail.body}`)
+        noteRef.current.classList.add('animate__heartBeat')
+        setTimeout(() => {
+            navigate(`/note/edit?type=txt&title=${mail.subject}&txt=${mail.body}`)
+        }, 1000)
     }
 
     if (!mail) return <div>Loading...</div>
@@ -47,7 +51,7 @@ export function MailDetails() {
             <div className="mail-details">
                 <h1>{mail.subject}</h1>
                 <p>{mail.body}</p>
-                <button onClick={sendToNote}>To Note</button>
+                <i title="To Note" ref={noteRef} onClick={sendToNote} style={{ cursor: 'pointer' }} class="fa-regular fa-note-sticky"></i>
             </div>
         </div>
     )

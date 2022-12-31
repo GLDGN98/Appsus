@@ -18,6 +18,9 @@
 @import 'cmps/book-index.css';
 
 
+@import 'cmps/add-review.css';
+
+
 /* Views */
 
 @import 'views/book-index.css'

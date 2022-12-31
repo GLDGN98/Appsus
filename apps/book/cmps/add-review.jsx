@@ -20,11 +20,11 @@ export function AddReview({ book, setBook }) {
     }
 
 
-    
+
 
 
     return (
-        <div>
+        <div className="add-review">
             <form onSubmit={onSubmitReview}>
                 <label htmlFor="username">Username</label>
                 <input
