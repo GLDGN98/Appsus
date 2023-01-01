@@ -16,7 +16,7 @@
     margin-inline-end: 2rem;
 }
 
-@media (max-width: 440px) {
+@media (max-width: 800px) {
     .mail-container {
         width: 100vw;
     }

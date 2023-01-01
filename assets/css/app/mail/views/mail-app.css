@@ -174,7 +174,7 @@ body.menu-open-mail div.main-screen-mail {
     opacity: 0.9;
 }
 
-@media (max-width: 440px) {
+@media (max-width: 800px) {
 
     div.menu-mobile {
         display: unset;
@@ -226,6 +226,7 @@ body.menu-open-mail div.main-screen-mail {
 
     .main-outlet {
         margin: 0 auto;
+        width: 100vw;
     }
 
     .new-mail.active {
